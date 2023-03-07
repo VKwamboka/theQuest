@@ -1,4 +1,4 @@
-.container{
+.container1{
     background-image: url("../../assets/bg1.jpg");
     background-position: center;
     height: 100vh;
@@ -39,4 +39,9 @@ p{
 .par h1{
     font-size: 40px;
     font-weight: bolder;
+}
+.middle_hero{
+    display: flex;
+    margin-top: 4rem 5rem;
+    
 }
