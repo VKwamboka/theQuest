@@ -8,8 +8,13 @@
 
 # Node
 /node_modules
-npm-debug.log
+npm-debug.log       [
+
 yarn-error.log
+node_modules
+.vscode
+
+
 
 # IDEs and editors
 .idea/
