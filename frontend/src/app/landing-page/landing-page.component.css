@@ -1,0 +1,42 @@
+.container{
+    background-image: url("../../assets/bg1.jpg");
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+.content{
+    padding: 1rem  4rem;
+    color: black;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.middle{
+    display: flex;
+    margin: 20px auto;
+    gap: 3rem;
+
+}
+.nav button{
+    width: 8rem;
+    height: 2.5rem;
+    margin: 20px;
+}
+.logo{
+    margin: 20px;
+}
+.logo h1{
+    color: #DA670B;
+    font-weight: bold;
+}
+p{
+    font-size: 16px;
+}  
+.par h1{
+    font-size: 40px;
+    font-weight: bolder;
+}
