@@ -2,3 +2,63 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+  @font-face {
+    font-family: "Source Sans Pro";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Source Sans Pro Regular"), local("SourceSans Pro-Regular"), local("Source Sans Pro 400"), local("SourceSans Pro-400"), local("Source Sans Pro"), url("https://cdn.sstatic.net/Fonts/source-sans-pro/source-sans-pro-regular-webfont.woff?v=993db0ec4347") format("woff");
+  }
+  @font-face {
+    font-family: "Source Sans Pro Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Source Sans Pro Bold Bold"), local("SourceSans Pro Bold-Bold"), local("Source Sans Pro Bold 700"), local("SourceSans Pro Bold-700"), url("https://cdn.sstatic.net/Fonts/source-sans-pro/source-sans-pro-bold-webfont.woff?v=f52ccc0bbce9") format("woff");
+  }
+  @font-face {
+    font-family: "Roboto Slab";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Roboto Slab Regular"), local("RobotoSlab-Regular"), local("Roboto Slab 400"), local("RobotoSlab-400"), local("Roboto Slab"), url("https://cdn.sstatic.net/Fonts/roboto-slab/roboto-slab-regular-webfont.woff?v=a75088a46d79") format("woff");
+  }
+  @font-face {
+    font-family: "Roboto Slab Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: local("Roboto Slab Bold Bold"), local("RobotoSlab Bold-Bold"), local("Roboto Slab Bold 700"), local("RobotoSlab Bold-700"), url("https://cdn.sstatic.net/Fonts/roboto-slab/roboto-slab-bold-webfont.woff?v=719d1c709127") format("woff");
+  } 
+  section{
+    padding: 5rem 0;
+  }
+  ul{
+    list-style: none;
+  }
+  a{
+    text-decoration: none;
+    color: var(--blue-600);
+    cursor: pointer;
+  }
+  img{
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .btn{
+    text-align: center;
+    font-size: 1.3rem;
+    border-radius: 3px;
+    transition: all 0.5s;
+    padding: 1.3rem 2.5rem;
+  }
+  .btn-orange{
+    background-color:var(--orange);
+    color: var(--white);
+  
+  }
+  .btn-dark-blue{
+    background-color:var(--dark-blue);
+    color: var(--white);
+  
+  }
+  
