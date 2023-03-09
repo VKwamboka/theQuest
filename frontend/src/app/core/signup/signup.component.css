@@ -7,11 +7,28 @@
     margin: 0 auto;
     padding: 20px;
     background-image: url("../../../assets/bg1.jpg");
-    /* background-color:#2D2D2D;  */
+    margin-top: 4rem;
+  }
+  .signup{
+    background-color: #2A2A2B; 
+    height: 100vh;
   }
   
+ 
+  .logo{
+    margin:0 4rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top: 1rem;
+  }
+
+  .logo h1{
+    color: #f48024;
+    font-weight: bold;
+}
+  
   h1 {
-    /* color: white; */
     color: black;
     text-align: center;
   }
