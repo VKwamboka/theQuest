@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-image: url("../../../assets/bg1.jpg");
+    /* background-color:#2D2D2D;  */
+  }
+  
+  h1 {
+    /* color: white; */
+    color: black;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    color: black;
+    /* color: white; */
+  }
+  
+  input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    
+  /* Using the official dark mode theme colors from Stack Overflow */
+    
+  background-color:#F48024; 
+  border:none; 
+  color:white; 
+  font-weight:bold; 
+  border-radius:3px; 
+  cursor:pointer; 
+  }
+    
+  /* Adding some hover effects */
+  
+  button:hover {
+  background-color:#D77322; 
+  }
+    
+  /* Setting the background color of the body to match the dark mode theme */
+  
+  body {
+  background-color:#2D2D2D; 
+  }
+    
