@@ -8,6 +8,7 @@ const routes: Routes = [
   {path:'register', loadComponent:()=>import('./core/signup/signup.component').then(l=>l.SignupComponent)},
   {path:'user', loadComponent:()=>import('./userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent)},
   {path:'admin', loadComponent:()=>import('./adminashboard/adminashboard.component').then(l=>l.AdminashboardComponent)},
+  {path:'question', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
 ];
 
 @NgModule({
