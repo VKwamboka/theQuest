@@ -12,7 +12,9 @@ html {
   font-size: 10px;
   color: var(--black-800);
 }
-
+ul li{
+  list-style: none;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -9,6 +9,9 @@
   .footer-content {
     display: flex;
   }
+  .footer-links{
+    margin: 0;
+  }
   
   .footer-icon {
     flex: 0 0 64px;
@@ -24,6 +27,7 @@
     flex: 2 1 auto;
     flex-wrap: wrap;
   }
+
   
   .footer-nav-col {
     flex: 1 0 auto;

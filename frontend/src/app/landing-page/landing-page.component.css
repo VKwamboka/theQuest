@@ -13,7 +13,7 @@
   }
   
   .logo img{
-    width: 10%;
+    width: 16rem;
   }
   .right{
     width: 50%;
@@ -34,11 +34,16 @@
 .nav{
     color: white;
     display: flex;
-    font-size: 16px;  
+    font-size: 16px;
+    align-items:center ;
 }
 .not-logo{
   display: flex;
   justify-content: space-between;
+  width: 70%;
+}
+.log-btn button{
+  padding:0;
 }
 .middle{
     display: flex;
@@ -57,7 +62,8 @@
     border: none;
 }
 .logo{
-    margin: 2rem  ;
+    margin-top: 2rem  ;
+    width: 25%;
 }
 .logo h1{
     color: #fb4f14;
@@ -77,7 +83,6 @@
 /* Questions */
 .questions-content {
     display: flex;
-    margin-top: 8rem;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -95,7 +100,7 @@
     gap: 2rem;
   }
   .questions-header {
-    margin: 8rem 0 6rem;
+    margin: 4rem 0 ;
   }
   
   .questions-body {
