@@ -2,11 +2,11 @@
 .container1{
     /* background-image: url("../../assets/bg1.jpg"); */
     position: absolute;
-    background-position: center;
+    /* background-position: center; */
     height: 100vh;
     width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
+    /* background-repeat: no-repeat; */
+    /* background-size: cover; */
     background-color: #2A2A2B;
     
     /* background-color: #d6d9dc; */
@@ -45,6 +45,9 @@
 .log-btn button{
   padding:0;
 }
+.log-btn button:hover{
+  background-color: #fb4f14;
+}
 .middle{
     display: flex;
     justify-content: center;
@@ -64,6 +67,9 @@
 .logo{
     margin-top: 2rem  ;
     width: 25%;
+}
+.middle p:hover{
+  color:#fb4f14 ;
 }
 .logo h1{
     color: #fb4f14;
