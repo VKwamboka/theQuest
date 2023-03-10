@@ -39,10 +39,12 @@
   }
   
   input[type="submit"]:hover {
-    background-color: #FFC04D;
+   
+    background-color: #f48024;
   }
   button[type="submit"] {
-    background-color: #FFA500;
+    background-color:#f48024;
+    ;
     color: #FFFFFF;
     border: none;
     padding: 10px 20px;
@@ -120,4 +122,29 @@
     border-radius: 5px;
     font-size: 14px;
   }
-  
+  /* comments */
+  .comment {
+    background-color: #2A2A2B;
+    border-color: gray;
+    color: white;
+}
+
+.comment-user {
+    color: blue;
+}
+
+.comment-date {
+    color: gray-lighter;
+}
+
+.comment-score {
+    color: #f48024;
+}
+
+.comment-upvote {
+    fill: gray;
+}
+
+.comment-flag {
+    fill: gray;
+}
