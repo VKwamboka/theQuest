@@ -1,17 +1,15 @@
 * {
     box-sizing: border-box;
   }
-  
   .container1 {
     display: flex;
   }
-  
+ 
   .sidebar {
     width: 200px;
     background-color:#1C1C1C; 
     color:white; 
-  }
-  
+  } 
   .logo {
     padding: 10px;
   }
