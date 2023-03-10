@@ -114,7 +114,10 @@
     font-size: 24px;
     margin-top: 0;
   }
-  
+  .header-comment{
+    display:flex;
+    gap: 2rem;
+  }
   .comment, .answer {
     margin-top: 20px;
   }

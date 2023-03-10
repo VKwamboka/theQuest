@@ -9,7 +9,7 @@
 }
 html {
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 10px;
+  /* font-size: 10px; */
   color: var(--black-800);
 }
 ul li{
