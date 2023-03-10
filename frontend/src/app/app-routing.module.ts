@@ -12,6 +12,8 @@ const routes: Routes = [
   {path:'profile', loadComponent:()=>import('./userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
   {path:'editprofile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
   {path:'fullquestion', loadComponent:()=>import('./full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+  {path:'manageusers', loadComponent:()=>import('./manage-users/manage-users.component').then(l=>l.ManageUsersComponent)},
+  {path:'managequestions', loadComponent:()=>import('./manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)},
 ];
 
 @NgModule({

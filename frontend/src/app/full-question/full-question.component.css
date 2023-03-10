@@ -1,4 +1,4 @@
-.question {
+/* .question {
     background-color: #222222;
     padding: 20px;
     margin-bottom: 20px;
@@ -51,3 +51,145 @@
   .answer-score, .comment-score{
     color: #BEBEBE;
   }
+  i{
+    font-size: 20px;
+    color: #BEBEBE;
+  } */
+  .container1 {
+    width: 100vw;
+    margin: 0 auto;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  .question-meta {
+    color: #BEBEBE;
+    font-size: 16px;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .question {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+  }
+  
+  .question h1 {
+    font-size: 20px;
+    margin: 0;
+    color: #0077CC;
+  }
+  
+  .info {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+  .question-tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .tag {
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  .comments{
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+  .comments, .answers {
+    margin-top: 20px;
+    /* border-top: 1px solid #ccc; */
+    padding-top: 20px;
+  }
+  
+  .comments h2, .answers h2 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .comment, .answer {
+    margin-top: 20px;
+  }
+  
+  .comment p, .answer p {
+    margin: 0;
+  }
+  
+  .actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .btn {
+    background-color: #fff;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+  }
+  
+  .btn-upvote {
+    background-color: #00ccff;
+    color: #fff;
+  }
+  
+  .btn-downvote {
+    background-color: #ff6600;
+    color: #fff;
+  }
+  
+  .btn-answer {
+    background-color: #ff9933;
+    color: #fff;
+  }
+  
+  /* Dark mode styles */
+  
+  .container {
+    background-color: #222;
+    color: #eee;
+  }
+  
+  .question {
+    border-bottom: 1px solid #777;
+  }
+  
+  .info {
+    color: #ccc;
+  }
+  
+  .comments, .answers {
+    border-top: 1px solid #777;
+  }
+  
+  .answer {
+    border-bottom: 1px solid #777;
+  }
+  
+  .btn {
+    box-shadow: none;
+  }
+  
+  .btn-upvote {
+    background-color: #33ccff;
+  }
+  
+  .btn-downvote {
+    background-color: #ff9933;
+  }
+  
+  .btn-answer:hover {
+    background-color: #ff6600;
+  }
+  
