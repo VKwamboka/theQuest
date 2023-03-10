@@ -11,6 +11,7 @@ const routes: Routes = [
   {path:'question', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
   {path:'profile', loadComponent:()=>import('./userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
   {path:'editprofile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
+  {path:'fullquestion', loadComponent:()=>import('./full-question/full-question.component').then(l=>l.FullQuestionComponent)},
 ];
 
 @NgModule({
