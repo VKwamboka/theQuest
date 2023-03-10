@@ -9,12 +9,8 @@
   
   .sidebar {
     width: 200px;
-    height: 100vh;
-    
-  /* Using the official dark mode theme colors from Stack Overflow */
-    
-  background-color:#1C1C1C; 
-  color:white; 
+    background-color:#1C1C1C; 
+    color:white; 
   }
   
   .logo {
@@ -32,38 +28,31 @@
   }
   
   .menu li a {
-    
-  /* Using the official dark mode theme colors from Stack Overflow */
-    
   display:block; 
   padding:10px; 
   color:#9E9E9E; 
   text-decoration:none; 
   }
   
-  .menu li a:hover {
-    
-  /* Using the official dark mode theme colors from Stack Overflow */
-    
+  .menu li a:hover { 
   background-color:#2D2D2D; 
   color:white; 
   }
   
   .main {
-    
-  /* Using the official dark mode theme colors from Stack Overflow */
-    
-  background-color:#2D2D2D; 
-  color:white; 
-  flex-grow:1; 
-  padding:20px; 
-  overflow-y:auto; 
+    background-color:#2D2D2D; 
+    color:white; 
+    flex-grow:1; 
+    padding:20px; 
+    overflow-y:auto; 
   }
+  /* svg{
+    width:50%;
+  } */
   
-  .header {
-    
-  /* Using the official dark mode theme colors from Stack Overflow */
-    
-  border-bottom:1px solid #3A3A3A; 
-  margin-bottom:20px; 
+  .header { 
+    border-bottom:1px solid #3A3A3A; 
+    margin-bottom:20px; 
+    display: flex;
+    justify-content: space-between;
   }
