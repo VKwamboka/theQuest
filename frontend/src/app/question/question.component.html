@@ -1,50 +1,56 @@
-<div class="new-question-container">
-    <h1>Ask a Question</h1>
-    <form>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title">
-      <label for="body">Body</label>
-      <textarea id="body" name="body"></textarea>
-      <label for="tags">Tags</label>
-      <input type="text" id="tags" name="tags">
-      <button type="submit">Post Your Question</button>
-    </form>
-  </div>
-
-  <div class="question-card">
-    <div class="votes">
-      <div class="upvote"></div>
-      <div class="score">15</div>
-      <div class="downvote"></div>
+<div class="container1">
+    <div class="container mx-auto flex justify-between items-center">
+      <form id="search">
+        <input type="text" class="bg-gray-900 text-white rounded px-8 py-2 w-256" placeholder="Search...">
+      </form>
+      <a href="#" class="font-bold text-xl ask" >Ask  Question</a>
+     
     </div>
-    <div class="question-details">
-      <h2 class="question-title">How to center a div element?</h2>
-      <p class="question-stats">Asked 3 hours ago &#8226; Active &#8226; Views 15 &#8226; Answers 2</p>
-      <div class="question-tags">
-        <span class="tag">html</span>
-        <span class="tag">css</span>
+    <br>
+
+
+  <main class="container mx-auto py-8">
+   
+
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-3xl font-bold mb-8">All Questions</h1>
+      <!-- <div class="text-gray-400">Showing 1-10 of 1,000,000 results</div> -->
+      <div>
+        <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
+        <select name="sort-by" id="sort-by" class="bg-gray-800 text-white rounded px-4 py-2">
+          <option value="votes">Votes</option>
+          <option value="active">Active</option>
+          <option value="newest">Newest</option>
+        </select>
       </div>
     </div>
-  </div>
-  
-
-  <!-- comments -->
-  <div class="comment js-comment">
-    <div class="comment-body js-comment-edit-hide">
-       <div class="comment-text js-comment-text-and-form">
-          <div class="comment-body__content js-comment-body-content">
-             <p>Great answer!</p>
-          </div>
-          <ul class="comment-actions grid gsx gs4 mt8">
-             <li class="grid--cell comment-user">
-                <a href="#" class="s-link s-link__muted s-username">user123</a>
-             </li>
-             <li class="grid--cell comment-date"><span title="2023-03-10 06:30:08Z" class="relativetime">just now</span></li>
-             <li class="grid--cell comment-score"><span title="+1/-0">1</span></li>
-             <li class="grid--cell comment-upvote"><a href="#" title="+1" aria-label="+1" role="button" aria-pressed="false"><svg aria-hidden="true" width="18" height="18" viewBox="-2 -2 18 18"><path d=""></path></svg></a></li>
-             <li class="grid--cell comment-flag"><a href="#" title="" aria-label="" role="" aria-pressed=""><svg aria-hidden="" width="" height="" viewBox=""><path d=""></path></svg></a></li>
-          </ul>
-       </div>
+    <!-- questions -->
+    <div class="question">
+      <h3><a href="#">How do I center an image using CSS?</a></h3>
+      <p class="details">Asked 3 hours ago by <a href="#">user123</a></p>
+      <p class="tags">Tags: <a href="#">html</a> <a href="#">css</a></p>
+      <p class="summary">I want to center an image on my webpage, but I can't seem to get it to work. Any ideas?</p>
+      <p class="answers">3 answers</p>
     </div>
- </div>
- 
+    <div class="question">
+      <h3><a href="#">What is the difference between HTML and XHTML?</a></h3>
+      <p class="details">Asked 1 day ago by <a href="#">user456</a></p>
+      <p class="tags">Tags: <a href="#">html</a> <a href="#">xhtml</a></p>
+      <p class="summary">I'm new to web development and I'm wondering what the difference is between HTML and XHTML. Can anyone explain?</p>
+      <p class="answers">1 answer</p>
+    </div>
+    <div class="question">
+      <h3><a href="#">How do I create a responsive design?</a></h3>
+      <p class="details">Asked 2 days ago by <a href="#">user789</a></p>
+      <p class="tags">Tags: <a href="#">html</a>, <a href="#">css</a>, <a href="#">responsive-design</a></p>
+      <p class="summary">I want my website to look good on all devices, but I'm not sure how to create a responsive design. Any tips?</p>
+      <p class="answers">2 answers</p>
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <button class="bg-gray-800 text-white px-4 py-2 rounded-md">Load More</button>
+    </div>
+  </main>
+</div>
+
+

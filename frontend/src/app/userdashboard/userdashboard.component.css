@@ -11,6 +11,17 @@
     width: 200px;
     background-color:#1C1C1C; 
     color:white; 
+    position: sticky;
+  top: 0;
+  height: 100vh; /* Make the sidebar full height of the viewport */
+/* 
+top: 0;
+margin-bottom: var(--su8);
+max-height: 100vh;
+overflow-y: auto;
+scrollbar-color: var(--scrollbar) transparent;
+top: var(--top-bar-allocated-space); */
+
   }
   
   .logo {

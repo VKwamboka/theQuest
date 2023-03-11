@@ -1,0 +1,150 @@
+.new-question-container {
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  textarea {
+    background-color: #2D2D2D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  input[type="submit"] {
+    background-color: #FFA500;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  input[type="submit"]:hover {
+   
+    background-color: #f48024;
+  }
+  button[type="submit"] {
+    background-color:#f48024;
+    ;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #FF8C00;
+  }  
+  .question-card {
+    background-color: #222222;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+  }
+  
+  .votes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+  }
+  
+  .upvote, .downvote {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    cursor: pointer;
+  }
+  
+  .upvote {
+    border-bottom: 10px solid #FFFFFF;
+  }
+  
+  .downvote {
+    border-top: 10px solid #FFFFFF;
+  }
+  
+  .score {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .question-details {
+    flex: 1;
+  }
+  
+  .question-title {
+    color: #FFFFFF;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .question-stats {
+    color: #BEBEBE;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .question-tags {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .tag {
+    background-color: #444444;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  /* comments */
+  .comment {
+    background-color: #2A2A2B;
+    border-color: gray;
+    color: white;
+}
+
+.comment-user {
+    color: blue;
+}
+
+.comment-date {
+    color: gray-lighter;
+}
+
+.comment-score {
+    color: #f48024;
+}
+
+.comment-upvote {
+    fill: gray;
+}
+
+.comment-flag {
+    fill: gray;
+}

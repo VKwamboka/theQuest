@@ -1,150 +1,128 @@
-.new-question-container {
-    background-color: #1E1E1E;
-    color: #FFFFFF;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"],
-  textarea {
-    background-color: #2D2D2D;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 3px;
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  input[type="submit"] {
-    background-color: #FFA500;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 3px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-   
-    background-color: #f48024;
-  }
-  button[type="submit"] {
-    background-color:#f48024;
-    ;
-    color: #FFFFFF;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #FF8C00;
-  }  
-  .question-card {
-    background-color: #222222;
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    display: flex;
-  }
-  
-  .votes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 20px;
-  }
-  
-  .upvote, .downvote {
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    cursor: pointer;
-  }
-  
-  .upvote {
-    border-bottom: 10px solid #FFFFFF;
-  }
-  
-  .downvote {
-    border-top: 10px solid #FFFFFF;
-  }
-  
-  .score {
-    font-size: 24px;
-    margin: 10px 0;
-  }
-  
-  .question-details {
-    flex: 1;
-  }
-  
-  .question-title {
-    color: #FFFFFF;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .question-stats {
-    color: #BEBEBE;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .question-tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .tag {
-    background-color: #444444;
-    color: #FFFFFF;
-    padding: 5px 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  /* comments */
-  .comment {
-    background-color: #2A2A2B;
-    border-color: gray;
-    color: white;
+.container1{
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 20px;
+  color: #f0f0f0;
 }
 
-.comment-user {
-    color: blue;
+/* Set the font color to white */
+body, a, h1, h2, h3, h4, h5, h6, p, span, div {
+  color: #fff;
 }
 
-.comment-date {
-    color: gray-lighter;
+/* Style the header */
+#header {
+  background-color: #212121;
+  border-bottom: 1px solid #454545;
+  background-color: #1b1c1d;
 }
 
-.comment-score {
-    color: #f48024;
+/* Style the navigation links */
+.top-bar .-link {
+  color: #a0a0a0;
 }
 
-.comment-upvote {
-    fill: gray;
+.top-bar .-link:hover, .top-bar .-link:active {
+  color: #fff;
 }
 
-.comment-flag {
-    fill: gray;
+/* Style the questions */
+.question-summary {
+  background-color: #2b2c2d;
+  border: 1px solid #454545;
+  margin-bottom: 15px;
+}
+
+.question-summary .summary {
+  color: #fff;
+}
+
+.question-summary .status {
+  color: #a0a0a0;
+}
+
+/* Style the tags */
+.tags {
+  margin-top: 5px;
+}
+
+.tags a {
+  background-color: #3e3f40;
+  color: #a0a0a0;
+  border-radius: 2px;
+  padding: 3px 7px;
+  margin-right: 5px;
+}
+
+.tags a:hover, .tags a:active {
+  background-color: #4e4f50;
+  color: #fff;
+}
+
+
+/* Style the pagination */
+.pagination {
+  margin-top: 15px;
+}
+
+
+header {
+  background-color: #212121;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav li:last-child {
+  margin-right: 0;
+}
+
+nav a {
+  color: #d4d4d4;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+main {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+
+}
+.question a{
+  color: #33a7ff;
+  font-weight: 400;
+}
+#search input{
+  width:40rem;
+}
+.ask{
+  background-color: #0964aa;
+  padding: 0.6rem;
+  border-radius: 5px;
+}
+.ask:hover{
+  background-color: #33a7ff;
+  
 }

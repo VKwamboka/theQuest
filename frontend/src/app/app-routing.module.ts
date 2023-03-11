@@ -9,6 +9,8 @@ const routes: Routes = [
   {
     path:'user', loadComponent:()=>import('./userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent),children:[
       {path:'profile', loadComponent:()=>import('./userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
+      {path:'all-questions', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
+      {path:'ask-question', loadComponent:()=>import('./ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
     ]
   },
   {
