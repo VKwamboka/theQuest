@@ -1,6 +1,6 @@
 .container1{
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   padding: 20px;
   color: #f0f0f0;
@@ -130,4 +130,38 @@ h1 {
 .ask:hover{
   background-color: #33a7ff;
   
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #242526;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.pagination li {
+  margin-right: 10px;
+}
+
+.pagination a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  background-color: #f48024;
+}
+.pagination a:hover{
+  background-color: #3e3f40;
 }
