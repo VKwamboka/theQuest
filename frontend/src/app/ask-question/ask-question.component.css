@@ -1,5 +1,5 @@
 .new-question-container {
-    background-color: #1E1E1E;
+    /* background-color: #1E1E1E; */
     color: #FFFFFF;
     padding: 20px;
     border-radius: 5px;
@@ -18,7 +18,7 @@
   
   input[type="text"],
   textarea {
-    background-color: #2D2D2D;
+    background-color: #1E1E1E;
     color: #FFFFFF;
     border: none;
     border-radius: 3px;
