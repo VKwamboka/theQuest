@@ -3,12 +3,16 @@
   }
   .container1 {
     display: flex;
+    height: 100%;
   }
  
   .sidebar {
     width: 200px;
     background-color:#1C1C1C; 
     color:white; 
+    position: sticky;
+    top: 0;
+    height: 100vh; 
   } 
   .logo {
     padding: 10px;
@@ -16,6 +20,14 @@
   
   .logo img {
     width: 100%;
+  }
+  .menu-toggle {
+    display: none;
+     /* position: relative; */
+  }
+  .hidden {
+    display: none;
+   
   }
   
   .menu {
@@ -81,33 +93,64 @@
   font-size:x-large;
   }
   table {
-  
   width :100%;
-  
-  
-  
   border-collapse :collapse;
-  
-  
-  
   }
-  
-  
   table th,
-  
   table td {
-  
-  
   padding :10px;
-  
-  
-  
   text-align :left;
-  
-  
-  
   border :1px solid #9E9E9E;
-  
-  
-  
   }
+   /* media query */
+ @media screen and (max-width: 640px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 25px;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    /* right: 10px; */
+    background-color:#1C1C1C;
+    padding: 10px;
+    /* border-radius: 5px; */
+  }
+
+  .menu li {
+    margin: 10px 0;
+  }
+
+  .menu li a {
+    display: block;
+    padding: 5px;
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+  }
+
+  .menu.active {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .menu.active li {
+    margin: 0;
+  }
+  .head{
+  display: none;
+  }
+}

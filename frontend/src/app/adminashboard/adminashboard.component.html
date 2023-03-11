@@ -1,5 +1,5 @@
 <div class="container1">
-  <div class="sidebar">
+  <div class="sidebar" [ngClass]="{'hidden': isMenuOpen}">
     <div class="logo">
       <img
         src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a"
@@ -15,6 +15,17 @@
   </div>
   <div class="main">
     <div class="header">
+      <!-- menu whensidebar is closed -->
+      <div class="menu-toggle" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+        <ul class="menu"  [ngClass]="{'active': isMenuOpen}" >
+          <li><a routerLink="/admin">Dashboard</a></li>
+          <li><a routerLink="manage-questions">Posts</a></li>
+          <li><a routerLink="manage-users">Users</a></li>
+          <li><a routerLink="#">Settings</a></li>
+        </ul>
+      </div>
+      
       <div class="head">
         <h1>Admin Dashboard</h1>
         <p>Manage your Stack Overflow site with ease.</p>
