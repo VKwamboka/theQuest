@@ -116,6 +116,8 @@ h1 {
 }
 #search input{
   width:40rem;
+  padding: 1rem;
+  background-color: #3e3f40;
 }
 .ask{
   background-color: #0964aa;
