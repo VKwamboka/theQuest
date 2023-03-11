@@ -10,5 +10,11 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./userdashboard.component.css']
 })
 export class UserdashboardComponent {
+  isMenuOpen = false;
 
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+    console.log('menu toggled');
+    
+  }
 }

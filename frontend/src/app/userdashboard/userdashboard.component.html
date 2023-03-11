@@ -1,10 +1,10 @@
 <div class="container1">
-    <div class="sidebar">
+    <div class="sidebar" [ngClass]="{'hidden': isMenuOpen}">
       <div class="logo">
         <img src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a" alt="Stack Overflow logo">
         <small style="text-align: center;">user@gmail.com</small>
       </div>
-      <ul class="menu">
+      <ul class="menu"  >
         <li><a href="#">Home</a></li>
         <li><a href="#">Questions</a></li>
         <li><a href="#">Tags</a></li>
@@ -12,8 +12,22 @@
         <li><a href="#">Badges</a></li>
       </ul>
     </div>
+<!-- when side bar is  -->
+ 
+
     <div class="main">
       <div class="header">
+        <div class="menu-toggle" (click)="toggleMenu()">
+          <i class="fas fa-bars"></i>
+          <ul class="menu"  [ngClass]="{'active': isMenuOpen}" >
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Questions</a></li>
+            <li><a href="#">Tags</a></li>
+            <li><a routerLink="profile">My Profile</a></li>
+            <li><a href="#">Badges</a></li>
+          </ul>
+        </div>
+       
         <div class="head">
           <h1>Welcome to The Overflow!</h1>
           <p>The largest, most trusted online community for developers to learn, share their knowledge, and build their careers.</p>
