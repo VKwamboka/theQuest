@@ -165,3 +165,54 @@ h1 {
 .pagination a:hover{
   background-color: #3e3f40;
 }
+
+/* vi */
+.question1 {
+  padding: 10px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.votes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.votes i {
+  margin: 0 5px;
+}
+
+.upvotes {
+  margin-right: 10px;
+}
+
+.title {
+  flex-grow: 1;
+}
+
+.title h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.answers {
+  display: flex;
+  align-items: center;
+}
+
+.answers i {
+  margin-right: 5px;
+}
+
+.num-answers {
+  font-size: 14px;
+}
