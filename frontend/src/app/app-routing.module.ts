@@ -17,13 +17,13 @@ const routes: Routes = [
     path:'admin', loadComponent:()=>import('./adminashboard/adminashboard.component').then(l=>l.AdminashboardComponent),children:[
       {path:'', loadComponent:()=>import('./admincontent/admincontent.component').then(l=>l.AdmincontentComponent)},
       {path:'manage-users', loadComponent:()=>import('./manage-users/manage-users.component').then(l=>l.ManageUsersComponent)},
-      {path:'manage-questions', loadComponent:()=>import('./manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)}
-
+      {path:'manage-questions', loadComponent:()=>import('./manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)},
+      {path:'edit-profile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
 
     ]
   },
   {path:'question', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
-  {path:'editprofile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
+  
   {path:'fullquestion', loadComponent:()=>import('./full-question/full-question.component').then(l=>l.FullQuestionComponent)},
   
   
