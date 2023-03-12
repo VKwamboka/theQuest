@@ -29,7 +29,8 @@ const routes: Routes = [
   {path:'question', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
   
   {path:'fullquestion', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
-  
+  {path:'**', loadComponent:()=>import('./not-found/not-found.component').then(l=>l.NotFoundComponent)},
+
   
 ];
 
