@@ -21,7 +21,7 @@
   }
   .right img{
     opacity: 0.8;
-    height: 45rem;
+    height: 40rem;
     width: 100%;
   }
 .content{
@@ -56,7 +56,7 @@
 
 }
 .started{
-  margin: 8rem 0;
+  margin: 4rem 0;
 }
 .nav button{
     width: 9rem;
@@ -103,7 +103,7 @@
   .active{
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
   .questions-header {
     margin: 4rem 0 ;
@@ -319,7 +319,7 @@ color:white;
   flex-direction: column;
   align-items: center;
   justify-content:center;
-  height :80vh;
+  height :15vh;
 
 }
 
