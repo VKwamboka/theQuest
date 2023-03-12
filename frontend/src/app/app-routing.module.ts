@@ -11,6 +11,10 @@ const routes: Routes = [
       {path:'profile', loadComponent:()=>import('./userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
       {path:'all-questions', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
       {path:'ask-question', loadComponent:()=>import('./ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
+      {path:'edit-profile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
+      {path:'', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
+      {path:'full-question', loadComponent:()=>import('./full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+
     ]
   },
   {
@@ -18,7 +22,7 @@ const routes: Routes = [
       {path:'', loadComponent:()=>import('./admincontent/admincontent.component').then(l=>l.AdmincontentComponent)},
       {path:'manage-users', loadComponent:()=>import('./manage-users/manage-users.component').then(l=>l.ManageUsersComponent)},
       {path:'manage-questions', loadComponent:()=>import('./manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)},
-      {path:'edit-profile', loadComponent:()=>import('./editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
+      
 
     ]
   },

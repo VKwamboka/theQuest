@@ -1,5 +1,5 @@
 .user-profile-edit {
-    background-color: #222222;
+    /* background-color: #222222; */
     height: 100vh;
     padding: 20px;
     margin-bottom: 20px;
@@ -24,7 +24,7 @@
   
   input,
   textarea {
-    background-color: #444444;
+    background-color: #1E1E1E;
     border: none;
     border-radius: 5px;
     color: #FFFFFF;
@@ -38,7 +38,7 @@
   }
   
   .btn-submit {
-    background-color: #4CAF50;
+    background-color:#f48024;
     border: none;
     border-radius: 5px;
     color: #FFFFFF;
@@ -48,6 +48,6 @@
   }
   
   .btn-submit:hover {
-    background-color: #3E8E41;
+    background-color: #FF8C00;
   }
   
