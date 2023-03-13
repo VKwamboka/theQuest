@@ -1,5 +1,5 @@
 /* Full-width input fields */
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=email]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -7,9 +7,10 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
   }
-  /* .form{
+  .form form{
     background-image: url('../../../assets/bg1.jpg');
-  } */
+    width: 80%;
+  }
 
   .logo img{
     width: 12rem;
