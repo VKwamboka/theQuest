@@ -4,7 +4,7 @@
     <!-- <h1>The<img src="../../assets/Logo.png" alt="logo" > </h1> -->
   
 
-    <a href="https://stackoverflow.blog/" title="Stack Overflow Blog" rel="home">
+    <a routerLink="/" title="Stack Overflow Blog" rel="home">
       <svg class="native wmx100 native" width="309" height="64" viewBox="0 0 309 64" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M43.9001 32.9027C43.9001 24.4982 48.6388 19.8489 55.7022 19.8489C62.7655 19.8489 67.5043 24.5876 67.5043 32.9027C67.5043 41.3072 62.7655 46.2247 55.7022 46.2247C48.7282 46.2247 43.9001 41.2178 43.9001 32.9027ZM60.7091 32.9027C60.7091 28.2534 58.8315 25.5711 55.7916 25.5711C52.7517 25.5711 50.874 28.2534 50.874 32.9027C50.874 37.552 52.7517 40.4131 55.7916 40.4131C58.8315 40.4131 60.7091 37.4626 60.7091 32.9027Z" fill="#F48024"></path>
 <path d="M69.9183 20.2064H77.0711L79.7534 31.2932C80.4687 33.9755 80.9157 36.6578 81.631 39.3401H81.8098C82.5251 36.5684 83.0616 33.9755 83.6874 31.2932L86.2803 20.2064H93.1649L85.6545 45.6882H77.5182L69.9183 20.2064Z" fill="#F48024"></path>
@@ -33,7 +33,7 @@
 <path d="M202.245 42.2908C201.529 41.3967 200.814 40.4132 200.099 39.4296L200.814 38.8932C201.529 39.8767 202.245 40.7708 202.96 41.7543L202.245 42.2908Z" fill="#E8B8A3"></path>
 </svg>
     </a>
-    <h1>Home</h1>
+    <a routerLink="/"><h1>Home</h1></a>
 </div>
   <div class="form">
     <form class="modal-content animate" >
@@ -55,7 +55,8 @@
         </label>
       </div>
   
-      <div class="container" style="background-color:#f1f1f1">
+      <div class="container forget" style="background-color:#f1f1f1">
+        <span class="psw">Don't have an account? <a routerLink="/register">Sign Up</a> </span>
         <!-- <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button> -->
         <span class="psw">Forgot <a href="#">password?</a></span>
       </div>

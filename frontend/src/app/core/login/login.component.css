@@ -91,6 +91,10 @@ input[type=text], input[type=password] {
     border: 1px solid #888;
     width: 80%; 
   }
+  .forget{
+    display: flex;
+    justify-content: space-between;
+  }
   
   /* The Close Button (x) */
   .close {
