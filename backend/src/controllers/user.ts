@@ -160,3 +160,71 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
      res.status(500).json(error.message)
   }
   }
+
+  // get all users
+  export const getAllUsers=async(req:ExtendedRequest,res:Response)=>{
+    try {
+      const users:User[]= await (await  _db.exec('GetAllUsers')).recordset
+      if(!users){
+         return res.status(404).json({error:'No Users Found'})
+      }
+    
+      return res.status(200).json(users)
+    
+    } catch (error) {
+      return res.status(500).json(error)
+    } 
+    
+  }
+
+  // delete user
+  export const deleteUser=async(req:ExtendedRequest,res:Response)=>{
+    try {
+      const id = req.params.id
+      const user:User= await (await  _db.exec('getProfile', {id})).recordset[0]
+      if(!user){
+         return res.status(404).json({error:'User Not Found'})
+      }
+      await _db.exec('deleteUser', {id})
+      return res.status(200).json({message:'User deleted'})
+    
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  }
+
+  // get user by id
+  export const getUserById=async(req:ExtendedRequest,res:Response)=>{
+    try {
+      const id = req.params.id
+      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
+      if(!user){
+         return res.status(404).json({error:'User Not Found'})
+      }
+    
+      return res.status(200).json(user)
+    
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+    
+  }
+
+  // update password
+  export const updatePassword=async(req:ExtendedRequest,res:Response)=>{
+    try {
+      const id = req.params.id
+      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
+      if(!user){
+         return res.status(404).json({error:'User Not Found'})
+      }
+      const hashedPassword= await Bcrypt.hash(req.body.Password,10)
+      await _db.exec('usp_UpdatePassword', {id,password:hashedPassword})
+      return res.status(200).json({message:'Password updated'})
+    
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  }
+
+  // update user
