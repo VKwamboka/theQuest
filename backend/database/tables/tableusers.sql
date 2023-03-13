@@ -6,7 +6,7 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.users
 (
-    userId INT NOT NULL PRIMARY KEY, -- primary key column
+    userId INT  PRIMARY KEY, -- primary key column
     Name VARCHAR(200)NOT NULL,
     Email VARCHAR(300) UNIQUE NOT NULL,
     Role VARCHAR(100) DEFAULT 'user',

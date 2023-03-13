@@ -5,7 +5,7 @@ import Joi, { ref } from "joi";
 export const UserSignUpHelper = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required().email().messages({
-    "string.empty": "Please provide email",
+    "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
   password: Joi.string().required(),

@@ -4,3 +4,159 @@ import path from 'path'
 import jwt from 'jsonwebtoken'
 import {v4 as uid} from 'uuid'
 import { RequestHandler,Request,Response } from 'express'
+import { UserSignUpHelper, UserSignInHelper } from '../helpers/userHelper'
+import { DecodedData, User } from '../interfaces/userInterface'
+import { DatabaseUtils } from "../utilis/dbUtilis";
+
+const  _db = new DatabaseUtils()
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
+
+// register user    
+// export const registerUser = async (req: Request, res: Response) => {
+//     try {
+
+//       const { Name, Email, Password } = await UserSignUpHelper.validateAsync(
+//         req.body
+//         )
+//         const salt = await Bcrypt.genSalt(10)
+//         const hashedPassword = await Bcrypt.hash(Password, salt)
+//         const user: User = {
+//         userId: uid(),
+//         Name,
+//         Email,
+//         Password: hashedPassword,
+//         }
+
+//       // check if user exists
+//       const userReg = await _db.exec("usp_FindUserByEmail", { Email });
+//        // check if user was soft deleted
+//     if (userReg.recordset.length > 0 &&userReg.recordset[0].isDeleted) {
+//       return res.status(400).json({
+//         message:
+//           "Email has been registered before, please try another email or contact support",
+//       });
+//     }
+
+//     if (userReg.recordset.length > 0) {
+//       return res.status(400).json({
+//         message:
+//           "User with similar email already exists, please try another email",
+//       });
+//     }
+        
+//       const result = await _db.exec('registerUser', user)
+
+//        if(result.recordset.length > 0){
+//         const token = jwt.sign(
+//           { userId: result.recordset[0].userId,Eemail: result.recordset[0].Email },
+//           process.env.JWT_SECRET as string,
+//           { expiresIn: '1d' }
+//           )
+//           res.status(201).json({
+              
+//           status: 'User registered successfully',
+//           data: {
+//               token,
+//           },
+//           })
+//       return res.status(201).json({message:'User registered'})
+//         }
+        
+       
+//     } catch (error) {
+//         res.status(500).json(error) 
+   
+//     }
+// }
+
+
+interface ExtendedRequest extends Request{
+  body:{Name:string ,Email:string,Password:string, ConfirmPassword:string}
+  params:{id:string},
+  info?:DecodedData
+}
+export async function RegisterUser(req:ExtendedRequest, res:Response){
+try {
+  const id =uid()
+  const{Name,Email,Password} = req.body
+  console.log(req.body)
+  const {error} =UserSignUpHelper.validate(req.body)
+  if(error){
+      return res.status(422).json(error.details[0].message)
+  }
+  const hashedPassword= await Bcrypt.hash(Password,10)
+  await _db.exec('registerUser', {id,name:Name,email:Email, password:hashedPassword})
+  return res.status(201).json({message:'User registered successfully'})
+
+} 
+catch (error) {
+   res.status(500).json(error) 
+}
+}
+
+// login user
+export const loginUser = async (req: Request, res: Response) => {
+    try {
+        const { Email, Password } = await UserSignInHelper.validateAsync(req.body)
+        const user = await _db.exec('usp_FindUserByEmail', { Email })
+        if (user.recordset.length === 0) {
+            return res.status(400).json({ message: 'Invalid email or password' })
+        }
+        const validPassword = await Bcrypt.compare(Password, user.recordset[0].Password)
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Invalid email or password' })
+        }
+        const token = jwt.sign(
+            { userId: user.recordset[0].userId, Email: user.recordset[0].Email },
+            process.env.JWT_SECRET as string,
+            { expiresIn: '1d' }
+        )
+        res.status(200).json({
+            status: 'User logged in successfully',
+            data: {
+                token,
+            },
+        })
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+
+// get user profile
+
+export const getProfile=async(req:ExtendedRequest,res:Response)=>{
+  try {
+    const id = req.params.id
+    const user:User= await (await  _db.exec('getProfile', {id})).recordset[0]
+    if(!user){
+       return res.status(404).json({error:'User Not Found'})
+    }
+  
+    return res.status(200).json(user)
+  
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+  
+  }
+
+// update profile
+export async function updateProfile(req:ExtendedRequest,res:Response){
+  try {
+  const {Name,Email}= req.body
+  const profile:User[]= await (await _db.exec('getProfile', {id:req.params.id} )).recordset
+    
+      if(profile.length){
+        await _db.exec('usp_UpdateUser', {id:req.params.id,name:Name, email:Email})
+        return res.status(200).json({message:'Updated user'})
+      }
+    return res.status(404).json({error:'User Not Found'}) 
+  // res.json(profile)
+       
+    } 
+  
+  catch (error:any) {
+     res.status(500).json(error.message)
+  }
+  }
