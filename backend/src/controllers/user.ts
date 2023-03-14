@@ -13,62 +13,62 @@ const  _db = new DatabaseUtils()
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 // register user    
-// export const registerUser = async (req: Request, res: Response) => {
-//     try {
+export const RegisterUser = async (req: Request, res: Response) => {
+    try {
 
-//       const { Name, Email, Password } = await UserSignUpHelper.validateAsync(
-//         req.body
-//         )
-//         const salt = await Bcrypt.genSalt(10)
-//         const hashedPassword = await Bcrypt.hash(Password, salt)
-//         const user: User = {
-//         userId: uid(),
-//         Name,
-//         Email,
-//         Password: hashedPassword,
-//         }
+      const { Name, Email, Password } = await UserSignUpHelper.validateAsync(
+        req.body
+        )
+        const salt = await Bcrypt.genSalt(10)
+        const hashedPassword = await Bcrypt.hash(Password, salt)
+        const user: User = {
+        userId: uid(),
+        Name,
+        Email,
+        Password: hashedPassword,
+        }
 
-//       // check if user exists
-//       const userReg = await _db.exec("usp_FindUserByEmail", { Email });
-//        // check if user was soft deleted
-//     if (userReg.recordset.length > 0 &&userReg.recordset[0].isDeleted) {
-//       return res.status(400).json({
-//         message:
-//           "Email has been registered before, please try another email or contact support",
-//       });
-//     }
+      // check if user exists
+      const userReg = await _db.exec("usp_FindUserByEmail", { Email });
+       // check if user was soft deleted
+    if (userReg.recordset.length > 0 &&userReg.recordset[0].isDeleted) {
+      return res.status(400).json({
+        message:
+          "Email has been registered before, please try another email or contact support",
+      });
+    }
 
-//     if (userReg.recordset.length > 0) {
-//       return res.status(400).json({
-//         message:
-//           "User with similar email already exists, please try another email",
-//       });
-//     }
+    if (userReg.recordset.length > 0) {
+      return res.status(400).json({
+        message:
+          "User with similar email already exists, please try another email",
+      });
+    }
         
-//       const result = await _db.exec('registerUser', user)
+      const result = await _db.exec('registerUser', user)
 
-//        if(result.recordset.length > 0){
-//         const token = jwt.sign(
-//           { userId: result.recordset[0].userId,Eemail: result.recordset[0].Email },
-//           process.env.JWT_SECRET as string,
-//           { expiresIn: '1d' }
-//           )
-//           res.status(201).json({
+       if(result.recordset.length > 0){
+        const token = jwt.sign(
+          { userId: result.recordset[0].userId,Email: result.recordset[0].Email },
+          process.env.JWT_SECRET as string,
+          { expiresIn: '1d' }
+          )
+          res.status(201).json({
               
-//           status: 'User registered successfully',
-//           data: {
-//               token,
-//           },
-//           })
-//       return res.status(201).json({message:'User registered'})
-//         }
+          status: 'User registered successfully',
+          data: {
+              token,
+          },
+          })
+      return res.status(201).json({message:'User registered'})
+        }
         
        
-//     } catch (error) {
-//         res.status(500).json(error) 
+    } catch (error) {
+        res.status(500).json(error) 
    
-//     }
-// }
+    }
+}
 
 
 interface ExtendedRequest extends Request{
@@ -76,25 +76,25 @@ interface ExtendedRequest extends Request{
   params:{userId:string},
   info?:DecodedData
 }
-export async function RegisterUser(req:ExtendedRequest, res:Response){
-try {
-  const userId =uid()
-  const{Name,Email,Password} = req.body
-  console.log(req.body)
-  const {error} =UserSignUpHelper.validate(req.body)
-  if(error){
-      return res.status(422).json(error.details[0].message)
-  }
-  const hashedPassword= await Bcrypt.hash(Password,10)
-  await _db.exec('registerUser', {userId,name:Name,email:Email, password:hashedPassword})
-  return res.status(201).json({message:'User registered successfully'})
+// export async function RegisterUser(req:ExtendedRequest, res:Response){
+// try {
+//   const userId =uid()
+//   const{Name,Email,Password} = req.body
+//   console.log(req.body)
+//   const {error} =UserSignUpHelper.validate(req.body)
+//   if(error){
+//       return res.status(422).json(error.details[0].message)
+//   }
+//   const hashedPassword= await Bcrypt.hash(Password,10)
+//   await _db.exec('registerUser', {userId,name:Name,email:Email, password:hashedPassword})
+//   return res.status(201).json({message:'User registered successfully'})
 
-} 
-catch (error) {
-  console.log(error)
-   res.status(500).json(error) 
-}
-}
+// } 
+// catch (error) {
+//   console.log(error)
+//    res.status(500).json(error) 
+// }
+// }
 
 // login user
 export const loginUser = async (req: Request, res: Response) => {
