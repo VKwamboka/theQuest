@@ -73,7 +73,7 @@ export const RegisterUser = async (req: Request, res: Response) => {
 
 interface ExtendedRequest extends Request{
   body:{Name:string , location:string, bio:string, Email:string,Password:string, ConfirmPassword:string}
-  params:{userId:string},
+  // params:{userId:string},
   info?:DecodedData
 }
 // export async function RegisterUser(req:ExtendedRequest, res:Response){
@@ -129,7 +129,6 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const getProfile=async(req:ExtendedRequest,res:Response)=>{
   try {
-    // const id = req.params.userId
     const userId = req.params.userId as string;
     const user:User= await (await  _db.exec('getProfile', {userId })).recordset[0]
     if(!user){
@@ -145,16 +144,19 @@ export const getProfile=async(req:ExtendedRequest,res:Response)=>{
   }
 
 // update profile
-export async function updateProfile(req:ExtendedRequest,res:Response){
+export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
   try {
+  
+  const Id = req.params.id as string;
   const {Name,Email,location,bio}= req.body
-  const profile:User[]= await (await _db.exec('getProfile', {userId:req.params.userId} )).recordset
-    
-      if(profile.length){
-        await _db.exec('usp_UpdateUser', {userId:req.params.userId,Name:Name, Email:Email, location:location, bio:bio})
-        return res.status(200).json({message:'Updated user'})
-      }
-    return res.status(404).json({error:'User Not Found'}) 
+  const profile:User[]= await (await _db.exec('getProfile', {userId:Id} )).recordset
+  
+  if(profile){
+    console.log(profile)
+    await _db.exec('usp_UpdateUser', {userId:Id, Name:Name, Email:Email, location:location, bio:bio})
+    return res.status(200).json({message:'Updated user'})
+  }
+    return res.status(404).json({error:'Oops! User Not Found'}) 
   // res.json(profile)
        
     } 

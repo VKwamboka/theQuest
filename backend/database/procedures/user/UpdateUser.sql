@@ -1,5 +1,5 @@
 CREATE PROCEDURE usp_UpdateUser(
-    @userId INT,
+    @userId VARCHAR(255),
     @Name NVARCHAR(255) = NULL,
     @Email NVARCHAR(255) = NULL,
     @Password NVARCHAR(255) = NULL,
