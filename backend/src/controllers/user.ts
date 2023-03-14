@@ -71,13 +71,13 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 
 interface ExtendedRequest extends Request{
-  body:{Name:string ,Email:string,Password:string, ConfirmPassword:string}
+  body:{Name:string , location:string, bio:string, Email:string,Password:string, ConfirmPassword:string}
   params:{userId:string},
   info?:DecodedData
 }
 export async function RegisterUser(req:ExtendedRequest, res:Response){
 try {
-  const id =uid()
+  const userId =uid()
   const{Name,Email,Password} = req.body
   console.log(req.body)
   const {error} =UserSignUpHelper.validate(req.body)
@@ -85,11 +85,12 @@ try {
       return res.status(422).json(error.details[0].message)
   }
   const hashedPassword= await Bcrypt.hash(Password,10)
-  await _db.exec('registerUser', {id,name:Name,email:Email, password:hashedPassword})
+  await _db.exec('registerUser', {userId,name:Name,email:Email, password:hashedPassword})
   return res.status(201).json({message:'User registered successfully'})
 
 } 
 catch (error) {
+  console.log(error)
    res.status(500).json(error) 
 }
 }
@@ -129,7 +130,7 @@ export const getProfile=async(req:ExtendedRequest,res:Response)=>{
   try {
     // const id = req.params.userId
     const userId = req.params.userId as string;
-    const user:User= await (await  _db.exec('getProfile', {id: userId })).recordset[0]
+    const user:User= await (await  _db.exec('getProfile', {userId })).recordset[0]
     if(!user){
        return res.status(404).json({error:'User Not Found'})
     }
@@ -145,11 +146,11 @@ export const getProfile=async(req:ExtendedRequest,res:Response)=>{
 // update profile
 export async function updateProfile(req:ExtendedRequest,res:Response){
   try {
-  const {Name,Email}= req.body
-  const profile:User[]= await (await _db.exec('getProfile', {id:req.params.userId} )).recordset
+  const {Name,Email,location,bio}= req.body
+  const profile:User[]= await (await _db.exec('getProfile', {userId:req.params.userId} )).recordset
     
       if(profile.length){
-        await _db.exec('usp_UpdateUser', {id:req.params.userId,name:Name, email:Email})
+        await _db.exec('usp_UpdateUser', {userId:req.params.userId,Name:Name, Email:Email, location:location, bio:bio})
         return res.status(200).json({message:'Updated user'})
       }
     return res.status(404).json({error:'User Not Found'}) 
@@ -181,12 +182,12 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // delete user
   export const deleteUser=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.userId
-      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
+      const userId = req.params.userId
+      const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
       }
-      await _db.exec('deleteUser', {id})
+      await _db.exec('deleteUser', {userId})
       return res.status(200).json({message:'User deleted'})
     
     } catch (error) {
@@ -197,8 +198,8 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // get user by id
   export const getUserById=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.userId
-      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
+      const userId = req.params.userId
+      const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
       }
@@ -214,14 +215,14 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // update password
   export const updatePassword=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.userId
+      const userId = req.params.userId
       
-      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
+      const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
       }
       const hashedPassword= await Bcrypt.hash(req.body.Password,10)
-      await _db.exec('usp_UpdatePassword', {id,password:hashedPassword})
+      await _db.exec('usp_UpdatePassword', {userId,password:hashedPassword})
       return res.status(200).json({message:'Password updated'})
     
     } catch (error) {

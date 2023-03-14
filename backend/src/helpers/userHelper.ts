@@ -3,39 +3,39 @@ import Joi, { ref } from "joi";
 
 // signup Helper
 export const UserSignUpHelper = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required().email().messages({
+  Name: Joi.string().required(),
+  Email: Joi.string().required().email().messages({
     "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
-  password: Joi.string().required(),
-  confirmPassword: Joi.equal(ref("password")).required().messages({
+  Password: Joi.string().required(),
+  confirmPassword: Joi.equal(ref("Password")).required().messages({
     "any.only": "Passwords do not match",
   }),
 });
 
 // signin Helper
 export const UserSignInHelper = Joi.object({
-  email: Joi.string().required().email().messages({
+  Email: Joi.string().required().email().messages({
     "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
-  password: Joi.string().required().messages({
-    "string.empty": "Please provide a password",
+  Password: Joi.string().required().messages({
+    "string.empty": "Please provide a Password",
   }),
 });
 
-// forgot password Helper
+// forgot Password Helper
 export const UserForgotPasswordHelper = Joi.object({
-  email: Joi.string().required().email().messages({
+  Email: Joi.string().required().email().messages({
     "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
 });
 
-// reset password Helper
+// reset Password Helper
 export const UserPasswordResetHelper = Joi.object({
-  password: Joi.string()
+  Password: Joi.string()
     .required()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$")
@@ -44,19 +44,19 @@ export const UserPasswordResetHelper = Joi.object({
       "string.pattern.base":
         "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character",
     }),
-  confirmPassword: Joi.equal(ref("password")).required().messages({
+  confirmPassword: Joi.equal(ref("Password")).required().messages({
     "any.only": "Passwords do not match",
   }),
 });
 
 // update user profile Helper
 export const UserUpdateProfileHelper = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required().email().messages({
+  Name: Joi.string().required(),
+  Email: Joi.string().required().email().messages({
     "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
-  password: Joi.string()
+  Password: Joi.string()
     .required()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$")
@@ -65,14 +65,14 @@ export const UserUpdateProfileHelper = Joi.object({
       "string.pattern.base":
         "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character",
     }),
-  confirmPassword: Joi.equal(ref("password")).required().messages({
+  confirmPassword: Joi.equal(ref("Password")).required().messages({
     "any.only": "Passwords do not match",
   }),
 });
 
-// update user password Helper
+// update user Password Helper
 export const UserUpdatePasswordHelper = Joi.object({
-  password: Joi.string()
+  Password: Joi.string()
     .required()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$")
@@ -81,17 +81,17 @@ export const UserUpdatePasswordHelper = Joi.object({
       "string.pattern.base":
         "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character",
     }),
-  confirmPassword: Joi.equal(ref("password")).required().messages({
+  confirmPassword: Joi.equal(ref("Password")).required().messages({
     "any.only": "Passwords do not match",
   }),
 });
 
 export const UserUpdateProfileByAdminHelper = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required().email().messages({
+  Name: Joi.string().required(),
+  Email: Joi.string().required().email().messages({
     "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
   isDeleted: Joi.boolean(),
-  isAdmin: Joi.boolean(),
+  Role: Joi.string(),
 });
