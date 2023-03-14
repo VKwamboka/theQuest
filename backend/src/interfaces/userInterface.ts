@@ -8,7 +8,7 @@ export interface User {
   }
 
   export interface DecodedData{
-    Id: string,
+    userId: string,
     Name:string,
     Email:string,
     Role: string,

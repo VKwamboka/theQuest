@@ -72,7 +72,7 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 interface ExtendedRequest extends Request{
   body:{Name:string ,Email:string,Password:string, ConfirmPassword:string}
-  params:{id:string},
+  params:{userId:string},
   info?:DecodedData
 }
 export async function RegisterUser(req:ExtendedRequest, res:Response){
@@ -127,8 +127,9 @@ export const loginUser = async (req: Request, res: Response) => {
 
 export const getProfile=async(req:ExtendedRequest,res:Response)=>{
   try {
-    const id = req.params.id
-    const user:User= await (await  _db.exec('getProfile', {id})).recordset[0]
+    // const id = req.params.userId
+    const userId = req.params.userId as string;
+    const user:User= await (await  _db.exec('getProfile', {id: userId })).recordset[0]
     if(!user){
        return res.status(404).json({error:'User Not Found'})
     }
@@ -145,10 +146,10 @@ export const getProfile=async(req:ExtendedRequest,res:Response)=>{
 export async function updateProfile(req:ExtendedRequest,res:Response){
   try {
   const {Name,Email}= req.body
-  const profile:User[]= await (await _db.exec('getProfile', {id:req.params.id} )).recordset
+  const profile:User[]= await (await _db.exec('getProfile', {id:req.params.userId} )).recordset
     
       if(profile.length){
-        await _db.exec('usp_UpdateUser', {id:req.params.id,name:Name, email:Email})
+        await _db.exec('usp_UpdateUser', {id:req.params.userId,name:Name, email:Email})
         return res.status(200).json({message:'Updated user'})
       }
     return res.status(404).json({error:'User Not Found'}) 
@@ -180,8 +181,8 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // delete user
   export const deleteUser=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.id
-      const user:User= await (await  _db.exec('getProfile', {id})).recordset[0]
+      const id = req.params.userId
+      const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
       }
@@ -196,7 +197,7 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // get user by id
   export const getUserById=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.id
+      const id = req.params.userId
       const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
@@ -213,7 +214,8 @@ export async function updateProfile(req:ExtendedRequest,res:Response){
   // update password
   export const updatePassword=async(req:ExtendedRequest,res:Response)=>{
     try {
-      const id = req.params.id
+      const id = req.params.userId
+      
       const user:User= await (await  _db.exec('usp_FindUserById', {id})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})

@@ -4,3 +4,6 @@ AS
 BEGIN
 SELECT userId ,Name ,Email, Password FROM users WHERE userId = @userId;
 END
+
+
+EXEC getProfile @userId = 3
