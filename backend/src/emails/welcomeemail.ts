@@ -17,14 +17,14 @@ export const sendWelcomeEmail = async () => {
 
       const newUsers = result.recordset as User[];
       newUsers.forEach((user) => {
-        const subject = "Welcome to GadgetHub";
+        const subject = "Welcome to the Overflow";
         const html 
-        = `<h1>Welcome to GadgetHub</h1>
+        = `<h1>Welcome to the Overflow</h1>
             <p>Dear ${user.Name},</p>
-            <p>Thank you for registering an account with GadgetHub.</p>
+            <p>Thank you for registering an account with the Overflow.</p>
             <P>We are happy to have you on board and ready to serve you.</P>
-            <P>Happy <a href=${process.env.CLIENT_URL}>Shopping</a> 🎉</P>
-            <p>Regards,<br/>GadgetHub Team</p>`;
+            <P>Connect. Learn. Know. Share 🎉🎉</P>
+            <p>Regards,<br/>the Overflow Team</p>`;
 
         sendEmail(subject, user.Email, html);
       });

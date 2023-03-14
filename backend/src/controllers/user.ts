@@ -7,6 +7,7 @@ import { RequestHandler,Request,Response } from 'express'
 import { UserSignUpHelper, UserSignInHelper } from '../helpers/userHelper'
 import { DecodedData, User } from '../interfaces/userInterface'
 import { DatabaseUtils } from "../utilis/dbUtilis";
+import { sendEmail } from '../utilis/background-services/helpers/email'
 
 const  _db = new DatabaseUtils()
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
