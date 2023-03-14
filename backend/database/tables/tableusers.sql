@@ -6,12 +6,14 @@ GO
 -- Create the table in the specified schema
 CREATE TABLE dbo.users
 (
-    userId INT NOT NULL PRIMARY KEY, -- primary key column
+    userId VARCHAR(255)  PRIMARY KEY, -- primary key column
     Name VARCHAR(200)NOT NULL,
     Email VARCHAR(300) UNIQUE NOT NULL,
     Role VARCHAR(100) DEFAULT 'user',
     Password VARCHAR(150) NOT NULL,
     isSent VARCHAR(150) DEFAULT '0',
+    location VARCHAR(255) ,
+    bio VARCHAR(1255) ,
     isDeleted BIT NOT NULL DEFAULT 0,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP

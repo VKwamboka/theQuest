@@ -82,34 +82,15 @@
   .card p { 
   font-size:x-large;
   }
+  /* table */
   table {
-  
   width :100%;
-  
-  
-  
   border-collapse :collapse;
-  
-  
-  
   }
   
   
-  table th,
-  
-  table td {
-  
-  
+  table th,table td {
   padding :10px;
-  
-  
-  
   text-align :left;
-  
-  
-  
   border :1px solid #9E9E9E;
-  
-  
-  
   }

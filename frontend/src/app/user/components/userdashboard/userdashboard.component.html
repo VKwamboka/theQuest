@@ -6,11 +6,11 @@
       </div>
       <ul class="menu"  >
         <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="all-questions">Questions</a></li>
+        <li><a routerLink="/user/all-questions">Questions</a></li>
         <!-- <li><a routerLink="#">Tags</a></li> -->
-        <li><a routerLink="all-questions"> My Questions(2)</a></li>
-        <li><a routerLink="profile">My Profile</a></li>
-        <li><a routerLink="ask-question">Ask Question</a></li>
+        <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
+        <li><a routerLink="/user/profile">My Profile</a></li>
+        <li><a routerLink="/user/ask-question">Ask Question</a></li>
 
       </ul>
     </div>
@@ -22,11 +22,13 @@
         <div class="menu-toggle" (click)="toggleMenu()">
           <i class="fas fa-bars"></i>
           <ul class="menu"  [ngClass]="{'active': isMenuOpen}" >
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">Tags</a></li>
-            <li><a routerLink="profile">My Profile</a></li>
-            <li><a href="#">Badges</a></li>
+            <li><a routerLink="/">Home</a></li>
+            <li><a routerLink="/user/all-questions">Questions</a></li>
+            <!-- <li><a routerLink="#">Tags</a></li> -->
+            <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
+            <li><a routerLink="/user/profile">My Profile</a></li>
+            <li><a routerLink="/user/ask-question">Ask Question</a></li>
+
           </ul>
         </div>
        
