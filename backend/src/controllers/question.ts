@@ -60,9 +60,14 @@ export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
     const questionID = req.params.id
     console.log(req.params.id)
 
-    const result = await _db.exec("usp_FindQuestionById", {questionID})
-    
-    res.status(200).json(result)
+    const question:Question= await (await _db.exec('usp_FindQuestionById', {questionID} )).recordset[0]
+    if(question){
+        await _db.exec("usp_FindQuestionById", {questionID})
+        return res.status(200).json(question)
+        
+    }
+    return res.status(404).json({error:'Oops! Question Not Found'}) 
+
   }catch (error) {
     console.log(error)
     res.status(500).json(error)
@@ -88,11 +93,30 @@ export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
 
         }
         return res.status(404).json({error:'Oops! Question Not Found'}) 
-        // const result = await _db.exec("UpdateQuestion", {questionID, Title, Body, Code})
-        // res.status(200).json(result)
-
 
     }catch (error) {
         res.status(500).json(error)
 }
+}
+
+
+// delete question
+
+export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
+    try{
+        const QuestionID = req.params.id
+
+        const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
+
+        if(quiz){
+            await _db.exec("DeleteQuestion", {QuestionID})
+            return res.status(200).json({error:'Question Deleted Successfully'}) 
+        }
+
+        return res.status(404).json({error:'Oops! Question Not Found'})  
+        // const result = await _db.exec("DeleteQuestion", {QuestionID})
+        // res.status(200).json(result)
+    }catch (error) {
+        res.status(500).json(error)
+    }
 }
