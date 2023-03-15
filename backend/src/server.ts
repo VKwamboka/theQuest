@@ -4,6 +4,7 @@ import userRoutes from './router/userRoutes'
 import cors from 'cors'
 import { sendWelcomeEmail } from './emails/welcomeemail'
 import cron from "node-cron";
+import questionRoutes from './router/questionRouter'
 
 
 const app= express()
@@ -14,6 +15,8 @@ app.use(json()) //adds a body to the Request
 
 //Register Routes
 app.use('/auth',userRoutes)
+// quiz ROutes
+app.use('/question', questionRoutes)
 
 
 app.listen(4002,()=>{

@@ -9,18 +9,22 @@ WHERE SPECIFIC_SCHEMA = N'dbo'
 DROP PROCEDURE dbo.createQuestion
 GO
 -- Create the stored procedure in the specified schema
-CREATE PROCEDURE dbo.createQuestion
+CREATE OR ALTER PROCEDURE dbo.createQuestion
    @Title varchar(255),
-  @Body text,
+  @Body VARCHAR(1255),
   @UserID VARCHAR(255),
-  @Code text,
-  
-  @questionID VARCHAR
+  @Code VARCHAR(1255),
+  @QuestionDate DATETIME,
+  @questionID VARCHAR(255)
 AS
   BEGIN
   INSERT INTO questions (Title, Body, UserID, questionID,Code,QuestionDate)
-  VALUES (@Title, @Body, @UserID, @QuestionID, @Code,GETDATE());
+  VALUES (@Title, @Body, @UserID, @questionID,@Code, @QuestionDate);
 END;
 GO
 
-EXECUTE createQuestion 'How to create a stored procedure?', 'I want to learn how to create a stored procedure in mssql.', '6eee788f-69a3-4e68-9037-12c44b901374', '101','nmbvcfg';
+SELECT * FROM questions
+
+-- DROP PROCEDURE IF EXISTS createQuestion;
+
+-- EXECUTE createQuestion 'How to create a stored procedure?', 'I want to learn how to create a stored procedure in mssql.', '6eee788f-69a3-4e68-9037-12c44b901374', '101','nmbvcfg';

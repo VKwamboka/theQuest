@@ -31,6 +31,7 @@ export const RegisterUser = async (req: Request, res: Response) => {
         )
         const salt = await Bcrypt.genSalt(10)
         const hashedPassword = await Bcrypt.hash(Password, salt)
+        
         const user: User = {
         userId: uid(),
         Name,
@@ -276,11 +277,7 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
       }
 
       const { userId, Name } = user
-     
-    
-
       const JWT = generateJWT({ userId, Name, Email } as JWTPayload, "1h");
-  
       const resetUrl = `${process.env.CLIENT_URL}/reset-password/?resetToken=${JWT}`;
   
       const passwordResetMsg = `
@@ -292,7 +289,6 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
 
       try {
         await sendEmail("Password Reset Request", Email, passwordResetMsg);
-  
         return res.status(200).json({
           message: "We have sent a link to reset your password to your email",
           resetUrl,
@@ -303,7 +299,7 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
       }
 
     } catch (error) {
-      console.log(error)
+      // console.log(error)
       return res.status(500).json(error)
     }
   }
