@@ -16,6 +16,8 @@ interface ExtendedRequest extends Request{
 const  _db = new DatabaseUtils()
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
+// create question
+
 export const createQuestion = async (req: Request, res: Response) => {
     try{
         const { Title, Body, Code, UserId} = await createQuizHelper.validateAsync(req.body)
@@ -26,7 +28,7 @@ export const createQuestion = async (req: Request, res: Response) => {
             UserID:UserId,
             Code,
             QuestionDate: new Date(),
-            questionID: "fghvgfdhghdjfgsdhghjeg"
+            questionID: uid(),
         }
 
         console.log(question)
@@ -40,45 +42,6 @@ export const createQuestion = async (req: Request, res: Response) => {
   }
     
 }
-// create question
-
-// export const createQuiz = async (req: Request, res: Response) => {
-//     const { error } = createQuizHelper.validate(req.body);
-//     if (error) {
-//       return res.status(422).json(error.details[0].message);
-//     }
-  
-//     const {
-//       UserId,
-//       Title,
-//       Body,
-//       Code,
-//       QuestionDate,
-    
-      
-//     } = req.body;
-  
-//     try {
-//       const question = await _db.exec("createQuestion", {
-//         UserId,
-//         Title,
-//         Body,
-//         Code,
-//         QuestionDate,
-//         questionID: uid(),
-//       });
-//       console.log(req.body)
-  
-//       if (question.recordset.length > 0) {
-//         return res.status(201).json(question.recordset[0]);
-//       } else {
-//         return res.status(400).json({ message: "Question not created" });
-//       }
-//     } catch (error: any) {
-//       res.status(500).json(error.message);
-//       console.log(error);
-//     }
-//   };
 
 
 // get all questions
@@ -95,11 +58,25 @@ export const getAllQuestions = async (req: Request, res: Response) => {
 export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
   try{
     const questionID = req.params.id
-    console.log(questionID)
+    console.log(req.params.id)
 
-    const result = await _db.exec("GetQuestionById", {questionID})
+    const result = await _db.exec("usp_FindQuestionById", {questionID})
+    
     res.status(200).json(result)
   }catch (error) {
+    console.log(error)
     res.status(500).json(error)
+}
+}
+
+// update question
+
+export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
+    try{
+        const questionID = req.params
+
+
+    }catch (error) {
+        res.status(500).json(error)
 }
 }
