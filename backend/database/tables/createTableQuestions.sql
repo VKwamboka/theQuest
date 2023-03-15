@@ -16,5 +16,6 @@ CREATE TABLE dbo.questions
 
   CONSTRAINT FK_Questions_UserID
   FOREIGN KEY (UserID) REFERENCES users(userId)
+  ON DELETE CASCADE
 );
 GO

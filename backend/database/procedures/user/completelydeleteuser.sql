@@ -1,6 +1,6 @@
 
-CREATE PROCEDURE DeleteUserCompletely
-    (@userId INT)
+CREATE OR ALTER PROCEDURE DeleteUserCompletely
+    (@userId VARCHAR(255))
 AS
 BEGIN
     DELETE 

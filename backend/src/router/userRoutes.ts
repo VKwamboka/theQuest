@@ -1,5 +1,5 @@
 import express from "express";
-import { RegisterUser , sendEmailToUser,updatePasswordUser,loginUser,getAllUsers,getProfile,deleteUser,updatePassword,getUserById, updateProfile} from "../controllers/user";
+import { RegisterUser , sendEmailToUser,updatePasswordUser,loginUser,getAllUsers,getProfile,deleteUser,updatePassword,getUserById, updateProfile,deleteUserCompletely} from "../controllers/user";
 
 const userRoutes = express.Router();
 
@@ -14,6 +14,8 @@ userRoutes.route("/user/:id").get(getUserById);
 userRoutes.route("/updateprofile/:id").patch(updateProfile);
 userRoutes.route("/updatepassworduser/:id").patch(updatePasswordUser);
 userRoutes.route("/sendemail").post(sendEmailToUser);
+userRoutes.route("/deletecompletely/:id").delete(deleteUserCompletely);
+
 
 
 export default userRoutes;
