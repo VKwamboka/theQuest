@@ -1,5 +1,5 @@
 import express from "express";
-import{createQuestion, getAllQuestions,getQuestionById} from '../controllers/question'
+import{createQuestion, getAllQuestions,getQuestionById,updateQuestion} from '../controllers/question'
 
 const questionRoutes = express.Router();
 
@@ -7,5 +7,6 @@ const questionRoutes = express.Router();
 questionRoutes.route("/postQuestion").post(createQuestion);
 questionRoutes.route("/getAllQuestions").get(getAllQuestions);
 questionRoutes.route("/getQuestionById/:id").get(getQuestionById);
+questionRoutes.route("/updateQuestion/:id").patch(updateQuestion);
 
 export default questionRoutes;

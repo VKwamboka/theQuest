@@ -27,8 +27,8 @@ const questionSchema = Joi.object({
 
 // create question helpers
 export const createQuizHelper = Joi.object({
-    Title: Joi.string().required(),
-    Body: Joi.string().required(),
+    Title: Joi.string().required().messages({"string.empty": "Title is required"}),
+    Body: Joi.string().required().messages({"string.empty": "Body is required"}),
     UserId:Joi.string(),
     Code:Joi.string(),
     Tags:Joi.array().items(Joi.string())
@@ -36,6 +36,6 @@ export const createQuizHelper = Joi.object({
 
 // update question helpers
 export const updateQuizHelper = Joi.object({
-    Title: Joi.string().required(),
-    Body: Joi.string().required()
+    Title: Joi.string(),
+    Body: Joi.string(),
 });

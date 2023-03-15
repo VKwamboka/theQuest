@@ -73,7 +73,23 @@ export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
 
 export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
     try{
-        const questionID = req.params
+        const QuestionID = req.params.id
+        const { Title, Body, Code} = await updateQuizHelper.validateAsync(req.body)
+
+        const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
+
+        if(quiz){
+            console.log(quiz.questionID === QuestionID)
+
+            
+            await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
+
+            return res.status(200).json({message:'Updated  Question Successfully'})
+
+        }
+        return res.status(404).json({error:'Oops! Question Not Found'}) 
+        // const result = await _db.exec("UpdateQuestion", {questionID, Title, Body, Code})
+        // res.status(200).json(result)
 
 
     }catch (error) {

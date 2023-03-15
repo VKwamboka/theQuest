@@ -1,8 +1,8 @@
-CREATE PROCEDURE UpdateQuestion
-    @QuestionID VARCHAR,
-    @Title VARCHAR,
-    @Body VARCHAR,
-    @Code VARCHAR
+CREATE OR ALTER PROCEDURE UpdateQuestion
+    @QuestionID VARCHAR(255),
+    @Title VARCHAR(255),
+    @Body VARCHAR(1255),
+    @Code VARCHAR(1255)
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -10,6 +10,7 @@ BEGIN
     UPDATE questions
     SET Title = @Title, Body = @Body, Code = @Code
     WHERE QuestionID = @QuestionID;
+    -- SELECT * FROM questions WHERE QuestionID = @QuestionID;
 END
 
-DROP PROCEDURE IF EXISTS UpdateQuestion;
+-- DROP PROCEDURE IF EXISTS UpdateQuestion;
