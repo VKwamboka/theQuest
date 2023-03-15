@@ -1,4 +1,3 @@
-
 import Joi, { ref } from "joi";
 
 // signup Helper
@@ -51,13 +50,10 @@ export const UserPasswordResetHelper = Joi.object({
 
 // update user profile Helper
 export const UserUpdateProfileHelper = Joi.object({
-  Name: Joi.string().required(),
   Email: Joi.string().required().email().messages({
-    "string.empty": "Please provide an email",
     "string.email": "Invalid email",
   }),
   Password: Joi.string()
-    .required()
     .pattern(
       new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$")
     )
@@ -65,7 +61,7 @@ export const UserUpdateProfileHelper = Joi.object({
       "string.pattern.base":
         "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character",
     }),
-  confirmPassword: Joi.equal(ref("Password")).required().messages({
+  confirmPassword: Joi.equal(ref("Password")).messages({
     "any.only": "Passwords do not match",
   }),
 });
@@ -81,7 +77,7 @@ export const UserUpdatePasswordHelper = Joi.object({
       "string.pattern.base":
         "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special case character",
     }),
-  confirmPassword: Joi.equal(ref("Password")).required().messages({
+  ConfirmPassword: Joi.equal(ref("Password")).required().messages({
     "any.only": "Passwords do not match",
   }),
 });

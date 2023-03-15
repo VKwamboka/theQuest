@@ -1,5 +1,5 @@
 import express from "express";
-import { RegisterUser , loginUser,getAllUsers,getProfile,deleteUser,updatePassword,getUserById, updateProfile} from "../controllers/user";
+import { RegisterUser , updatePasswordUser,loginUser,getAllUsers,getProfile,deleteUser,updatePassword,getUserById, updateProfile} from "../controllers/user";
 
 const userRoutes = express.Router();
 
@@ -12,6 +12,7 @@ userRoutes.route("/delete/:id").patch(deleteUser);
 userRoutes.route("/updatepassword/:id").patch(updatePassword);
 userRoutes.route("/user/:id").get(getUserById);
 userRoutes.route("/updateprofile/:id").patch(updateProfile);
+userRoutes.route("/updatepassworduser/:id").patch(updatePasswordUser);
 
 
 export default userRoutes;
