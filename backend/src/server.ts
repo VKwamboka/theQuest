@@ -4,6 +4,8 @@ import userRoutes from './router/userRoutes'
 import cors from 'cors'
 import { sendWelcomeEmail } from './emails/welcomeemail'
 import cron from "node-cron";
+import questionRoutes from './router/questionRouter'
+import answerRoutes from './router/answerRouter';
 
 
 const app= express()
@@ -14,6 +16,14 @@ app.use(json()) //adds a body to the Request
 
 //Register Routes
 app.use('/auth',userRoutes)
+// quiz ROutes
+app.use('/question', questionRoutes)
+// answer Routes
+app.use('/answer', answerRoutes)
+
+app.listen(3000, () => {
+    console.log('Server is running on port 3000')
+})
 
 
 app.listen(4002,()=>{
