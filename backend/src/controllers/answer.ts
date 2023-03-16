@@ -2,12 +2,11 @@ import path from 'path'
 import dotenv from 'dotenv'
 import {v4 as uid} from 'uuid'
 import{createAnswerHelper, updateAnswerHelper} from '../helpers/answerHelper'
-import { RequestHandler,Request,Response } from 'express'
+import { Request,Response } from 'express'
 import { DatabaseUtils } from "../utilis/dbUtilis";
 import { Answer } from '../interfaces/answer'
 import { DecodedData, User } from '../interfaces/userInterface'
 import { sendEmail } from '../utilis/background-services/helpers/email'
-// import { createAnswerHelper } from '../helpers/answerHelper'
 
 interface ExtendedRequest extends Request{
     body:{answer_id:string, user_id:string,question_id:string,created_at:Date,updated_at:Date,answer_text:string},
