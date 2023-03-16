@@ -141,7 +141,7 @@ export const markAnswerPreferred = async (req: ExtendedRequest, res: Response) =
 
          //send email to user whose answer was marked as preferred
       const subject = "Your answer has been marked as preferred";
-      const html = `<h1>Password Reset Successful</h1>
+      const html = `<h1>Answer marked as preferred</h1>
       <p>Dear ${userDetails.Name},</p>
       <b>Congratulations!</b> Your answer has been marked as preferred.</p>
       <p>Regards,<br/>The OverFlow</p>
