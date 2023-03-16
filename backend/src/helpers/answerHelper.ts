@@ -5,7 +5,9 @@ const Joi = require('joi');
 
 // create question helpers
 export const createAnswerHelper = Joi.object({
-    answer_text: Joi.string().required().messages({"string.empty": "Answer text is required"})
+  user_id: Joi.string().required().messages({"string.empty": "User ID is required"}),
+  question_id: Joi.string().required().messages({"string.empty": "Question ID is required"}),
+  answer_text: Joi.string().required().messages({"string.empty": "Answer text is required"})
   });
 
 // update question helpers

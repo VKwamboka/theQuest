@@ -5,7 +5,7 @@ import { createQuizHelper, updateQuizHelper } from '../helpers/questionHelpers'
 import { RequestHandler,Request,Response } from 'express'
 import { DatabaseUtils } from "../utilis/dbUtilis";
 import { Question } from '../interfaces/question'
-import { DecodedData } from '../interfaces/userInterface'
+import { DecodedData, User } from '../interfaces/userInterface'
 
 interface ExtendedRequest extends Request{
     body:{Name:string,userId:string, Email:string,Title:string,Body:string,Code:string,Tags:string[]},
@@ -30,8 +30,13 @@ export const createQuestion = async (req: Request, res: Response) => {
             QuestionDate: new Date(),
             questionID: uid(),
         }
-
+        const userId = req.body.UserId
         console.log(question)
+        const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
+        console.log(req.params)
+        if(!user){
+       return res.status(404).json({error:'User Not Found'})
+    }
 
         const result = await _db.exec("createQuestion", question)
         res.status(201).json(result)
@@ -84,7 +89,7 @@ export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
 
         if(quiz){
-            console.log(quiz.questionID === QuestionID)
+            // console.log(quiz.questionID === QuestionID)
 
             
             await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
@@ -110,7 +115,7 @@ export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
 
         if(quiz){
             await _db.exec("DeleteQuestion", {QuestionID})
-            return res.status(200).json({error:'Question Deleted Successfully'}) 
+            return res.status(200).json('Question Deleted Successfully') 
         }
 
         return res.status(404).json({error:'Oops! Question Not Found'})  

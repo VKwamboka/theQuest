@@ -4,12 +4,12 @@ import {v4 as uid} from 'uuid'
 import{createAnswerHelper, updateAnswerHelper} from '../helpers/answerHelper'
 import { RequestHandler,Request,Response } from 'express'
 import { DatabaseUtils } from "../utilis/dbUtilis";
-import { Question } from '../interfaces/question'
+import { Answer } from '../interfaces/answer'
 import { DecodedData } from '../interfaces/userInterface'
 // import { createAnswerHelper } from '../helpers/answerHelper'
 
 interface ExtendedRequest extends Request{
-    body:{Name:string,userId:string, Email:string,Title:string,Body:string,Code:string,Tags:string[]},
+    body:{answer_id:string, user_id:string,question_id:string,created_at:Date,updated_at:Date,answer_text:string},
     params:{id:string},
     info?:DecodedData
 }
@@ -18,106 +18,194 @@ const  _db = new DatabaseUtils()
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 // create answer
-
 export const createAnswer = async (req: Request, res: Response) => {
     try{
-        const { Title, Body, Code, UserId} = await createAnswerHelper.validateAsync(req.body)
-        
-        const question: Question = {
-            Title,
-            Body,
-            UserID:UserId,
-            Code,
-            QuestionDate: new Date(),
-            questionID: uid(),
+        const { user_id,question_id,answer_text} = await createAnswerHelper.validateAsync(req.body)
+        const answer: Answer = {
+            answer_id: uid(),
+            user_id: user_id,
+            question_id: question_id,
+            answer_text,
+            created_at: new Date(),
+            updated_at: new Date()
         }
 
-        console.log(question)
+        const result = await _db.exec("createAnswer", answer)
+       return  res.status(201).json(result)
 
-        const result = await _db.exec("createQuestion", question)
-        res.status(201).json(result)
-        console.log(question)
-
-    }catch (error) {
-    return res.status(500).json(error)
-  }
-    
+    }   
+    catch (error) {
+            return res.status(500).json(error)
+          }
 }
 
-
-// get all questions
-export const getAllQuestions = async (req: Request, res: Response) => {
+// get answers
+export const getAnswers = async (req: Request, res: Response) => {
     try {
-        const result = await _db.exec("GetAllQuestions")
+        const result = await _db.exec("GetAllAnswers")
         res.status(200).json(result)
     } catch (error) {
         res.status(500).json(error)
     }
 }
 
-// get question by id(get one question)
-export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
-  try{
-    const questionID = req.params.id
-    console.log(req.params.id)
 
-    const question:Question= await (await _db.exec('usp_FindQuestionById', {questionID} )).recordset[0]
-    if(question){
-        await _db.exec("usp_FindQuestionById", {questionID})
-        return res.status(200).json(question)
-        
+// update answer
+export const updateAnswer = async (req: ExtendedRequest, res: Response) => {
+    try {
+        const {user_id,question_id,answer_text} = await updateAnswerHelper.validateAsync(req.body)
+
+        const answer_id = req.params.id
+        const answerID = req.params.id
+     
+        const answer:Answer= await (await _db.exec('findAnswerById', {answerID} )).recordset[0]
+        console.log(answer)
+
+        if(!answer){
+            return res.status(404).json({message: "Answer not found"})
+        }
+
+        const result = await (await _db.exec("usp_UpdateAnswer", {answer_id,answer_text,user_id:user_id,question_id:question_id}))
+        return res.status(200).json({message:'Updated  Answer Successfully'})
+
+       
+    } catch (error) {
+        console.log(error)
+       return res.status(500).json(error)
     }
-    return res.status(404).json({error:'Oops! Question Not Found'}) 
-
-  }catch (error) {
-    console.log(error)
-    res.status(500).json(error)
-}
 }
 
-// update question
+// delete answer
+export const deleteAnswer = async (req: ExtendedRequest, res: Response) => {
+    try {
+        const answerID = req.params.id
+     
+        const answer:Answer= await (await _db.exec('findAnswerById', {answerID} )).recordset[0]
+        console.log(answer)
 
-export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
-    try{
-        const QuestionID = req.params.id
-        const { Title, Body, Code} = await updateAnswerHelper.validateAsync(req.body)
+        if(!answer){
+            return res.status(404).json({message: "Answer not found"})
+        }
 
-        const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
+        const answer_id = req.params.id
+        const {user_id}= req.body
+         await _db.exec("DeleteAnswerByUser", {answer_id,user_id:user_id})
 
-        if(quiz){
-            console.log(quiz.questionID === QuestionID)
+        res.status(200).json({message: "Answer deleted successfully"})
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
+
+// get answer by id
+export const getAnswerById = async (req: ExtendedRequest, res: Response) => {
+    try {
+        const answerID = req.params.id
+        console.log(req.params)
+        const result = await (await _db.exec("findAnswerById", {answerID})).recordset[0]
+
+        if(result){
+            return res.status(200).json(result)
+        }
+        return res.status(404).json({error:'Oops! Answer Not Found'}) 
+        
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+
+// export const createAnswer = async (req: Request, res: Response) => {
+//     try{
+//         const { Title, Body, Code, UserId} = await createAnswerHelper.validateAsync(req.body)
+        
+//         const question: Question = {
+//             Title,
+//             Body,
+//             UserID:UserId,
+//             Code,
+//             QuestionDate: new Date(),
+//             questionID: uid(),
+//         }
+
+//         console.log(question)
+
+//         const result = await _db.exec("createQuestion", question)
+//         res.status(201).json(result)
+//         console.log(question)
+
+//     }catch (error) {
+//     return res.status(500).json(error)
+//   }
+    
+// }
+
+
+
+// // get question by id(get one question)
+// export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
+//   try{
+//     const questionID = req.params.id
+//     console.log(req.params.id)
+
+//     const question:Question= await (await _db.exec('usp_FindQuestionById', {questionID} )).recordset[0]
+//     if(question){
+//         await _db.exec("usp_FindQuestionById", {questionID})
+//         return res.status(200).json(question)
+        
+//     }
+//     return res.status(404).json({error:'Oops! Question Not Found'}) 
+
+//   }catch (error) {
+//     console.log(error)
+//     res.status(500).json(error)
+// }
+// }
+
+// // update question
+
+// export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
+//     try{
+//         const QuestionID = req.params.id
+//         const { Title, Body, Code} = await updateAnswerHelper.validateAsync(req.body)
+
+//         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
+
+//         if(quiz){
+//             console.log(quiz.questionID === QuestionID)
 
             
-            await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
+//             await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
 
-            return res.status(200).json({message:'Updated  Question Successfully'})
+//             return res.status(200).json({message:'Updated  Question Successfully'})
 
-        }
-        return res.status(404).json({error:'Oops! Question Not Found'}) 
+//         }
+//         return res.status(404).json({error:'Oops! Question Not Found'}) 
 
-    }catch (error) {
-        res.status(500).json(error)
-}
-}
+//     }catch (error) {
+//         res.status(500).json(error)
+// }
+// }
 
 
-// delete question
+// // delete question
 
-export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
-    try{
-        const QuestionID = req.params.id
+// export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
+//     try{
+//         const QuestionID = req.params.id
 
-        const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
+//         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
 
-        if(quiz){
-            await _db.exec("DeleteQuestion", {QuestionID})
-            return res.status(200).json({error:'Question Deleted Successfully'}) 
-        }
+//         if(quiz){
+//             await _db.exec("DeleteQuestion", {QuestionID})
+//             return res.status(200).json({error:'Question Deleted Successfully'}) 
+//         }
 
-        return res.status(404).json({error:'Oops! Question Not Found'})  
-        // const result = await _db.exec("DeleteQuestion", {QuestionID})
-        // res.status(200).json(result)
-    }catch (error) {
-        res.status(500).json(error)
-    }
-}
+//         return res.status(404).json({error:'Oops! Question Not Found'})  
+//         // const result = await _db.exec("DeleteQuestion", {QuestionID})
+//         // res.status(200).json(result)
+//     }catch (error) {
+//         res.status(500).json(error)
+//     }
+// }
