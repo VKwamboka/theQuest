@@ -5,7 +5,7 @@ import{createAnswerHelper, updateAnswerHelper} from '../helpers/answerHelper'
 import { RequestHandler,Request,Response } from 'express'
 import { DatabaseUtils } from "../utilis/dbUtilis";
 import { Answer } from '../interfaces/answer'
-import { DecodedData } from '../interfaces/userInterface'
+import { DecodedData, User } from '../interfaces/userInterface'
 // import { createAnswerHelper } from '../helpers/answerHelper'
 
 interface ExtendedRequest extends Request{
@@ -28,6 +28,11 @@ export const createAnswer = async (req: Request, res: Response) => {
             answer_text,
             created_at: new Date(),
             updated_at: new Date()
+        }
+        const userId = req.params.userId
+        const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
+        if(!user){
+           return res.status(404).json({error:'User Not Found'})
         }
 
         const result = await _db.exec("createAnswer", answer)
