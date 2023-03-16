@@ -1,0 +1,6 @@
+CREATE PROCEDURE GetAllAnswers
+AS
+BEGIN
+    SELECT *
+    FROM answers
+END

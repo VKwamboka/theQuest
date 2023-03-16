@@ -4,11 +4,11 @@ const Joi = require('joi');
 
 
 // create question helpers
-export const createQuizHelper = Joi.object({
-    answer_text: Joi.string().required()
+export const createAnswerHelper = Joi.object({
+    answer_text: Joi.string().required().messages({"string.empty": "Answer text is required"})
   });
 
 // update question helpers
-export const updateQuizHelper = Joi.object({
-    answer_text: Joi.string().required()
+export const updateAnswerHelper = Joi.object({
+    answer_text: Joi.string().required().messages({"string.empty": "Answer text is required"})
 });
