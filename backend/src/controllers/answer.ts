@@ -6,6 +6,7 @@ import { RequestHandler,Request,Response } from 'express'
 import { DatabaseUtils } from "../utilis/dbUtilis";
 import { Answer } from '../interfaces/answer'
 import { DecodedData, User } from '../interfaces/userInterface'
+import { sendEmail } from '../utilis/background-services/helpers/email'
 // import { createAnswerHelper } from '../helpers/answerHelper'
 
 interface ExtendedRequest extends Request{
@@ -29,11 +30,11 @@ export const createAnswer = async (req: Request, res: Response) => {
             created_at: new Date(),
             updated_at: new Date()
         }
-        const userId = req.params.userId
-        const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
-        if(!user){
-           return res.status(404).json({error:'User Not Found'})
-        }
+        // const userId = req.params.userId
+        // const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
+        // if(!user){
+        //    return res.status(404).json({error:'User Not Found'})
+        // }
 
         const result = await _db.exec("createAnswer", answer)
        return  res.status(201).json(result)
@@ -48,9 +49,9 @@ export const createAnswer = async (req: Request, res: Response) => {
 export const getAnswers = async (req: Request, res: Response) => {
     try {
         const result = await _db.exec("GetAllAnswers")
-        res.status(200).json(result)
+        return res.status(200).json(result)
     } catch (error) {
-        res.status(500).json(error)
+        return res.status(500).json(error)
     }
 }
 
@@ -116,101 +117,47 @@ export const getAnswerById = async (req: ExtendedRequest, res: Response) => {
         return res.status(404).json({error:'Oops! Answer Not Found'}) 
         
     } catch (error) {
-        res.status(500).json(error)
+       return res.status(500).json(error)
     }
 }
 
 
-// export const createAnswer = async (req: Request, res: Response) => {
-//     try{
-//         const { Title, Body, Code, UserId} = await createAnswerHelper.validateAsync(req.body)
-        
-//         const question: Question = {
-//             Title,
-//             Body,
-//             UserID:UserId,
-//             Code,
-//             QuestionDate: new Date(),
-//             questionID: uid(),
-//         }
+// mark answer as preferred
+export const markAnswerPreferred = async (req: ExtendedRequest, res: Response) => {
+    try{
+        // const answer:Answer= await (await _db.exec('findAnswerById', {answerID} )).recordset[0]
+        // console.log(answer)
 
-//         console.log(question)
+        // if(!answer){
+        //     return res.status(404).json({message: "Answer not found"})
+        // }
 
-//         const result = await _db.exec("createQuestion", question)
-//         res.status(201).json(result)
-//         console.log(question)
+        const { user_id, answer_id,question_id } = req.body; 
 
-//     }catch (error) {
-//     return res.status(500).json(error)
-//   }
-    
-// }
+        const result = await (await _db.exec("MarkAnswerAsPreferred", {answer_id,user_id})).recordset[0]
 
+        // Retrieve preferred answer user details
+        const userDetails = await (await _db.exec("getPreferredAnswerUserDetails", { question_id:question_id })).recordset[0];
 
+         //send email to user whose answer was marked as preferred
+      const subject = "Your answer has been marked as preferred";
+      const html = `<h1>Password Reset Successful</h1>
+      <p>Dear ${userDetails.Name},</p>
+      <b>Congratulations!</b> Your answer has been marked as preferred.</p>
+      <p>Regards,<br/>The OverFlow</p>
+      <P>Happy Coding 🎉</P>`;
+      
+      sendEmail(subject, userDetails.Email, html);
 
-// // get question by id(get one question)
-// export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
-//   try{
-//     const questionID = req.params.id
-//     console.log(req.params.id)
-
-//     const question:Question= await (await _db.exec('usp_FindQuestionById', {questionID} )).recordset[0]
-//     if(question){
-//         await _db.exec("usp_FindQuestionById", {questionID})
-//         return res.status(200).json(question)
-        
-//     }
-//     return res.status(404).json({error:'Oops! Question Not Found'}) 
-
-//   }catch (error) {
-//     console.log(error)
-//     res.status(500).json(error)
-// }
-// }
-
-// // update question
-
-// export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
-//     try{
-//         const QuestionID = req.params.id
-//         const { Title, Body, Code} = await updateAnswerHelper.validateAsync(req.body)
-
-//         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
-
-//         if(quiz){
-//             console.log(quiz.questionID === QuestionID)
-
+        console.log(userDetails.Email)
             
-//             await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
+     
+        return res.status(200).json(result)  
 
-//             return res.status(200).json({message:'Updated  Question Successfully'})
-
-//         }
-//         return res.status(404).json({error:'Oops! Question Not Found'}) 
-
-//     }catch (error) {
-//         res.status(500).json(error)
-// }
-// }
+    }catch (error) {
+        return res.status(500).json(error)
+        
+    }
+}
 
 
-// // delete question
-
-// export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
-//     try{
-//         const QuestionID = req.params.id
-
-//         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
-
-//         if(quiz){
-//             await _db.exec("DeleteQuestion", {QuestionID})
-//             return res.status(200).json({error:'Question Deleted Successfully'}) 
-//         }
-
-//         return res.status(404).json({error:'Oops! Question Not Found'})  
-//         // const result = await _db.exec("DeleteQuestion", {QuestionID})
-//         // res.status(200).json(result)
-//     }catch (error) {
-//         res.status(500).json(error)
-//     }
-// }

@@ -1,6 +1,6 @@
-CREATE PROCEDURE MarkAnswerAsPreferred
-    @user_id int,
-    @answer_id int
+CREATE OR ALTER PROCEDURE MarkAnswerAsPreferred
+    @user_id  VARCHAR(255),
+    @answer_id VARCHAR(255)
 AS
 BEGIN
     IF NOT EXISTS(SELECT questionID FROM questions WHERE questionID = (SELECT question_id FROM answers WHERE answer_id = @answer_id) AND UserID = @user_id)
