@@ -16,7 +16,7 @@ for(let user of users){
     const message = {
     from: process.env.SMTP_USER_EMAIL,
     to: user.Email,
-    subject: "Welcome to The Overflow",
+    subject: "Your answer has been marked as preferred",
     html
 };
 
