@@ -1,6 +1,6 @@
 export interface Answer{
     answer_id:string,
-    user_id:string,
+    userId:string,
     question_id:string,
     answer_text:string,
     created_at:Date,
