@@ -1,15 +1,19 @@
 import ejs from 'ejs'
 import { sendEmail } from '../helpers/email';
-import mssql from 'mssql'
+import mssql, { IProcedureResult } from 'mssql'
 import { sqlConfig } from '../config';
 import { User } from '../interface/user';
+import { Question } from '../interface/question';
+import { Answer } from '../interface/answer';
 
 
  const sendAnswerPreferredEmail = async()=>{
     const pool = await mssql.connect(sqlConfig)
-    const users:User[]= await(await pool.request().
-    query("SELECT * FROM users WHERE isSent ='0'")).recordset
-    console.log(users);
+
+    const users:User[] = await (await pool.request().execute("getPreferredAnswerUserDetails")).recordset
+
+    let answer:Answer = await (await pool.request().execute("getPreferredAnswerUserDetails")).recordset[0]
+    
 
 for(let user of users){
     ejs.renderFile('template/answerMarkedPreferred.ejs',{name:user.Name}, async(error, html)=>{
@@ -20,14 +24,10 @@ for(let user of users){
     html
 };
 
-// console.log(html);
-
-// console.log(error);
-
 
  try {
 await sendEmail(message) 
-await pool.request().query(`UPDATE users SET isSent ='1' WHERE userId  ='${user.userId}'`)
+await pool.request().query(`UPDATE answers SET isSent = 1 WHERE answer_id = '${answer.answer_id}' AND user_id = '${answer.user_id}'`)
  } catch (error) {
     console.log(error);
     

@@ -52,7 +52,7 @@ export const createQuestion = async (req: Request, res: Response) => {
 // get all questions
 export const getAllQuestions = async (req: Request, res: Response) => {
     try {
-        const result = await _db.exec("GetAllQuestions")
+        const result = await (await _db.exec("GetAllQuestions")).recordset
         res.status(200).json(result)
     } catch (error) {
         res.status(500).json(error)

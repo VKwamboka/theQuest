@@ -135,20 +135,20 @@ export const markAnswerPreferred = async (req: ExtendedRequest, res: Response) =
 
         const result = await (await _db.exec("MarkAnswerAsPreferred", {answer_id,user_id})).recordset[0]
 
-        // Retrieve preferred answer user details
-        const userDetails = await (await _db.exec("getPreferredAnswerUserDetails", { question_id:question_id })).recordset[0];
+        // // Retrieve preferred answer user details
+        // const userDetails = await (await _db.exec("getPreferredAnswerUserDetails", { question_id:question_id })).recordset[0];
 
-         //send email to user whose answer was marked as preferred
-        const subject = "Your answer has been marked as preferred";
-        const html = `<h1>Answer marked as preferred</h1>
-        <p>Dear ${userDetails.Name},</p>
-        <b>Congratulations!</b> Your answer has been marked as preferred.</p>
-        <p>Regards,<br/>The OverFlow</p>
-        <P>Happy Coding 🎉</P>`;
+        //  //send email to user whose answer was marked as preferred
+        // const subject = "Your answer has been marked as preferred";
+        // const html = `<h1>Answer marked as preferred</h1>
+        // <p>Dear ${userDetails.Name},</p>
+        // <b>Congratulations!</b> Your answer has been marked as preferred.</p>
+        // <p>Regards,<br/>The OverFlow</p>
+        // <P>Happy Coding 🎉</P>`;
       
-        sendEmail(subject, userDetails.Email, html);
+        // sendEmail(subject, userDetails.Email, html);
 
-        console.log(userDetails.Email)
+        // console.log(userDetails.Email)
             
      
         return res.status(200).json(result)  
