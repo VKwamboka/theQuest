@@ -80,7 +80,7 @@ export const deleteComment = async (req: ExtendedRequest, res: Response) => {
 
  const comment = await  (await _db.exec("findCommentById", {comment_id})).recordset[0]
     if(comment){
-    await _db.exec("DeleteAnswerComment", {comment_id: req.params.id, user_id: comment.user_id});
+    await _db.exec("DeleteAnswerComment", {comment_id: req.params.id, user_id:req.body.user_id});
           return res.status(200).json({message:'Deleted Comment Successfully'})
     }
    
@@ -88,7 +88,7 @@ export const deleteComment = async (req: ExtendedRequest, res: Response) => {
     
     
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(500).json({error:"You cannot delete a comment you did not post"})
   }
 };
 

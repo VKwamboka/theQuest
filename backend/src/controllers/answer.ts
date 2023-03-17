@@ -98,7 +98,7 @@ export const deleteAnswer = async (req: ExtendedRequest, res: Response) => {
 
         res.status(200).json({message: "Answer deleted successfully"})
     } catch (error) {
-        return res.status(500).json({error:"You cannot delete a comment you did not post"})
+        return res.status(500).json({error:"You cannot delete an answer you did not post"})
     }
 }
 
