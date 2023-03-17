@@ -1,9 +1,12 @@
 import ejs from 'ejs'
 import { sendEmail } from '../helpers/email';
 import mssql from 'mssql'
+import dotenv from 'dotenv'
+import path from 'path'
 import { sqlConfig } from '../config';
 import { User } from '../interface/user';
 
+dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
  const sendWelcomeEmail = async()=>{
     const pool = await mssql.connect(sqlConfig)

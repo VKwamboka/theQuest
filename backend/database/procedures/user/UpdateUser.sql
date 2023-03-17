@@ -1,4 +1,4 @@
-CREATE PROCEDURE usp_UpdateUser(
+CREATE OR ALTER PROCEDURE usp_UpdateUser(
     @userId VARCHAR(255),
     @Name NVARCHAR(255) = NULL,
     @Email NVARCHAR(255) = NULL,
@@ -18,6 +18,10 @@ BEGIN
         location = COALESCE(@location, location),
         bio = COALESCE(@bio, bio),
         isDeleted = COALESCE(@isDeleted, isDeleted),
+             forgetPassword = CASE 
+                WHEN @Password IS NOT NULL THEN 2 
+                ELSE forgetPassword 
+                END,
         updatedAt = GETDATE()
         WHERE userId = @userId;
     SELECT *
