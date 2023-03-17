@@ -6,6 +6,8 @@ import { sendWelcomeEmail } from './emails/welcomeemail'
 import cron from "node-cron";
 import questionRoutes from './router/questionRouter'
 import answerRoutes from './router/answerRouter';
+import commentRouter from './router/commentRouter';
+import voteRouter from './router/voteRouter';
 
 
 const app= express()
@@ -20,6 +22,12 @@ app.use('/auth',userRoutes)
 app.use('/question', questionRoutes)
 // answer Routes
 app.use('/answer', answerRoutes)
+// Comment Routes
+app.use('/comment', commentRouter)
+// Vote Routes
+app.use('/vote', voteRouter)
+
+
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000')

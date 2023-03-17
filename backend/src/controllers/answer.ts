@@ -47,7 +47,7 @@ export const createAnswer = async (req: Request, res: Response) => {
 // get answers
 export const getAnswers = async (req: Request, res: Response) => {
     try {
-        const result = await _db.exec("GetAllAnswers")
+        const result = await (await _db.exec("GetAllAnswers")).recordset
         return res.status(200).json(result)
     } catch (error) {
         return res.status(500).json(error)
@@ -98,7 +98,7 @@ export const deleteAnswer = async (req: ExtendedRequest, res: Response) => {
 
         res.status(200).json({message: "Answer deleted successfully"})
     } catch (error) {
-        return res.status(500).json(error)
+        return res.status(500).json({error:"You cannot delete a comment you did not post"})
     }
 }
 

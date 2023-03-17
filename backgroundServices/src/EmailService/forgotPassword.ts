@@ -8,7 +8,7 @@ import { User } from '../interface/user';
  const changeForgotPasswordMail = async()=>{
     const pool = await mssql.connect(sqlConfig)
     const users:User[]= await(await pool.request().
-    query("SELECT * FROM users WHERE isSent ='0'")).recordset
+    execute('GetUsersForForgotPasswordEmail')).recordset
     console.log(users);
 
 for(let user of users){
@@ -16,13 +16,9 @@ for(let user of users){
     const message = {
     from: process.env.SMTP_USER_EMAIL,
     to: user.Email,
-    subject: "Welcome to The Overflow",
+    subject: "Password reset request",
     html
 };
-
-// console.log(html);
-
-// console.log(error);
 
 
  try {
