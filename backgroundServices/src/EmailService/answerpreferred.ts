@@ -27,7 +27,7 @@ for(let user of users){
 
  try {
 await sendEmail(message) 
-await pool.request().query(`UPDATE answers SET isSent = 1 WHERE answer_id = '${answer.answer_id}' AND user_id = '${answer.user_id}'`)
+await pool.request().query(`UPDATE answers SET isSent = 1 WHERE answer_id = '${answer.answer_id}'`)
  } catch (error) {
     console.log(error);
     
