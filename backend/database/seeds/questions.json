@@ -1,0 +1,99 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "questions",
+    "dateExported": "2023-03-17T04:03:02.728Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "a86c178b-2a0f-47ac-9d9f-28ed3c0bbade",
+            "colId": "6c8d650f-1a7b-421e-a7cd-f0db385eac50",
+            "containerId": "",
+            "name": "createQuestion",
+            "url": "localhost:5500/question/postQuestion",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-15T11:18:28.634Z",
+            "modified": "2023-03-16T11:12:13.934Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Title\":\"How to center a div\",\n  \"Body\":\"How can i style a div\",\n  \"UserId\":\"7aaa6c4e-ed32-4b40-8cab-53db06b5c6e1\",\n  \"Code\":\"ready.set\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "572cda0c-33b8-4f3e-9da8-f60be7a6944f",
+            "colId": "6c8d650f-1a7b-421e-a7cd-f0db385eac50",
+            "containerId": "",
+            "name": "getAllQuestions",
+            "url": "localhost:5500/question/getAllQuestions",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-03-15T13:24:59.669Z",
+            "modified": "2023-03-15T16:02:27.821Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Title\":\"How to style a div\",\n  \"Body\":\"How can i style a div\",\n  \"UserId\":\"54c4c27c-8860-40cd-81b2-4bbd9c5c4de7\",\n  \"Code\":\"ready.set\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "209db6db-85dc-4bdc-8817-e8c56e2dc6bd",
+            "colId": "6c8d650f-1a7b-421e-a7cd-f0db385eac50",
+            "containerId": "",
+            "name": "getOneQuestion",
+            "url": "localhost:5500/question/getQuestionById/fghvgfdhghdjfgsdhghjeg",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-03-15T14:04:04.727Z",
+            "modified": "2023-03-15T14:07:43.888Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "41ca4b34-7aef-4e3f-be22-00d3f53f04b3",
+            "colId": "6c8d650f-1a7b-421e-a7cd-f0db385eac50",
+            "containerId": "",
+            "name": "updateQuestion",
+            "url": "localhost:5500/question/updateQuestion/fghvgfdhghdjfgsdhghjeg",
+            "method": "PATCH",
+            "sortNum": 30000,
+            "created": "2023-03-15T14:36:54.551Z",
+            "modified": "2023-03-15T15:19:17.554Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Title\":\"Sty\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f2ab61cd-470e-49a3-8e3e-dfb6d07bfe73",
+            "colId": "6c8d650f-1a7b-421e-a7cd-f0db385eac50",
+            "containerId": "",
+            "name": "deletequestion",
+            "url": "localhost:5500/question/deleteQuestion/fghvgfdhghdjfgsdhghjeg",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-03-15T15:32:35.813Z",
+            "modified": "2023-03-15T15:33:48.753Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Title\":\"Sty\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

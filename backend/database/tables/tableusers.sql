@@ -15,7 +15,10 @@ CREATE TABLE dbo.users
     location VARCHAR(255) ,
     bio VARCHAR(1255) ,
     isDeleted BIT NOT NULL DEFAULT 0,
+    forgetPassword INT NOT NULL DEFAULT 0 ,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 GO
+
+

@@ -1,0 +1,160 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "stackoverflow",
+    "dateExported": "2023-03-17T03:56:57.249Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "df723a90-05a1-4528-990a-9b851dc28a67",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "register User",
+            "url": "localhost:5500/auth/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-03-13T15:00:32.088Z",
+            "modified": "2023-03-16T17:14:10.112Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Name\":\"Kwamboka\",\n  \"Email\":\"verah.kwamboka@student.moringaschool.com\",\n  \"Password\":\"12345\",\n  \"confirmPassword\":\"12345\"\n  \n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "45ed95ff-16ac-4277-82df-0f5efe92c1c1",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "get all users",
+            "url": "localhost:5500/auth/users",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-03-14T02:47:45.706Z",
+            "modified": "2023-03-14T02:59:44.672Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "bc596614-2eba-4b7c-a090-af42e87ad48f",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "get profile",
+            "url": "localhost:5500/auth/profile/cf586a3d-e8e1-4766-b1e0-3c1fa4da5187",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-03-14T03:00:21.027Z",
+            "modified": "2023-03-16T17:09:06.839Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "05e451bc-1476-4eb0-8c32-e8ed79997f9c",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "delete user",
+            "url": "localhost:5500/auth/delete/cf586a3d-e8e1-4766-b1e0-3c1fa4da5187",
+            "method": "PATCH",
+            "sortNum": 40000,
+            "created": "2023-03-14T03:09:30.366Z",
+            "modified": "2023-03-16T16:55:50.539Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9fa742c0-3f49-46c9-bca1-5f45320ae570",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "delete user Completely",
+            "url": "localhost:5500/auth/deletecompletely/fe2e981f-fa9f-48da-86d7-d04b49f5543e",
+            "method": "DELETE",
+            "sortNum": 45000,
+            "created": "2023-03-15T16:07:20.068Z",
+            "modified": "2023-03-16T10:23:24.047Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "35a6f9cb-f9ff-4bad-a659-39435652ae8c",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "login",
+            "url": "localhost:5500/auth/login",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-03-14T15:07:17.021Z",
+            "modified": "2023-03-14T15:09:39.784Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\":\"veradownloads@gmail.com\",\n  \"Password\":\"12345\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d5e29c6b-b5f2-4e81-bed2-be3e6de09196",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "Update user",
+            "url": "localhost:5500/auth/updateprofile/6eee788f-69a3-4e68-9037-12c44b901374",
+            "method": "PATCH",
+            "sortNum": 60000,
+            "created": "2023-03-14T15:38:03.661Z",
+            "modified": "2023-03-15T06:39:32.600Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Email\":\"vee@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "488c77ce-6049-4956-b414-3d398e4c090a",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "update password",
+            "url": "localhost:5500/auth/updatepassworduser/cf586a3d-e8e1-4766-b1e0-3c1fa4da5187",
+            "method": "PATCH",
+            "sortNum": 70000,
+            "created": "2023-03-15T06:59:56.689Z",
+            "modified": "2023-03-15T07:17:21.909Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Password\":\"Vee@12345\",\n  \"ConfirmPassword\":\"Vee@12345\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "05b31ff4-f8e1-4f18-9b88-87325477c9e9",
+            "colId": "8db3716f-5c3a-4e18-a20d-291771b0313e",
+            "containerId": "",
+            "name": "sendemailforgot",
+            "url": "localhost:5500/auth/sendemail",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-03-15T08:09:09.615Z",
+            "modified": "2023-03-15T09:06:34.419Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"veradownlods@gmail.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
