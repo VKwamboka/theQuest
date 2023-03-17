@@ -89,9 +89,6 @@ export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
         const quiz:Question= await (await _db.exec('usp_FindQuestionById', {QuestionID} )).recordset[0]
 
         if(quiz){
-            // console.log(quiz.questionID === QuestionID)
-
-            
             await _db.exec("UpdateQuestion", {QuestionID, Title:Title, Body:Body, Code:Code})
 
             return res.status(200).json({message:'Updated  Question Successfully'})
@@ -115,12 +112,11 @@ export const deleteQuestion = async (req: ExtendedRequest, res: Response) => {
 
         if(quiz){
             await _db.exec("DeleteQuestion", {QuestionID})
-            return res.status(200).json('Question Deleted Successfully') 
+            return res.status(200).json({message:'Question Deleted Successfully'}) 
         }
 
         return res.status(404).json({error:'Oops! Question Not Found'})  
-        // const result = await _db.exec("DeleteQuestion", {QuestionID})
-        // res.status(200).json(result)
+     
     }catch (error) {
         res.status(500).json(error)
     }

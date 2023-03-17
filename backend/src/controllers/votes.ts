@@ -28,13 +28,20 @@ export const createVote = async (req: ExtendedRequest, res: Response) => {
                     answer_id:answer_id,
                     vote_type,
                 };
-      
-      const result = await (await _db.exec('vote_answer', vote )).recordset
-     
-      console.log(result)
+// find if answer and user exist
+      const answerID = answer_id
+      const userId = user_id
+      const answer = await (await _db.exec('findAnswerById', {answerID})).recordset[0]
+      const user = await (await _db.exec('usp_FindUserById', {userId})).recordset[0]
+      console.log(answer)
+      if(answer  && user){
+        await (await _db.exec('vote_answer', vote )).recordset
+        return res.status(201).json({message:"Voted succcessfully!!!"});
+      }
+      return res.status(404).json({message:"Answer or User not found"})
      
 
-      return res.status(201).json({message:"Voted succcessfully!!!"});
+      
     } catch (error) {
       console.log(error)
       return res.status(500).json(error);

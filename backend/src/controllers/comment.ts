@@ -96,9 +96,6 @@ export const deleteComment = async (req: ExtendedRequest, res: Response) => {
 export const getCommentById = async (req: ExtendedRequest, res: Response) => {
   try {
 
-    // const comment_id = req.params.id
-    // console.log(comment_id)
-
 
     const result = await (await _db.exec("findCommentById", {
       comment_id: req.params.id,
