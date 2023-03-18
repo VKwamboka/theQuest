@@ -15,9 +15,33 @@ export interface User {
     isAdmin?: boolean;
   }
   
-  export interface IUserProfile {
+  export interface UserProfile {
     id: number;
     name: string;
     email: string;
     isAdmin: boolean;
   }
+
+
+
+//   export interface User{
+//     Name:string
+//     Email:string
+//     Password:string
+// }
+
+export interface Message{
+    message:string
+}
+
+export interface LoginUser{
+    Email:string
+    Password:string
+}
+
+export interface LoginSuccess{
+    message:string
+    token:string
+    role:string
+    name:string
+}

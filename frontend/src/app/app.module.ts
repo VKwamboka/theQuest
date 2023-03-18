@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+
 
 @NgModule({
   declarations: [
@@ -14,6 +16,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     MatSlideToggleModule,
     FormsModule,
+    StoreModule.forRoot({}),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
