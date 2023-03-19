@@ -18,12 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  // formData = {
-  //   name: '',
-  //   email: '',
-  //   password: ''
-  // };
-  // private tokenKey = 'token';
+ 
   error = false;
   errorMessage = '';
 
@@ -47,20 +42,25 @@ export class LoginComponent {
     console.log(this.form.value)
     this.authentication.loginUser(this.form.value).subscribe(response=>{
      
-      this.auth.setRole(response.role)
-      this.auth.setName(response.name)
+      this.auth.setRole(response.Role)
+      this.auth.setName(response.Name)
       this.auth.login()
       localStorage.setItem('token', response.data.token)
-      if(response.data.token){
-        
+
+      if(response.data.token  && response.Role == 'user'){
+       
         this.router.navigate(['/user'])
+        console.log(response.Name)
+      }
+      else if(response.data.token && response.Role == 'admin'){
+        this.router.navigate(['/admin'])
       }
     
     },(error)=>{
       this.errorMessage = error.error.message;
     })
     this.store.dispatch(login({userlogged:this.form.value}))
-    console.log(this.form.value)
+ 
   
     console.log('hey')
    
@@ -69,8 +69,6 @@ export class LoginComponent {
   Close(){
     this.error=false;
   }
-
- 
 
   // logout with state
   onLogout() {

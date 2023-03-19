@@ -43,8 +43,10 @@ export interface LoginSuccess{
     message:string
     data: {
       token: string;
+     
     };
+    Role:string
+    Name:string
     // token:string
-    role:string
-    name:string
+    
 }

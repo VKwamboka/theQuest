@@ -20,7 +20,7 @@ import { authReducer } from './core/reducers/authReducers';
   imports: [
     MatSlideToggleModule,
     FormsModule,
-    StoreModule.forRoot({prof:authReducer}),
+    StoreModule.forRoot({ prof:authReducer}),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
