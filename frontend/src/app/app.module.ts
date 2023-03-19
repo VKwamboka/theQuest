@@ -7,6 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthEffects } from './core/effects/authEffects';
+import { authReducer } from './core/reducers/authReducers';
 
 
 @NgModule({
@@ -16,11 +20,13 @@ import { StoreModule } from '@ngrx/store';
   imports: [
     MatSlideToggleModule,
     FormsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({prof:authReducer}),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    HttpClientModule,
+    NgbModule,
+    EffectsModule.forRoot([ AuthEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

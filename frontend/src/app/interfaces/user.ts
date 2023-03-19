@@ -4,7 +4,7 @@ export interface User {
     email: string;
     password: string;
     confirmPassword: string;
-    isAdmin?: boolean;
+    Role: string;
     JWT: string;
   }
   
@@ -12,14 +12,14 @@ export interface User {
     email: string;
     password: string;
     JWT: string;
-    isAdmin?: boolean;
+    Role:string
   }
   
   export interface UserProfile {
     id: number;
     name: string;
     email: string;
-    isAdmin: boolean;
+    Role:string;
   }
 
 
@@ -41,7 +41,10 @@ export interface LoginUser{
 
 export interface LoginSuccess{
     message:string
-    token:string
+    data: {
+      token: string;
+    };
+    // token:string
     role:string
     name:string
 }

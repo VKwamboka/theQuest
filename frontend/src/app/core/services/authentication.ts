@@ -18,7 +18,7 @@ export class AuthenticationService {
   }
 
   updateUser(id:string,updatedUser:User):Observable<User>{
-    return  this.http.put<User>(`http://localhost:4000/auth/user/${id}`, updatedUser)
+    return  this.http.put<User>(`http://localhost:5500/auth/user/${id}`, updatedUser)
    }
 
 }
