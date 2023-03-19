@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginSuccess, LoginUser, User } from 'src/app/interfaces/user';
+import { LoginSuccess, LoginUser, User , Register, RegisterUser} from 'src/app/interfaces/user';
 
 // login
 export const login = createAction('[User]Login', props<{ userlogged:LoginUser}>());
@@ -15,3 +15,8 @@ export const updateUserProfileFailure = createAction('[User]Update Profile Failu
 export const logout = createAction('[User]Logout');
 export const logoutSuccess = createAction('[User]Logout Success');
 export const logoutFailure = createAction('[User]Logout Failure', props<{errorMessage: string}>());
+
+// register
+export const register = createAction('[User]Register', props<{ userRegistered:RegisterUser}>());
+export const registerSuccess = createAction('[User]register Success', props<{registerSuccess:LoginSuccess}>());
+export const registerFailure = createAction('[User]register Failure', props<{errorMessage: string}>());

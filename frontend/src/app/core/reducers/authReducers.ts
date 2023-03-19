@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthState, initialAuthState } from '../states/authState';
-import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess } from  '../actions/authActions'
+import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess } from  '../actions/authActions'
 // import { User } from '../../interfaces/user';
 
 export const authReducer = createReducer<AuthState>(
@@ -28,6 +28,22 @@ export const authReducer = createReducer<AuthState>(
         user:updatedUser
     }
  }),
+
+//  register success
+on(registerSuccess, (state, actions):AuthState => ({
+  ...state,
+  isLoggedIn: true,
+  user: actions.registerSuccess,
+  errorMessage: null,
+})),
+
+// register failure
+on(registerFailure, (state, actions):AuthState => ({
+  ...state,
+  isLoggedIn: false,
+  user: null,
+  errorMessage:actions.errorMessage,
+})),
   
   on(logout, () => initialAuthState),
 );

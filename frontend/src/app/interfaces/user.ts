@@ -7,6 +7,13 @@ export interface User {
     Role: string;
     JWT: string;
   }
+
+  export interface Register{
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }
   
   export interface Login {
     email: string;
@@ -37,6 +44,13 @@ export interface Message{
 export interface LoginUser{
     Email:string
     Password:string
+}
+
+export interface RegisterUser{
+  Name:string
+  Email:string
+  Password:string
+  ConfirmPassword:string
 }
 
 export interface LoginSuccess{

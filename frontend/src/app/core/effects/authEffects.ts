@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from '../actions/authActions'
-import { login, loginSuccess, loginFailure } from '../actions/authActions';
-import { LoginSuccess, LoginUser, User } from  '../../interfaces/user';
+import { login, loginSuccess, loginFailure, register,registerFailure,registerSuccess } from '../actions/authActions';
+import { LoginSuccess, LoginUser, User,Register } from  '../../interfaces/user';
 import { AuthenticationService } from '../services/authentication';
 
 @Injectable()
@@ -27,6 +27,23 @@ export class AuthEffects {
   }
    
   );
+
+  // register user
+  register$ = createEffect(()=>{
+    return  this.actions$.pipe( ofType(register),
+    tap(action =>{console.log(action.userRegistered)}),
+    concatMap(action=>{
+      return this.authService.registerUser(action.userRegistered).pipe(
+        
+        map((registersuccess:LoginSuccess) => registerSuccess({ registerSuccess:registersuccess})),
+          catchError((error) => of(loginFailure(error)))
+      )
+  })
+    )
+  }
+   
+  );
+
 
   // update user
   updateUser = createEffect(()=>{
