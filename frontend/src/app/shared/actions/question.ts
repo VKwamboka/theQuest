@@ -34,3 +34,5 @@ export const deleteQuestion = createAction('[deleteQuestion]-deleteQuestion',pro
 export const deleteQuestionSuccess = createAction('[deleteQuestion]-deleteQuestionSuccess', props<{message:Message}>())
 
 export const deleteQuestionFail= createAction('[deleteQuestion]-deleteQuestionFail',props<{error:string}>())
+
+// get one question details

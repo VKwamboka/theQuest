@@ -48,7 +48,7 @@ objects = [
   }
 ];
 
-selectedObjectIndex!:number;
+selectedObjectIndex=0;
 
 
  
