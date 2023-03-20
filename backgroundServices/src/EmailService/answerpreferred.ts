@@ -13,10 +13,6 @@ const sendAnswerPreferredEmail = async () => {
     await pool.request().execute("getPreferredAnswerUserDetails")
   ).recordset;
 
-//   let answer: Answer = await (
-//     await pool.request().execute("getPreferredAnswerUserDetails")
-//   ).recordset[0];
-
  
   const preferredAnswers: Answer[] = await (
     await pool.request().execute("getPreferredAnswersToSendEmailFor")
