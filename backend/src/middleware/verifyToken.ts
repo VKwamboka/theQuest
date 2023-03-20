@@ -10,17 +10,21 @@ info?:DecodedData
 }
 
 export function VerifyToken (req:ExtendedRequest, res:Response,next:NextFunction){
-const token = req.headers['token'] as  string
+const token = req.headers.authorization?.split(' ')[1]
+// console.log(token)
 try {
     
     if(!token){
         return res.status(401).json({error:'Forbidden'})
     }
-    const Payloadata= jwt.verify(token, process.env.SECRETKEY as string) as DecodedData
-    req.info= Payloadata
+    // console.log(Payloadata)
+    const Payloadata= jwt.verify(token, process.env.JWT_SECRET as string) as DecodedData
+   
+   req.info= Payloadata
+   next()
     } 
 catch (error:any) {
-   res.status(403).json(error.message) 
+   return res.status(403).json(error.message) 
 }
-next()
+
 }

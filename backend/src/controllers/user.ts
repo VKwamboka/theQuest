@@ -26,7 +26,7 @@ const generateJWT = (payload: any, expiresIn: string) => {
 export const RegisterUser = async (req: Request, res: Response) => {
     try {
 
-      const { Name, Email, Password } = await UserSignUpHelper.validateAsync(
+      const { Name, Email, Password ,Role} = await UserSignUpHelper.validateAsync(
         req.body
         )
         const salt = await Bcrypt.genSalt(10)
@@ -69,6 +69,9 @@ export const RegisterUser = async (req: Request, res: Response) => {
           status: 'User registered successfully',
           data: {
               token,
+              Name,
+              Email,
+              Role
           },
           })
 
@@ -101,15 +104,21 @@ export const loginUser = async (req: Request, res: Response) => {
         if (!validPassword) {
             return res.status(400).json({ message: 'Invalid email or password' })
         }
+        
         const token = jwt.sign(
             { userId: user.recordset[0].userId, Email: user.recordset[0].Email },
             process.env.JWT_SECRET as string,
+
             { expiresIn: '1d' }
         )
         res.status(200).json({
             status: 'User logged in successfully',
+            Name: user.recordset[0].Name,
+                Email: user.recordset[0].Email,
+                Role: user.recordset[0].Role,
             data: {
                 token,
+                
             },
         })
     } catch (error) {
@@ -141,12 +150,12 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
   try {
   
   const Id = req.params.id as string;
-  const {Name,Email,location,bio}= await UserUpdateProfileHelper.validateAsync(req.body) 
+  const {Name,Email,location,bio,Role}= await UserUpdateProfileHelper.validateAsync(req.body) 
   const profile:User[]= await (await _db.exec('getProfile', {userId:Id} )).recordset
   
   if(profile){
     console.log(profile)
-    await _db.exec('usp_UpdateUser', {userId:Id, Name:Name, Email:Email, location:location, bio:bio})
+    await _db.exec('usp_UpdateUser', {userId:Id, Name:Name, Role:Role, Email:Email, location:location, bio:bio})
     return res.status(200).json({message:'Updated user'})
   }
     return res.status(404).json({error:'Oops! User Not Found'}) 
@@ -164,6 +173,7 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
     try {
       const users:User[]= await (await  _db.exec('GetAllUsers')).recordset
       if(!users){
+        console.log(users)
          return res.status(404).json({error:'No Users Found'})
       }
     

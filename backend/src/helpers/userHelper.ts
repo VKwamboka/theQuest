@@ -50,7 +50,7 @@ export const UserPasswordResetHelper = Joi.object({
 
 // update user profile Helper
 export const UserUpdateProfileHelper = Joi.object({
-  Email: Joi.string().required().email().messages({
+  Email: Joi.string().email().messages({
     "string.email": "Invalid email",
   }),
   Password: Joi.string()
@@ -64,6 +64,9 @@ export const UserUpdateProfileHelper = Joi.object({
   confirmPassword: Joi.equal(ref("Password")).messages({
     "any.only": "Passwords do not match",
   }),
+  Name:Joi.string(),
+  Role:Joi.string(),
+  
 });
 
 // update user Password Helper

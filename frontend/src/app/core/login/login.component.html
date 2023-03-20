@@ -39,20 +39,20 @@
     <!-- <div class="quiz-image">
       <img class="quiz-image__img" src="" />
     </div> -->
-    <form class="modal-content animate"  #loginForm="ngForm">
+    <form class="modal-content animate"  [formGroup]="form" (ngSubmit)="submitForm()" >
       <div class="imgcontainer">
         <!-- <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> -->
         <img src="img_avatar2.png" alt="Avatar" class="avatar">
       </div>
   
-      <div class="container">
+      <div class="container" >
         <!-- <label for="name"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="name" required [(ngModel)]="formData['name']">
         <div *ngIf="loginForm.controls['name'].touched && loginForm.controls['name'].errors">
           <div *ngIf="loginForm.controls['name']errors">Name is required.</div>
         </div> -->
 
-        <label for="email"><b>Email</b></label>
+        <!-- <label for="email"><b>Email</b></label>
         <input type="email" id="email" name="email" placeholder="Enter Email" required email [(ngModel)]="formData['email']">
         <div *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors">
           <div *ngIf="loginForm.controls['email'].errors['required']">Email is required.</div>
@@ -63,9 +63,32 @@
         <input type="password" placeholder="Enter Password" name="password" required [(ngModel)]="formData['password']">
         <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors">
           <div *ngIf="loginForm.controls['password']errors">Password is required.</div>
+        </div> -->
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" formControlName="Email"/>
+          <!-- <div *ngIf="form.controls['Email'].invalid && (form.controls['Email'].dirty || form.controls['Email'].touched)" class="alert alert-danger">
+            <div *ngIf="form.controls['Email']errors['required']">Email is required.</div>
+            <div *ngIf="form.controls['Email']errors['email']">Email must be a valid email address.</div>
+          </div> -->
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" formControlName="Password"/>
+          <!-- <div *ngIf="form.controls['Password'].invalid && (form.controls['Password'].dirty || form.controls['Password'].touched)" class="alert alert-danger">
+            <div *ngIf="form.controls['Password']errors['required']">Password is required.</div>
+            <div *ngIf="form.controls['Password']errors['minlength']">Password must be at least 8 characters long.</div>
+          </div> -->
         </div>
 
-        <button type="submit">Login</button>
+
+        <div class="error" *ngIf="error">
+          <p>{{errorMessage}}</p>
+      </div>
+
+
+        <button  >Login</button>
         <label>
           <input type="checkbox" checked="checked" name="remember"> Remember me
         </label>

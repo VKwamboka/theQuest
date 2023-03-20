@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './core/services/auth';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stackoverflow';
+  constructor(public auth:AuthService,private store:Store<any>){}
 }

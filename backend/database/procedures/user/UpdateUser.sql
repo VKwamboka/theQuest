@@ -5,7 +5,7 @@ CREATE OR ALTER PROCEDURE usp_UpdateUser(
     @Password NVARCHAR(255) = NULL,
     @location NVARCHAR(255) = NULL,
     @bio NVARCHAR(1255) = NULL,
-    @Role VARCHAR = 'user',
+    @Role VARCHAR(100) ,
     @isDeleted BIT = 0
 )
 AS

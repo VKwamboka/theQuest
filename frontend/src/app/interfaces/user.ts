@@ -4,20 +4,63 @@ export interface User {
     email: string;
     password: string;
     confirmPassword: string;
-    isAdmin?: boolean;
+    Role: string;
     JWT: string;
+  }
+
+  export interface Register{
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
   }
   
   export interface Login {
     email: string;
     password: string;
     JWT: string;
-    isAdmin?: boolean;
+    Role:string
   }
   
-  export interface IUserProfile {
+  export interface UserProfile {
     id: number;
     name: string;
     email: string;
-    isAdmin: boolean;
+    Role:string;
   }
+
+
+
+//   export interface User{
+//     Name:string
+//     Email:string
+//     Password:string
+// }
+
+export interface Message{
+    message:string
+}
+
+export interface LoginUser{
+    Email:string
+    Password:string
+}
+
+export interface RegisterUser{
+  Name:string
+  Email:string
+  Password:string
+  ConfirmPassword:string
+}
+
+export interface LoginSuccess{
+    message:string
+    data: {
+      token: string;
+     
+    };
+    Role:string
+    Name:string
+    // token:string
+    
+}
