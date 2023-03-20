@@ -104,9 +104,11 @@ export const loginUser = async (req: Request, res: Response) => {
         if (!validPassword) {
             return res.status(400).json({ message: 'Invalid email or password' })
         }
+        
         const token = jwt.sign(
             { userId: user.recordset[0].userId, Email: user.recordset[0].Email },
             process.env.JWT_SECRET as string,
+
             { expiresIn: '1d' }
         )
         res.status(200).json({
@@ -171,6 +173,7 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
     try {
       const users:User[]= await (await  _db.exec('GetAllUsers')).recordset
       if(!users){
+        console.log(users)
          return res.status(404).json({error:'No Users Found'})
       }
     
