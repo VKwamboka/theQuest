@@ -1,12 +1,29 @@
-CREATE PROCEDURE GetAllQuestions
+-- CREATE PROCEDURE GetAllQuestions
+-- AS
+-- BEGIN
+--     SELECT *
+--     FROM questions
+--     WHERE isDeleted = 0;
+-- END
+
+
+CREATE OR ALTER PROCEDURE GetAllQuestions
+    @pageNumber int,
+    @pageSize int
 AS
 BEGIN
+    SET NOCOUNT ON;
+
     SELECT *
-    FROM questions
-    WHERE isDeleted = 0;
+    FROM (
+        SELECT ROW_NUMBER() OVER (ORDER BY QuestionID) AS RowNum, *
+        FROM questions
+        WHERE isDeleted = 0
+    ) AS RowConstrainedResult
+    WHERE RowNum >= (@pageNumber - 1) * @pageSize + 1
+    AND RowNum <= @pageNumber * @pageSize
+    ORDER BY RowNum
 END
-
-
 
 -- CREATE PROCEDURE GetAllQuestions
 -- AS

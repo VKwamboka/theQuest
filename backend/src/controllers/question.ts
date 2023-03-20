@@ -50,14 +50,35 @@ export const createQuestion = async (req: Request, res: Response) => {
 
 
 // get all questions
-export const getAllQuestions = async (req: Request, res: Response) => {
-    try {
-        const result = await (await _db.exec("GetAllQuestions")).recordset
-        res.status(200).json(result)
-    } catch (error) {
-        res.status(500).json(error)
+// export const getAllQuestions = async (req: Request, res: Response) => {
+//     try {
+//         const result = await (await _db.exec("GetAllQuestions")).recordset
+//         res.status(200).json(result)
+//     } catch (error) {
+//         res.status(500).json(error)
+//     }
+// }
+
+// get all questions with pagination
+export const getAllQuestions = async (req: ExtendedRequest, res: Response) => {
+    interface IPagination{
+        pageNumber: number,
+        pageSize: number
     }
-}
+    const { pageNumber, pageSize } = req.query;
+    const pagination: IPagination = {
+        pageNumber: pageNumber? +pageNumber: 1,
+        pageSize: pageSize? +pageSize: 10
+    }
+    try {
+        // const pageNumber = parseInt(pagination.pageNumber) || 1; // default to first page
+        // const pageSize = parseInt(pagination.pageSize) || 10; // default page size to 10
+        const result = await (await _db.exec("GetAllQuestions", {pageNumber: pagination.pageNumber, pageSize: pagination.pageSize})).recordset;
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
 
 // get question by id(get one question)
 export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
