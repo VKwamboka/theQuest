@@ -3,16 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   
-  {path:'', loadComponent:()=>import('./landing-page/landing-page.component').then(l=>l.LandingPageComponent)},
+  {path:'', loadComponent:()=>import('./shared/components/landing-page/landing-page.component').then(l=>l.LandingPageComponent)},
   {path:'login', loadComponent:()=>import('./core/login/login.component').then(l=>l.LoginComponent)},
   {path:'register', loadComponent:()=>import('./core/signup/signup.component').then(l=>l.SignupComponent)},
   {
     path:'user', loadComponent:()=>import('./user/components/userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent),children:[
       {path:'profile', loadComponent:()=>import('./user/components/userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
-      {path:'all-questions', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
+      {path:'all-questions', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
       {path:'ask-question', loadComponent:()=>import('./user/components/ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
       {path:'edit-profile', loadComponent:()=>import('./user/components/editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
-      {path:'', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
+      {path:'', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
       {path:'full-question', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
 
     ]
@@ -26,7 +26,7 @@ const routes: Routes = [
 
     ]
   },
-  {path:'question', loadComponent:()=>import('./question/question.component').then(l=>l.QuestionComponent)},
+  {path:'question', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
   
   {path:'fullquestion', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
   {path:'**', loadComponent:()=>import('./not-found/not-found.component').then(l=>l.NotFoundComponent)},

@@ -79,6 +79,27 @@ export const getQuestionById = async (req: ExtendedRequest, res: Response) => {
 }
 }
 
+// get full question by id
+export const getFullQuestionById = async (req: ExtendedRequest, res: Response) => {
+    try{
+      const questionID = req.params.id
+      console.log(req.params.id)
+  
+      const question:Question= await (await _db.exec('FetchFullQuestion', {questionID} )).recordset[0]
+      if(question){
+          await _db.exec("FetchFullQuestion", {questionID})
+          return res.status(200).json(question)
+          
+      }
+      return res.status(404).json({error:'Oops! Question Not Found'}) 
+  
+    }catch (error) {
+      console.log(error)
+      res.status(500).json(error)
+  }
+  }
+
+
 // update question
 
 export const updateQuestion = async (req: ExtendedRequest, res: Response) => {

@@ -40,6 +40,9 @@ export class LoginComponent {
 
   submitForm(){
     console.log(this.form.value)
+
+
+    this.store.dispatch(login({userlogged:this.form.value}));
     this.authentication.loginUser(this.form.value).subscribe(response=>{
      
       this.auth.setRole(response.Role)
@@ -59,8 +62,11 @@ export class LoginComponent {
     },(error)=>{
       this.errorMessage = error.error.message;
     })
-    this.store.dispatch(login({userlogged:this.form.value}))
- 
+    // this.store.dispatch(login({userlogged:this.form.value}))
+    
+    // this.login$ = this.store.select(state => state.prof);
+    this.login$.subscribe(state => console.log(state));
+    
   
     console.log('hey')
    
