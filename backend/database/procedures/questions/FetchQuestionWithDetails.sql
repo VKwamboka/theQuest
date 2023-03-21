@@ -77,9 +77,9 @@ CREATE OR ALTER PROCEDURE FetchFullQuestion
     @questionID VARCHAR(255)
 AS
 BEGIN
-    SELECT q.questionID, q.Title, q.Body, u.Name AS UserName, u.location AS UserLocation,
+    SELECT q.questionID, q.Title, q.Body, q.Code, u.Name AS UserName, u.location AS UserLocation,
            u.bio AS UserBio, q.QuestionDate,
-           JSON_QUERY((SELECT a.answer_id, a.user_id, a.answer_text, a.isPreffered, a.created_at AS AnswerDate,
+           JSON_QUERY((SELECT a.answer_id, a.user_id,u.Name AS UserName, a.answer_text, a.isPreffered, a.created_at AS AnswerDate,
                                (SELECT vote_type, user_id FROM votes WHERE answer_id = a.answer_id FOR JSON PATH) AS Votes,
                                (SELECT comment_id, user_id, comment_text, created_at AS CommentDate 
                                 FROM comments WHERE answer_id = a.answer_id FOR JSON PATH) AS Comments

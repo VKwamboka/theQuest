@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { AddQuestion,Question,Message } from 'src/app/interfaces/question';
+import { AddQuestion,Question,Message, FullQuestion } from 'src/app/interfaces/question';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,8 @@ export class QuestionService {
     return this.http.get<Question[]>('http://localhost:5500/question/getAllQuestions');
   }
 //   get one question
-  getOneQuestion(id:string):Observable<Question>{
-   return  this.http.get<Question>(`http://localhost:5500/question/getFullQuestionById/${id}`)
+  getOneQuestion(id:string):Observable<FullQuestion>{
+   return  this.http.get<FullQuestion>(`http://localhost:5500/question/getFullQuestionById/${id}`)
   }
 
 //   delete question

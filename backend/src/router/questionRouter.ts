@@ -10,7 +10,7 @@ questionRoutes.route("/getAllQuestions").get(VerifyToken, getAllQuestions);
 questionRoutes.route("/getQuestionById/:id").get(VerifyToken, getQuestionById);
 questionRoutes.route("/updateQuestion/:id").patch(VerifyToken, updateQuestion);
 questionRoutes.route("/deleteQuestion/:id").delete(VerifyToken, deleteQuestion);
-questionRoutes.route("/getFullQuestionById/:id").get(VerifyToken, getFullQuestionById);
+questionRoutes.route("/getFullQuestionById/:id").get( getFullQuestionById);
 questionRoutes.route("/getUserQuestions/:id").get( getUserQuestions);
 
 export default questionRoutes;

@@ -77,13 +77,18 @@ export class QuestionEffects{
 
 
     // get single question
-    // getSingleQuestion = createEffect(()=>{
-    //     return this.actions$.pipe(
-    //         ofType(QuestionActions.getsingleQuestionId),
-    //         concatMap((action)=>{
-    //             return of(action.id)
-    //         })
-    //     )
-    // })
+    getSingleQuestion = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(QuestionActions.getsingleQuestionId),
+            concatMap((action)=>{
+                return this.quetionService.getOneQuestion(action.id).pipe(
+                    map(message=>{
+                        return QuestionActions.getsingleQuestionIdSuccess({Question:message})
+                    }),
+                    catchError(error=>of(QuestionActions.getsingleQuestionIdFail({error:error.message})))
+                )
+            })
+        )
+    })
 
 }
