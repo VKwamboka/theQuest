@@ -11,7 +11,9 @@
         <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
         <li><a routerLink="/user/profile">My Profile</a></li>
         <li><a routerLink="/user/ask-question">Ask Question</a></li>
-
+        <button (click)="showToast()">Show Toast Message</button>
+        <!-- <app-toast *ngIf="showToastMessage" [message]="toastMessage" [type]="toastType" [duration]="toastDuration"></app-toast> -->
+        
       </ul>
     </div>
 <!-- when side bar is  -->

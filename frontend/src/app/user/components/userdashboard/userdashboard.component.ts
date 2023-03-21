@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/services/auth';
 import { AppState } from 'src/app/core/states/appState';
-
+import { ToastComponent } from 'src/app/toast/toast.component';
 @Component({
   selector: 'app-userdashboard',
   standalone: true,
@@ -14,6 +14,12 @@ import { AppState } from 'src/app/core/states/appState';
 })
 export class UserdashboardComponent {
   constructor(public auth:AuthService,private store:Store<AppState>){}
+
+  toastVisible = false;
+
+  showToast() {
+    this.toastVisible = true;
+  }
   
   isMenuOpen = false;
 

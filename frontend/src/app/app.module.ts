@@ -8,7 +8,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AuthEffects } from './core/effects/authEffects';
 import { authReducer } from './core/reducers/authReducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -21,6 +21,7 @@ import { FilterByPipe } from './filter-by.pipe';
 import { OrderByPipe } from './order-by.pipe';
 import { MarkdownPipe } from './markdown.pipe';
 import { HighlightDirective } from 'src/templates/highlight.directive';
+import { TokenInterceptorService } from './core/services/token-interceptor.service';
 
 
 @NgModule({
@@ -46,7 +47,7 @@ import { HighlightDirective } from 'src/templates/highlight.directive';
     EffectsModule.forRoot([ AuthEffects, QuestionEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass:TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit ,NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule,Router } from '@angular/router';
 import { QuestionService } from '../../services/question.service';
@@ -15,7 +15,7 @@ import { AppState } from 'src/app/core/states/appState';
   standalone: true,
   imports: [CommonModule,RouterModule],
   templateUrl: './question.component.html',
-  styleUrls: ['./question.component.css']
+  styleUrls: ['./question.component.css'],
 })
 export class QuestionComponent {
   questions$!:Observable<Question[]>
