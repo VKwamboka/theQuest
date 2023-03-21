@@ -1,16 +1,42 @@
-CREATE PROCEDURE GetUserAnswersWithQuestionAndVotes
+CREATE OR ALTER PROCEDURE GetUserAnswersWithQuestionAndVotes
     @UserID VARCHAR(255)
 AS
 BEGIN
-    SELECT a.answer_id, a.answer_text, q.Title, q.Body, 
+    SELECT 
+        q.questionID, 
+        q.Title AS question_title, 
+        q.Body AS question_body,
+      
         (
-            SELECT vote_type, COUNT(*) AS vote_count
-            FROM votes
-            WHERE answer_id = a.answer_id
-            GROUP BY vote_type
+            SELECT 
+                a.answer_id,
+                a.answer_text,
+                a.isPreffered,
+             
+                (
+                    SELECT 
+                        vote_type, 
+                        COUNT(*) AS vote_count
+                    FROM 
+                        votes 
+                    WHERE 
+                        answer_id = a.answer_id 
+                    GROUP BY 
+                        vote_type 
+                    FOR JSON PATH
+                ) AS votes
+            FROM 
+                dbo.answers a 
+            WHERE 
+                a.question_id = q.questionID 
             FOR JSON PATH
-        ) AS votes
-    FROM dbo.answers a
-    JOIN dbo.questions q ON q.questionID = a.question_id
-    WHERE a.user_id = @UserID
+        ) AS answers
+    FROM 
+        dbo.questions q 
+    WHERE 
+        q.UserID = @UserID
+        AND
+        q.isDeleted = 0
+    FOR JSON PATH
 END
+
