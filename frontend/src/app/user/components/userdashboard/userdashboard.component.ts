@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component , OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/core/services/auth';
+import { AppState } from 'src/app/core/states/appState';
 
 @Component({
   selector: 'app-userdashboard',
@@ -10,6 +13,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./userdashboard.component.css']
 })
 export class UserdashboardComponent {
+  constructor(public auth:AuthService,private store:Store<AppState>){}
+  
   isMenuOpen = false;
 
   toggleMenu() {
@@ -17,4 +22,5 @@ export class UserdashboardComponent {
     console.log('menu toggled');
     
   }
+  
 }

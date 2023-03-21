@@ -2,7 +2,7 @@
     <div class="sidebar" [ngClass]="{'hidden': isMenuOpen}">
       <div class="logo">
         <img src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a" alt="Stack Overflow logo">
-        <small style="text-align: center;">user@gmail.com</small>
+        <small style="text-align: center;" *ngIf="auth.isLoggedIn">Welcome {{ auth.getName() }}☺️</small>
       </div>
       <ul class="menu"  >
         <li><a routerLink="/">Home</a></li>

@@ -12,22 +12,38 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthEffects } from './core/effects/authEffects';
 import { authReducer } from './core/reducers/authReducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { questionReducer } from './shared/reducers/question';
+import { QuestionEffects } from './shared/effects/question';
+import { TruncatePipe } from './truncate.pipe';
+import { TimeAgoPipe } from './time-ago.pipe';
+import { SearchPipe } from './search.pipe';
+import { FilterByPipe } from './filter-by.pipe';
+import { OrderByPipe } from './order-by.pipe';
+import { MarkdownPipe } from './markdown.pipe';
+import { HighlightDirective } from 'src/templates/highlight.directive';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TruncatePipe,
+    TimeAgoPipe,
+    SearchPipe,
+    FilterByPipe,
+    OrderByPipe,
+    HighlightDirective,
+    MarkdownPipe
   ],
   imports: [
     MatSlideToggleModule,
     FormsModule,
-    StoreModule.forRoot({ prof:authReducer}),
+    StoreModule.forRoot({ prof:authReducer, question:questionReducer}),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
-    EffectsModule.forRoot([ AuthEffects]),
+    EffectsModule.forRoot([ AuthEffects, QuestionEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
   ],
   providers: [],
