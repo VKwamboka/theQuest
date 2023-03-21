@@ -21,4 +21,11 @@ export class AuthenticationService {
     return  this.http.put<User>(`http://localhost:5500/auth/user/${id}`, updatedUser)
    }
 
+   getAllUsers():Observable<User[]>{ 
+    return this.http.get<User[]>('http://localhost:5500/auth/users')
+   }
+
+    deleteUser(id:string):Observable<Message>{
+    return this.http.delete<Message>(`http://localhost:5500/auth/deletecompletely/${id}`)
+    }
 }

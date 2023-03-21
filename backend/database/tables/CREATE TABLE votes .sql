@@ -10,4 +10,15 @@ CREATE TABLE votes (
 
 
 -- ALTER TABLE votes
+-- DROP CONSTRAINT fk_votes_users
+-- FOREIGN KEY (user_id)
+-- REFERENCES users (userId)
+-- ON DELETE CASCADE;
+
+-- ALTER TABLE votes
+-- ADD CONSTRAINT fk_votes_answers
+-- FOREIGN KEY (answer_id)
+-- REFERENCES answers (answer_id)
+-- ON DELETE CASCADE;
+
 -- ALTER COLUMN vote_type VARCHAR(60) NOT NULL;

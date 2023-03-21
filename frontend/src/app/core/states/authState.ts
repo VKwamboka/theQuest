@@ -13,6 +13,32 @@ export interface AuthState {
     errorMessage: string | null
   }
 
+  export interface UsersState {
+    users:User[]
+    Id:string,
+    Name:string,
+    Email:string,
+    Role:string
+    error: string | null
+  }
+   
+  export const initialUsersState: UsersState ={
+    users:[],
+    Id:'',
+    Name:'',
+    Email:'',
+    Role:'',
+    error:'',
+  }
+  // export const initialUserState: UsersState = {
+    
+  //   Id:'',
+  //   Name:'',
+  //   Email:'',
+  //   Role:''
+  
+  // };
+
   export const initialAuthState: AuthState = {
     isLoggedIn: false,
     loading: false,

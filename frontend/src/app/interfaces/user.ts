@@ -1,5 +1,6 @@
 
 export interface User {
+  id: string;
     name: string;
     email: string;
     password: string;
@@ -7,7 +8,15 @@ export interface User {
     Role: string;
     JWT: string;
   }
-
+export interface AdminUsers{
+  
+  Name:string
+  Email:string
+  Role:string
+  isDeleted:boolean
+  createdAt:Date
+  updatedAt:Date
+}
   export interface Register{
     name: string;
     email: string;
@@ -16,6 +25,7 @@ export interface User {
   }
   
   export interface Login {
+    users: User[];
     email: string;
     password: string;
     JWT: string;

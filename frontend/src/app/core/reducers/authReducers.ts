@@ -1,7 +1,10 @@
-import { createReducer, on } from '@ngrx/store';
-import { AuthState, initialAuthState } from '../states/authState';
-import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess } from  '../actions/authActions'
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { AuthState, initialAuthState, UsersState,initialUsersState } from '../states/authState';
+import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess, getAllUsersSuccess, getAllUsersFailure, deleteUserSuccess, deleteUserFailure } from  '../actions/authActions'
 // import { User } from '../../interfaces/user';
+
+const usersSliceState= createFeatureSelector<UsersState>('question')
+export const allusers= createSelector(usersSliceState, state=>state.users)
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,
@@ -44,6 +47,40 @@ on(registerFailure, (state, actions):AuthState => ({
   user: null,
   errorMessage:actions.errorMessage,
 })),
+
+
   
   on(logout, () => initialAuthState),
 );
+
+export const allUsersState = createReducer<UsersState>(
+  initialUsersState ,
+    // get all users
+  on(getAllUsersSuccess, (state, actions):UsersState => ({
+    ...state,
+    error:'',
+    users: actions.Users
+  })
+  ),
+
+  on(getAllUsersFailure, (state, actions):UsersState => ({
+    ...state,
+    error:actions.errorMessage,
+    users:[]
+  })
+  ),
+
+  // delete user
+  on(deleteUserSuccess, (state, actions):UsersState => ({
+    ...state,
+    error:'',
+    users: state.users.filter(user=>user.id!== actions.id)
+  })),
+
+  on(deleteUserFailure, (state, actions):UsersState => ({
+    ...state,
+
+    error:actions.errorMessage,
+    
+  })),
+)

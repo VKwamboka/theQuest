@@ -83,11 +83,11 @@
 </div> -->
 <div class="container1" *ngIf="question">
   <div class="question" >
-    <!-- <div class="question-meta">
-      <span class="question-votes">10 votes</span>
-      <span class="question-answers">2 answers</span>
+    <div class="question-meta">
+      <span class="question-votes">2 votes</span>
+      <span class="question-answers">{{ question.Answers.length }} answers</span>
       <span class="question-comments">2 comments</span>
-    </div> -->
+    </div>
     <h1>{{ question.Title }}</h1>
     <div class="question-tags">
       <span class="tag">html</span>
@@ -113,19 +113,20 @@
     </div>
   </div>
 
-  <h2>Anwers {{ question.Answers.length }}</h2>
+  <h2>Answers ({{ answers.length }})</h2>
 
-  <div class="answers" *ngFor="let answer of answers">    
+  <div class="answers" *ngFor="let answer of answers">   
+    
     <div  class="answer">
       <div class="info">
         <span>Answer by {{ answer.UserName}}</span>
-        <!-- <div class="question-meta">
-          <span class="question-votes">{{ answer.Votes.length }} votes</span>
-          <span class="question-comments"
+        <div class="question-meta">
+          <!-- <span class="question-votes">{{ answer.Votes.length }} votes</span> -->
+          <!-- <span class="question-comments"
             >{{ answer.Comments.length }} comments</span
-          >
+          > -->
         </div>
-        <span>{{ answer.AnswerDate | date : "medium" }}</span> -->
+        <span>{{ answer.AnswerDate | date : "medium" }}</span>
       </div>
       
         <p>{{ answer.answer_text }}</p>
