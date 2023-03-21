@@ -13,15 +13,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let question of questions$ |async">
-            <td>1</td>
-            <td>{{ question.Title }}</td>
-            <td>{{ question.UserID }}</td>
+          <tr *ngFor="let question of questions$ |async" [routerLink]="['/user/full-question',question.questionID]">
+            <td>{{ question.questionID }}</td>
+            <td >{{ question.Title }}</td>
+            <td>user</td>
             <!-- <td>HTML, CSS</td> -->
             <!-- <td>Open</td> -->
             <td>
-              <a href="#">Edit</a> |
-              <a href="#">Delete</a>
+              <a routerLink="#">Edit</a> |
+              <a (click)="Delete()" >Delete</a>
             </td>
           </tr>
           <tr>
