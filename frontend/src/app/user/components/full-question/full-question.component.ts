@@ -10,6 +10,8 @@ import { FullQuestion, Question } from 'src/app/interfaces/question';
 import { getsingleQuestionId } from 'src/app/shared/actions/question';
 import { oneQuestion } from 'src/app/shared/reducers/question';
 import {Answer} from 'src/app/interfaces/answer'
+import { Vote } from 'src/app/interfaces/vote';
+import { Comment } from 'src/app/interfaces/comment';
 // import { oneQuestion} from 'src/app/shared/reducers/question';
 // import {Quest}
 // import { getSingleQuestion } from 'src/app/shared/reducers/question';
@@ -27,6 +29,8 @@ export class FullQuestionComponent {
   question!: FullQuestion
   id!:string
   answers!:Answer[]
+  votes!:Vote[]
+  comments!:Comment[]
 
   constructor(private route:ActivatedRoute, private router:Router ,private store:Store<AppState>){}
 
@@ -42,6 +46,7 @@ this.store.select(oneQuestion).subscribe((question)=>{
     this.question=question
     this.answers=JSON.parse(question.Answers) 
     console.log(this.question);
+    // console.log(this.comments)
     
   }
 })

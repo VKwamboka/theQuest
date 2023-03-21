@@ -84,9 +84,9 @@
 <div class="container1" *ngIf="question">
   <div class="question" >
     <div class="question-meta">
-      <span class="question-votes">2 votes</span>
-      <span class="question-answers">{{ question.Answers.length }} answers</span>
-      <span class="question-comments">2 comments</span>
+      <span class="question-votes">{{ question.Answers?.Votes?.length  || 0}}  votes</span>
+      <span class="question-answers">{{ answers?.length || 0}} answers</span>
+      <span class="question-comments">{{ question.Answers?.Comments?.length  || 0}} comments</span>
     </div>
     <h1>{{ question.Title }}</h1>
     <div class="question-tags">
@@ -113,7 +113,7 @@
     </div>
   </div>
 
-  <h2>Answers ({{ answers.length }})</h2>
+  <h2>Answers ({{ answers?.length || 0}})</h2>
 
   <div class="answers" *ngFor="let answer of answers">   
     
@@ -121,10 +121,10 @@
       <div class="info">
         <span>Answer by {{ answer.UserName}}</span>
         <div class="question-meta">
-          <!-- <span class="question-votes">{{ answer.Votes.length }} votes</span> -->
-          <!-- <span class="question-comments"
-            >{{ answer.Comments.length }} comments</span
-          > -->
+          <span class="question-votes">{{ answer?.Votes?.length || 0}} votes</span>
+          <span class="question-comments"
+            >{{ answer?.Comments?.length || 0}} comments</span
+          >
         </div>
         <span>{{ answer.AnswerDate | date : "medium" }}</span>
       </div>
@@ -135,8 +135,8 @@
         <button class="btn btn-downvote">Downvote</button>
         <button class="btn btn-upvote">Comment</button>
       </div>
-      <!-- <div class="comments">
-        <h2>Comments ({{ answer.Comments.length }})</h2>
+      <div class="comments">
+        <h2>Comments ({{ answer?.Comments?.length || 0}})</h2>
         <div *ngFor="let comment of answer.Comments" class="comment">
           <div class="info">
             <span>Comment by {{ comment.user_id }}</span>
@@ -144,7 +144,7 @@
           </div>
           <p>{{ comment.comment_text }}</p>
         </div>
-      </div> -->
+      </div>
     </div>
   </div> 
 </div>
