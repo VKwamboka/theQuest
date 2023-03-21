@@ -13,10 +13,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let question of questions$ |async">
             <td>1</td>
-            <td>How to create a responsive design?</td>
-            <td>John Doe</td>
+            <td>{{ question.Title }}</td>
+            <td>{{ question.UserID }}</td>
             <!-- <td>HTML, CSS</td> -->
             <!-- <td>Open</td> -->
             <td>

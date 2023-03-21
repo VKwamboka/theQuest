@@ -74,7 +74,7 @@ export const allUsersState = createReducer<UsersState>(
   on(deleteUserSuccess, (state, actions):UsersState => ({
     ...state,
     error:'',
-    users: state.users.filter(user=>user.id!== actions.id)
+    // users: state.users.filter(user=>user.id!== actions.id)
   })),
 
   on(deleteUserFailure, (state, actions):UsersState => ({
