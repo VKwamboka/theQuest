@@ -57,6 +57,7 @@ this.store.dispatch(getsingleQuestionId({id:this.id}))
   //     console.log(this.question)
   //   }
   // })
+  
 
 }
 
@@ -68,5 +69,14 @@ this.store.dispatch(getsingleQuestionId({id:this.id}))
 
 
 // highlightBlock: any;
+
+getUpvoteCount(answer: any): number {
+  return answer?.Votes?.filter((v: any) => v.vote_type === 'upvote').length || 0;
+}
+
+getDownvoteCount(answer: any): number {
+  return answer?.Votes?.filter((v: any)=> v.vote_type === 'downvote').length || 0;
+}
+
 
 }

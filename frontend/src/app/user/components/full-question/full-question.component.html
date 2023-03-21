@@ -121,7 +121,9 @@
       <div class="info">
         <span>Answer by {{ answer.UserName}}</span>
         <div class="question-meta">
-          <span class="question-votes">{{ answer?.Votes?.length || 0}} votes</span>
+          
+          <span class="question-votes">{{ getUpvoteCount(answer) }} upvotes </span>
+           <span class="question-votes">{{ getDownvoteCount(answer) }} downvotes</span>
           <span class="question-comments"
             >{{ answer?.Comments?.length || 0}} comments</span
           >
