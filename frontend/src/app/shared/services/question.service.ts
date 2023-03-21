@@ -17,8 +17,8 @@ export class QuestionService {
   }
   
 //   get user's question
-  getUserQuestion():Observable<Question[]>{
-    return this.http.get<Question[]>('http://localhost:4000/flights/booking/emails');
+  getUserQuestion(id:string):Observable<Question[]>{
+    return this.http.get<Question[]>(`http://localhost:5500/question/getUserQuestions/${id}`);
   }
 // get all questions
   getAllQuestions():Observable<Question[]>{
@@ -26,17 +26,17 @@ export class QuestionService {
   }
 //   get one question
   getOneQuestion(id:string):Observable<Question>{
-   return  this.http.get<Question>(`http://localhost:4000/flights/${id}`)
+   return  this.http.get<Question>(`http://localhost:5500/question/getFullQuestionById/${id}`)
   }
 
 //   delete question
   deleteQuestion(id:string):Observable<Message>{
-    return  this.http.delete<Message>(`http://localhost:4000/flights/${id}`)
+    return  this.http.delete<Message>(`http://localhost:5500/question/deleteQuestion/${id}`)
    }
 
 //   update question
    updateQuestion(id:string,updatedQuestion:AddQuestion):Observable<Question>{
-    return  this.http.put<Question>(`http://localhost:4000/flights/${id}`, updatedQuestion)
+    return  this.http.put<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
    }
  
 
