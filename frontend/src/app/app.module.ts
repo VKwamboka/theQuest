@@ -10,7 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 import { AuthEffects } from './core/effects/authEffects';
-import { authReducer } from './core/reducers/authReducers';
+import { allUsersState, authReducer } from './core/reducers/authReducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { questionReducer } from './shared/reducers/question';
 import { QuestionEffects } from './shared/effects/question';
@@ -38,7 +38,7 @@ import { TokenInterceptorService } from './core/services/token-interceptor.servi
   imports: [
     MatSlideToggleModule,
     FormsModule,
-    StoreModule.forRoot({ prof:authReducer, question:questionReducer}),
+    StoreModule.forRoot({ prof:authReducer, question:questionReducer, users:allUsersState}),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

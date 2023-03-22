@@ -25,4 +25,7 @@ export class ManageUsersComponent {
     this.store.dispatch(getAllUsers())
     console.log(this.users$)
   }
+
+
+  
 }

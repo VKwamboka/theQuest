@@ -1,9 +1,9 @@
 import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { AuthState, initialAuthState, UsersState,initialUsersState } from '../states/authState';
 import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess, getAllUsersSuccess, getAllUsersFailure, deleteUserSuccess, deleteUserFailure } from  '../actions/authActions'
-// import { User } from '../../interfaces/user';
 
-const usersSliceState= createFeatureSelector<UsersState>('question')
+
+const usersSliceState= createFeatureSelector<UsersState>('users')
 export const allusers= createSelector(usersSliceState, state=>state.users)
 
 export const authReducer = createReducer<AuthState>(
@@ -74,7 +74,7 @@ export const allUsersState = createReducer<UsersState>(
   on(deleteUserSuccess, (state, actions):UsersState => ({
     ...state,
     error:'',
-    // users: state.users.filter(user=>user.id!== actions.id)
+    users: state.users.filter(user=>user.userId!== actions.id)
   })),
 
   on(deleteUserFailure, (state, actions):UsersState => ({

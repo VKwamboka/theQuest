@@ -13,9 +13,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users$ |async">
-            <td>1</td>
-            <td>{{ user}}</td>
-            <td>{{ user.email }}</td>
+            <td>{{user. userId  }}</td>
+            <td>{{ user.Name}}</td>
+            <td>{{ user.Email }}</td>
             <td>{{ user.Role }}</td>
             <td>
               <a href="#">Edit</a> |

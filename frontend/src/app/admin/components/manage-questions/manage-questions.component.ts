@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
 })
 export class ManageQuestionsComponent {
   questions$!:Observable<Question[]>
-  id!:string
+  // id!:string
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
 ngOnInit(): void {
@@ -29,9 +29,9 @@ this.store.dispatch(getQuestions())
 
 }
 
-Delete(){
+Delete(id:string){
   
-  this.store.dispatch(deleteQuestion({id:this.id}))
+  this.store.dispatch(deleteQuestion({id}))
   this.router.navigate(['/admin/manage-questions'])
 }
 
