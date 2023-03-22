@@ -43,5 +43,6 @@ getRole(){
 
   logout(){
     this.isLoggedIn=false;
+    localStorage.removeItem('token')
   }
 }

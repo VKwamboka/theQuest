@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth';
 
 @Component({
   selector: 'app-adminashboard',
@@ -10,6 +11,8 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./adminashboard.component.css']
 })
 export class AdminashboardComponent {
+
+  constructor(public auth:AuthService){}
   isMenuOpen = false;
 
   toggleMenu() {
