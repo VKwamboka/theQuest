@@ -8,6 +8,7 @@ import { AuthState } from '../states/authState';
 import { register } from '../actions/authActions';
 import { AuthService } from '../services/auth';
 import { Store } from '@ngrx/store';
+import { passwordMatchValidator } from '../cutomValidator';
 
 @Component({
   selector: 'app-signup',
@@ -32,8 +33,10 @@ export class SignupComponent {
     this.form = this.fb.group({
       Name:[null, Validators.required],
       Email:[null, [Validators.required, Validators.email]],
-      Password:[null, Validators.required],
+      Password:[null, Validators.required, Validators.minLength(8)],
       confirmPassword:[null, Validators.required]
+    }, {
+      validator: passwordMatchValidator('Password', 'confirmPassword')
     })
   }
 

@@ -33,7 +33,9 @@ export class LoginComponent {
   ngOnInit(): void {
     this.form = this.fb.group({
       Email:[null, [Validators.required, Validators.email]],
-      Password:[null, [Validators.required, Validators.minLength(8)]],
+      Password:[null, [Validators.required]],
+
+      // Password:[null, [Validators.required, Validators.minLength(8)]],
     }) 
 
   }
@@ -62,9 +64,7 @@ export class LoginComponent {
     },(error)=>{
       this.errorMessage = error.error.message;
     })
-    // this.store.dispatch(login({userlogged:this.form.value}))
     
-    // this.login$ = this.store.select(state => state.prof);
     this.login$.subscribe(state => console.log(state));
     
   
