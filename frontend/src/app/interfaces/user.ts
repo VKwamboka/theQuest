@@ -49,6 +49,7 @@ export interface AdminUsers{
 
 export interface Message{
     message:string
+    userID:string
 }
 
 export interface LoginUser{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from '../actions/authActions'
 import { login, loginSuccess, loginFailure, register,registerFailure,registerSuccess } from '../actions/authActions';
@@ -85,7 +85,22 @@ deleteUser = createEffect(()=>{
               }),
               catchError(error=>of(UserActions.deleteUserFailure(error.error.message)))
           )
-      })
+      }),
+      switchMap(() => [UserActions.getAllUsers()])
   )
 })
+// deleteUser$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(UserActions.deleteUser),
+//   concatMap((action) =>
+//     this.authService.deleteUser(action.id).pipe(
+//       map((message) => UserActions.deleteUserSuccess({ message })),
+//       catchError((error) =>
+//         of(UserActions.deleteUserFailure({ errorMessage: error.error.message }))
+//       )
+//     )
+//   ),
+//   switchMap(() => [UserActions.fetchUsers()])
+// )
+// );
 }

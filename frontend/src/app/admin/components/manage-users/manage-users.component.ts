@@ -4,7 +4,7 @@ import { allusers } from 'src/app/core/reducers/authReducers';
 import { AuthService } from 'src/app/core/services/auth';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getAllUsers } from 'src/app/core/actions/authActions';
+import { getAllUsers ,deleteUser} from 'src/app/core/actions/authActions';
 import { User } from 'src/app/interfaces/user';
 import { AppState } from 'src/app/core/states/appState';
 
@@ -26,6 +26,10 @@ export class ManageUsersComponent {
     console.log(this.users$)
   }
 
+// delete users
+  deleteUser(id:string){
+    this.store.dispatch(deleteUser({id}))
+    
+  }
 
-  
 }

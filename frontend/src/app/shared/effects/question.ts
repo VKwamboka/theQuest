@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, concatMap, map, mergeMap, of } from "rxjs";
+import { catchError, concatMap, map, mergeMap, of, switchMap } from "rxjs";
 import { QuestionService } from "../services/question.service";
 import * as QuestionActions from '../actions/question'
 
@@ -71,7 +71,8 @@ export class QuestionEffects{
                     }),
                     catchError(error=>of(QuestionActions.deleteQuestionFail({error:error.message})))
                 )
-            })
+            }),
+            switchMap(() => [QuestionActions.getQuestions()])
         )
     })
 

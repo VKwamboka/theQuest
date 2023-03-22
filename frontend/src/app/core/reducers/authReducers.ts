@@ -5,6 +5,7 @@ import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, re
 
 const usersSliceState= createFeatureSelector<UsersState>('users')
 export const allusers= createSelector(usersSliceState, state=>state.users)
+  const userId= createSelector(usersSliceState, state=>state.Id)
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,
@@ -70,12 +71,28 @@ export const allUsersState = createReducer<UsersState>(
   })
   ),
 
+//   const updatedBooking=state.bookings.map(item=>{
+//     return item.Id===action.booking.Id?action.booking:item
+// })
+
+// return{
+//     ...state,
+//     updateError:'',
+//     bookings:updatedBooking
+// }
+
   // delete user
-  on(deleteUserSuccess, (state, actions):UsersState => ({
-    ...state,
-    error:'',
-    users: state.users.filter(user=>user.userId!== actions.id)
-  })),
+  on(deleteUserSuccess, (state, actions): UsersState => {
+    const notdeletedUsers = state.users.filter(user => {
+      console.log(notdeletedUsers)
+      return user.userId !== actions.message.userID;
+    });
+    return {
+      ...state,
+      error: '',
+      users: notdeletedUsers
+    };
+  }),
 
   on(deleteUserFailure, (state, actions):UsersState => ({
     ...state,

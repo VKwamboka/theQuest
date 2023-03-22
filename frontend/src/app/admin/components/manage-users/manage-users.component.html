@@ -18,8 +18,8 @@
             <td>{{ user.Email }}</td>
             <td>{{ user.Role }}</td>
             <td>
-              <a href="#">Edit</a> |
-              <a href="#">Delete</a>
+              <!-- <a href="#">Edit</a> | -->
+              <a (click)="deleteUser(user.userId)">Delete</a>
             </td>
           </tr>
           <tr>
