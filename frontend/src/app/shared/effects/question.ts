@@ -74,7 +74,9 @@ export class QuestionEffects{
                     }),
                     catchError(error=>of(QuestionActions.updateQuestionFail({error:error.message})))
                 )
-            })
+            }),
+            switchMap(() => [QuestionActions.getQuestions()])
+
         )
     })
 

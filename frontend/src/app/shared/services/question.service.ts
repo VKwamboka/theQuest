@@ -42,7 +42,7 @@ deleteQuestionByUser(id:string):Observable<Message>{
 
 //   update question
    updateQuestion(id:string,updatedQuestion:AddQuestion):Observable<Question>{
-    return  this.http.put<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
+    return  this.http.patch<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
    }
  
 
