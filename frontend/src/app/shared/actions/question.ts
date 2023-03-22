@@ -32,6 +32,7 @@ export const updateQuestionFail= createAction('[updateQuestion]-updateQuestionFa
 
 
 export const deleteQuestion = createAction('[deleteQuestion]-deleteQuestion',props<{id:string}>())
+export const deleteQuestionByUser = createAction('[deleteQuestion]-deleteQuestion',props<{id:string}>())
 
 export const deleteQuestionSuccess = createAction('[deleteQuestion]-deleteQuestionSuccess', props<{message:Message}>())
 

@@ -34,6 +34,12 @@ export class QuestionService {
     return  this.http.delete<Message>(`http://localhost:5500/question/deleteQuestion/${id}`)
    }
 
+//  get questions by user
+//   delete question
+deleteQuestionByUser(id:string):Observable<Message>{
+  return  this.http.delete<Message>(`http://localhost:5500/question/deleteQuestion/${id}`)
+ }
+
 //   update question
    updateQuestion(id:string,updatedQuestion:AddQuestion):Observable<Question>{
     return  this.http.put<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)

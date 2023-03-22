@@ -155,9 +155,9 @@ export const getUserQuestions = async (req: ExtendedRequest, res: Response) => {
         const UserID = req.info?.userId
         
         console.log(req.info?.userId)
-        const quiz:Question[]= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
+        const quiz= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
 
-        if(quiz){
+        if(quiz.length){
             
             await _db.exec("GetUserQuestions", {UserID})
             return res.status(200).json(quiz) 

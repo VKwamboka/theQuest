@@ -27,15 +27,21 @@
     </div>
     <!-- questions -->
     
-    <div class="questions" *ngFor="let question of question" [routerLink]="['/user/full-question',question.questionID]" >
+    <div class="questions" *ngFor="let questions of question" >
       <div class="question"  >
-        <h3><a >{{ question.Title }}</a></h3>
-        <p class="details">{{ question.QuestionDate }} <a href="#">{{ question.UserID }}</a></p>
+        <h3><a  [routerLink]="['/user/full-question',questions.questionID]" >{{ questions.Title }}</a></h3>
+        <p class="details">{{ questions.QuestionDate }} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
-        <p class="summary">{{ question.Body }}</p>
+        <p class="summary">{{ questions.Body }}</p>
         <p class="answers">1 answer</p>
       </div>
+      <div class="actions">
+        <button class="btn btn-upvote">Update</button>
+        <button class="btn btn-downvote" (click)="Delete(questions.questionID)">Delete</button>
+      </div>
+      <hr>
     </div>
+    
     
   
 

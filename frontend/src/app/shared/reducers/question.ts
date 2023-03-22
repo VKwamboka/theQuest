@@ -11,7 +11,7 @@ const questionSliceState= createFeatureSelector<QuestionInterface>('question')
 // const userQuestionSliceState = createFeatureSelector<QuestionInterface>('userquestion')
   
  export const oneQuestion = createSelector(questionSliceState, state=>state.oneQuestion)
-  export const userQuestions = createSelector(questionSliceState, state=>state.userQuestions)  
+  export const userQuestion = createSelector(questionSliceState, state=>state.userQuestions)  
 export const myQuestions= createSelector(questionSliceState, state=>state.questions)
 const myQuestionsId= createSelector(questionSliceState, state=>state.questionId)
 

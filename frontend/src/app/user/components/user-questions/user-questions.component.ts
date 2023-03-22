@@ -4,10 +4,10 @@ import { RouterModule,Router } from '@angular/router';
 import { QuestionService } from 'src/app/shared/services/question.service';
 import { AuthService } from 'src/app/core/services/auth';
 import { Store } from '@ngrx/store';
-import { getQuestions ,getUserQuestions} from 'src/app/shared/actions/question';
+import { deleteQuestionByUser, getQuestions ,getUserQuestions} from 'src/app/shared/actions/question';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/interfaces/question';
-import { userQuestions } from 'src/app/shared/reducers/question';
+import { userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
 
 
@@ -29,9 +29,9 @@ ngOnInit(): void {
   // this.id=this.auth.getId()
   // console.log(this.id)
   // get questions
-this.store.select(userQuestions).subscribe((question)=>{
-  if(question){
-    this.question=question
+this.store.select(userQuestion).subscribe((questions)=>{
+  if(questions){
+    this.question=questions
 
     
   }
@@ -42,7 +42,11 @@ this.store.dispatch(getUserQuestions())
 
 }
 
-
+Delete(id:string){
+  
+  this.store.dispatch(deleteQuestionByUser({id}))
+ 
+}
 
 
 }
