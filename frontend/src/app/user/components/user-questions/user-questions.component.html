@@ -36,7 +36,7 @@
         <p class="answers">1 answer</p>
       </div>
       <div class="actions">
-        <button class="btn btn-upvote">Update</button>
+        <button class="btn btn-upvote" [routerLink]="['/user/edit-question',questions.questionID]">Update</button>
         <button class="btn btn-downvote" (click)="Delete(questions.questionID)">Delete</button>
       </div>
       <hr>

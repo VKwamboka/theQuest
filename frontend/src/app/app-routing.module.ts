@@ -13,7 +13,7 @@ const routes: Routes = [
       {path:'profile',  loadComponent:()=>import('./user/components/userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
       {path:'all-questions', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
       {path:'my-questions', loadComponent:()=>import('./user/components/user-questions/user-questions.component').then(l=>l.UserQuestionsComponent)},
-
+      {path:'edit-question/:id', loadComponent:()=>import('./user/components/edit-question/edit-question.component').then(l=>l.EditQuestionComponent)},
       {path:'ask-question', loadComponent:()=>import('./user/components/ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
       {path:'edit-profile',  loadComponent:()=>import('./user/components/editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
       {path:'',loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
