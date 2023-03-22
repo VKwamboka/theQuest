@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { AddQuestion, Question, Message } from "src/app/interfaces/question";
+import { AddQuestion, Question, Message, FullQuestion } from "src/app/interfaces/question";
 
 
 export const getQuestions = createAction('[Question]-getQuestions')
@@ -10,7 +10,9 @@ export const getQuestionFail= createAction('[Question]-getQuestionFail',props<{e
 
 export const getsingleQuestionId= createAction('[Single-Question]-getSingleQuestionId',props<{id:string}>())
 
+export const getsingleQuestionIdSuccess= createAction('[Single-Question]-getSingleQuestionIdSuccess',props<{Question:FullQuestion}>())
 
+export const getsingleQuestionIdFail= createAction('[Single-Question]-getSingleQuestionIdFail',props<{error:string}>())
 
 
 export const addQuestion = createAction('[addQuestion]-addQuestion',props<{newQuestion:AddQuestion}>())
@@ -34,3 +36,5 @@ export const deleteQuestion = createAction('[deleteQuestion]-deleteQuestion',pro
 export const deleteQuestionSuccess = createAction('[deleteQuestion]-deleteQuestionSuccess', props<{message:Message}>())
 
 export const deleteQuestionFail= createAction('[deleteQuestion]-deleteQuestionFail',props<{error:string}>())
+
+// get one question details

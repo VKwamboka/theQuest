@@ -160,3 +160,19 @@ export const markAnswerPreferred = async (req: ExtendedRequest, res: Response) =
 }
 
 
+// get user specific answers
+export const getUserAnswers = async (req: ExtendedRequest, res: Response) => {
+    try{
+        const UserID = req.params.id
+        const answer:Answer[]= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
+        console.log(answer)
+        if (answer){
+            const result = await (await _db.exec("GetUserQuestions", {UserID})).recordset
+            return res.status(200).json(result)
+        }
+        return res.status(404).json({error:'Oops! You have not posted any answers yet'})
+
+    }catch (error) {
+        return res.status(500).json(error)
+    } 
+}

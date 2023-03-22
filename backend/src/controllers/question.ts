@@ -143,6 +143,24 @@ export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
 }
 }
 
+// get speific user questions
+export const getUserQuestions = async (req: ExtendedRequest, res: Response) => {
+    try{
+        const UserID = req.params.id
+
+        const quiz:Question[]= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
+
+        if(quiz){
+            await _db.exec("GetUserQuestions", {UserID})
+            return res.status(200).json(quiz) 
+        }
+
+        return res.status(404).json({error:'Oops! Question Not Found'})  
+     
+    }catch (error) {
+        res.status(500).json(error)
+    }
+}
 
 // delete question
 

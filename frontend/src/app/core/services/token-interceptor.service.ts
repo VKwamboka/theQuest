@@ -11,7 +11,8 @@ export class TokenInterceptorService implements HttpInterceptor {
   intercept(req:HttpRequest<any> , next:HttpHandler){
     if(req.url!=='http://localhost:5500/auth/login'){
       const token = localStorage.getItem('token') as string
-    let modifiedReq= req.clone({headers:new HttpHeaders().append('token', token).append('Custom', 'Just see Me')})
+      // console.log(token)
+    let modifiedReq= req.clone({headers:req.headers.set('Authorization','Bearer ' + token).append('token', token)})
     return next.handle(modifiedReq)
     }
     return next.handle(req)

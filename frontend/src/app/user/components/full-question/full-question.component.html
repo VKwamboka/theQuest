@@ -81,14 +81,14 @@
     </div>
   </div>
 </div> -->
-<div class="container1">
-  <div class="question">
+<div class="container1" *ngIf="question">
+  <div class="question" >
     <div class="question-meta">
-      <span class="question-votes">10 votes</span>
-      <span class="question-answers">2 answers</span>
-      <span class="question-comments">2 comments</span>
+      <span class="question-votes">{{ question.Answers?.Votes?.length  || 0}}  votes</span>
+      <span class="question-answers">{{ answers?.length || 0}} answers</span>
+      <span class="question-comments">{{ question.Answers?.Comments?.length  || 0}} comments</span>
     </div>
-    <h1>How to create a responsive design?</h1>
+    <h1>{{ question.Title }}</h1>
     <div class="question-tags">
       <span class="tag">html</span>
       <span class="tag">css</span>
@@ -98,9 +98,14 @@
       <!-- <span>Tags: HTML, CSS</span> -->
     </div>
     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis
-      ligula in purus vulputate ultricies. 
+      {{ question.Body }}
     </p>
+    <!-- <code appHighlightCode>Hello World</code> -->
+    <!-- <p >{{ question.Code }}</p> -->
+    <code appHighlightCode class="code">
+      {{ question.Code }}
+    </code>
+
     <div class="actions">
       <!-- <button class="btn btn-upvote">Upvote</button>
       <button class="btn btn-downvote">Downvote</button> -->
@@ -108,88 +113,40 @@
     </div>
   </div>
 
-  <div class="answers">
-    <h2>Answers (2)</h2>
-    <div class="answer">
+  <h2>Answers ({{ answers?.length || 0}})</h2>
+
+  <div class="answers" *ngFor="let answer of answers">   
+    
+    <div  class="answer">
       <div class="info">
-        <span>Answer by Jane Doe</span>
+        <span>Answer by {{ answer.UserName}}</span>
         <div class="question-meta">
-          <span class="question-votes">10 votes</span>
-          <span class="question-comments">2 comments</span>
+          
+          <span class="question-votes">{{ getUpvoteCount(answer) }} upvotes </span>
+           <span class="question-votes">{{ getDownvoteCount(answer) }} downvotes</span>
+          <span class="question-comments"
+            >{{ answer?.Comments?.length || 0}} comments</span
+          >
         </div>
-        <span>1 hour ago</span>
+        <span>{{ answer.AnswerDate | date : "medium" }}</span>
       </div>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-        venenatis ligula in purus vulputate ultricies.
-      </p>
+      
+        <p>{{ answer.answer_text }}</p>
       <div class="actions">
         <button class="btn btn-upvote">Upvote</button>
         <button class="btn btn-downvote">Downvote</button>
         <button class="btn btn-upvote">Comment</button>
       </div>
       <div class="comments">
-        <h2>Comments (2)</h2>
-        <div class="comment">
+        <h2>Comments ({{ answer?.Comments?.length || 0}})</h2>
+        <div *ngFor="let comment of answer.Comments" class="comment">
           <div class="info">
-            <span>Comment by Jane Doe</span>
-            <span>1 hour ago</span>
+            <span>Comment by {{ comment.user_id }}</span>
+            <span>{{ comment.CommentDate | date : "medium" }}</span>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-            venenatis ligula in purus vulputate ultricies.
-          </p>
-          <!-- <div class="actions">
-            <button class="btn btn-upvote">Upvote</button>
-            <button class="btn btn-downvote">Downvote</button>
-          </div> -->
-        </div>
-        <div class="comment">
-          <div class="info">
-            <span>Comment by Jack Smith</span>
-            <span>2 hours ago</span>
-          </div>
-          <p>
-            Integer bibendum, nunc non lobortis interdum, justo elit aliquet
-            elit, ac luctus nibh felis vitae nisi.
-          </p>
-          <!-- <div class="actions">
-            <button class="btn btn-upvote">Upvote</button>
-            <button class="btn btn-downvote">Downvote</button>
-          </div> -->
+          <p>{{ comment.comment_text }}</p>
         </div>
       </div>
     </div>
-    <div class="answer">
-      <!-- <div class="question-meta">
-        <span class="question-votes">10 votes</span>
-        <span class="question-answers">5 answers</span>
-        <span class="question-comments">3 comments</span>
-      </div> -->
-      <div class="info">
-        <span>Answer by Jack Smith</span>
-        <div class="question-meta">
-          <span class="question-votes">10 votes</span>
-          <span class="question-comments">0 comments</span>
-        </div>
-        <span>2 hours ago</span>
-      </div>
-      <p>
-        Integer bibendum, nunc non lobortis interdum, justo elit aliquet elit,
-        ac luctus nibh felis vitae nisi.
-      </p>
-      <div class="actions">
-        <button class="btn btn-upvote">Upvote</button>
-        <button class="btn btn-downvote">Downvote</button>
-        <button class="btn btn-upvote">Comment</button>
-      </div>
-      <div class="comments">
-        <div class="header-comment">
-            <span><h2>Comments (0)</h2></span>
-            <!-- <span> Add comment</span> -->
-        </div>
-        
-      </div>
-    </div>
-  </div>
+  </div> 
 </div>

@@ -1,7 +1,11 @@
-import { createReducer, on } from '@ngrx/store';
-import { AuthState, initialAuthState } from '../states/authState';
-import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess } from  '../actions/authActions'
-// import { User } from '../../interfaces/user';
+import { createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
+import { AuthState, initialAuthState, UsersState,initialUsersState } from '../states/authState';
+import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess, getAllUsersSuccess, getAllUsersFailure, deleteUserSuccess, deleteUserFailure } from  '../actions/authActions'
+
+
+const usersSliceState= createFeatureSelector<UsersState>('users')
+export const allusers= createSelector(usersSliceState, state=>state.users)
+  const userId= createSelector(usersSliceState, state=>state.Id)
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,
@@ -44,6 +48,56 @@ on(registerFailure, (state, actions):AuthState => ({
   user: null,
   errorMessage:actions.errorMessage,
 })),
+
+
   
   on(logout, () => initialAuthState),
 );
+
+export const allUsersState = createReducer<UsersState>(
+  initialUsersState ,
+    // get all users
+  on(getAllUsersSuccess, (state, actions):UsersState => ({
+    ...state,
+    error:'',
+    users: actions.Users
+  })
+  ),
+
+  on(getAllUsersFailure, (state, actions):UsersState => ({
+    ...state,
+    error:actions.errorMessage,
+    users:[]
+  })
+  ),
+
+//   const updatedBooking=state.bookings.map(item=>{
+//     return item.Id===action.booking.Id?action.booking:item
+// })
+
+// return{
+//     ...state,
+//     updateError:'',
+//     bookings:updatedBooking
+// }
+
+  // delete user
+  on(deleteUserSuccess, (state, actions): UsersState => {
+    const notdeletedUsers = state.users.filter(user => {
+      console.log(notdeletedUsers)
+      return user.userId !== actions.message.userID;
+    });
+    return {
+      ...state,
+      error: '',
+      users: notdeletedUsers
+    };
+  }),
+
+  on(deleteUserFailure, (state, actions):UsersState => ({
+    ...state,
+
+    error:actions.errorMessage,
+    
+  })),
+)

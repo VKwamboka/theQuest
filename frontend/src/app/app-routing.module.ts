@@ -13,7 +13,8 @@ const routes: Routes = [
       {path:'ask-question', loadComponent:()=>import('./user/components/ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
       {path:'edit-profile', loadComponent:()=>import('./user/components/editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
       {path:'', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
-      {path:'full-question', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+      {path:'full-question/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+      // {path:'deleteQuestion/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
 
     ]
   },

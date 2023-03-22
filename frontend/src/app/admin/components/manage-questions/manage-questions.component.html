@@ -13,15 +13,15 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>How to create a responsive design?</td>
-            <td>John Doe</td>
+          <tr *ngFor="let question of questions$ |async" >
+            <td>{{ question.questionID }}</td>
+            <td [routerLink]="['/user/full-question',question.questionID]" >{{ question.Title }}</td>
+            <td>user</td>
             <!-- <td>HTML, CSS</td> -->
             <!-- <td>Open</td> -->
             <td>
-              <a href="#">Edit</a> |
-              <a href="#">Delete</a>
+              <a routerLink="#">Edit</a> |
+              <a (click)="Delete(question.questionID)" >Delete</a>
             </td>
           </tr>
           <tr>

@@ -2,7 +2,7 @@
     <div class="sidebar" [ngClass]="{'hidden': isMenuOpen}">
       <div class="logo">
         <img src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a" alt="Stack Overflow logo">
-        <small style="text-align: center;">user@gmail.com</small>
+        <small style="text-align: center;" *ngIf="auth.isLoggedIn">Welcome {{ auth.getName() }}☺️</small>
       </div>
       <ul class="menu"  >
         <li><a routerLink="/">Home</a></li>
@@ -11,7 +11,9 @@
         <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
         <li><a routerLink="/user/profile">My Profile</a></li>
         <li><a routerLink="/user/ask-question">Ask Question</a></li>
-
+        <button (click)="showToast()">Show Toast Message</button>
+        <!-- <app-toast *ngIf="showToastMessage" [message]="toastMessage" [type]="toastType" [duration]="toastDuration"></app-toast> -->
+        
       </ul>
     </div>
 <!-- when side bar is  -->

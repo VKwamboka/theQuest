@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, exhaustMap, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, exhaustMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as UserActions from '../actions/authActions'
 import { login, loginSuccess, loginFailure, register,registerFailure,registerSuccess } from '../actions/authActions';
@@ -41,8 +41,22 @@ export class AuthEffects {
   })
     )
   }
+
+  
    
   );
+  // get all users
+  getAllUsers$ = createEffect(()=>{
+    return  this.actions$.pipe( ofType(UserActions.getAllUsers),
+    mergeMap(()=>{
+      return this.authService.getAllUsers().pipe(
+        
+        map((users:User[]) => UserActions.getAllUsersSuccess({ Users:users})),
+          catchError((error) => of(UserActions.getAllUsersFailure(error)))
+      )
+  })
+    )
+  });
 
 
   // update user
@@ -59,4 +73,34 @@ export class AuthEffects {
         })
     )
 })
+
+// delete user
+deleteUser = createEffect(()=>{
+  return this.actions$.pipe(
+      ofType(UserActions.deleteUser),
+      concatMap(action=>{
+          return  this.authService.deleteUser(action.id).pipe(
+              map(message=>{
+                  return UserActions.deleteUserSuccess({message:message})
+              }),
+              catchError(error=>of(UserActions.deleteUserFailure(error.error.message)))
+          )
+      }),
+      switchMap(() => [UserActions.getAllUsers()])
+  )
+})
+// deleteUser$ = createEffect(() =>
+// this.actions$.pipe(
+//   ofType(UserActions.deleteUser),
+//   concatMap((action) =>
+//     this.authService.deleteUser(action.id).pipe(
+//       map((message) => UserActions.deleteUserSuccess({ message })),
+//       catchError((error) =>
+//         of(UserActions.deleteUserFailure({ errorMessage: error.error.message }))
+//       )
+//     )
+//   ),
+//   switchMap(() => [UserActions.fetchUsers()])
+// )
+// );
 }
