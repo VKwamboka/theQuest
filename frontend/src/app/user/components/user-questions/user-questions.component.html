@@ -27,7 +27,7 @@
     </div>
     <!-- questions -->
     
-    <div class="questions" *ngFor="let question of questions$ |async" [routerLink]="['/user/full-question',question.questionID]" >
+    <div class="questions" *ngFor="let question of question" [routerLink]="['/user/full-question',question.questionID]" >
       <div class="question"  >
         <h3><a >{{ question.Title }}</a></h3>
         <p class="details">{{ question.QuestionDate }} <a href="#">{{ question.UserID }}</a></p>
@@ -37,20 +37,7 @@
       </div>
     </div>
     
-    <div class="question"  >
-      <h3><a routerLink="/user/full-question">What is the difference between HTML and XHTML?</a></h3>
-      <p class="details">Asked 1 day ago by <a href="#">user456</a></p>
-      <p class="tags">Tags: <a href="#">html</a> <a href="#">xhtml</a></p>
-      <p class="summary">I'm new to web development and I'm wondering what the difference is between HTML and XHTML. Can anyone explain?</p>
-      <p class="answers">1 answer</p>
-    </div>
-    <div class="question">
-      <h3><a href="#">How do I create a responsive design?</a></h3>
-      <p class="details">Asked 2 days ago by <a href="#">user789</a></p>
-      <p class="tags">Tags: <a href="#">html</a>, <a href="#">css</a>, <a href="#">responsive-design</a></p>
-      <p class="summary">I want my website to look good on all devices, but I'm not sure how to create a responsive design. Any tips?</p>
-      <p class="answers">2 answers</p>
-    </div>
+  
 
     <!-- <div class="flex justify-center mt-8"> -->
       <div class="pagination">
@@ -68,5 +55,6 @@
     <!-- </div> -->
   </main>
 </div>
+
 
 

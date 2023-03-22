@@ -13,12 +13,12 @@ export class QuestionService {
 
 //   add question
   addQuestion(question:AddQuestion):Observable<Message>{
-    return this.http.post<Message>('http://localhost:4000/flights',question)
+    return this.http.post<Message>('http://localhost:5500/question/postQuestion',question)
   }
   
 //   get user's question
-  getUserQuestion(id:string):Observable<Question[]>{
-    return this.http.get<Question[]>(`http://localhost:5500/question/getUserQuestions/${id}`);
+  getUserQuestion():Observable<Question[]>{
+    return this.http.get<Question[]>(`http://localhost:5500/question/getUserQuestions`);
   }
 // get all questions
   getAllQuestions():Observable<Question[]>{

@@ -9,13 +9,15 @@ const routes: Routes = [
   {path:'login', loadComponent:()=>import('./core/login/login.component').then(l=>l.LoginComponent)},
   {path:'register', loadComponent:()=>import('./core/signup/signup.component').then(l=>l.SignupComponent)},
   {
-    path:'user', canActivate:[AuthGuardService], loadComponent:()=>import('./user/components/userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent),children:[
-      {path:'profile', loadComponent:()=>import('./user/components/userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
-      {path:'all-questions',loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
-      {path:'ask-question',loadComponent:()=>import('./user/components/ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
-      {path:'edit-profile', loadComponent:()=>import('./user/components/editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
+    path:'user', loadComponent:()=>import('./user/components/userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent),children:[
+      {path:'profile',  loadComponent:()=>import('./user/components/userprofile/userprofile.component').then(l=>l.UserprofileComponent)},
+      {path:'all-questions', loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
+      {path:'my-questions', loadComponent:()=>import('./user/components/user-questions/user-questions.component').then(l=>l.UserQuestionsComponent)},
+
+      {path:'ask-question', loadComponent:()=>import('./user/components/ask-question/ask-question.component').then(l=>l.AskQuestionComponent)},
+      {path:'edit-profile',  loadComponent:()=>import('./user/components/editprofile/editprofile.component').then(l=>l.EditprofileComponent)},
       {path:'',loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
-      {path:'full-question/:id',loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+      {path:'full-question/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
       // {path:'deleteQuestion/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
 
     ]

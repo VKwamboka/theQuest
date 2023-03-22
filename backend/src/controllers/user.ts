@@ -26,7 +26,7 @@ const generateJWT = (payload: any, expiresIn: string) => {
 export const RegisterUser = async (req: Request, res: Response) => {
     try {
 
-      const { Name, Email, Password ,Role} = await UserSignUpHelper.validateAsync(
+      const { Name, Email, Password ,Role,UserID} = await UserSignUpHelper.validateAsync(
         req.body
         )
         const salt = await Bcrypt.genSalt(10)
@@ -71,6 +71,7 @@ export const RegisterUser = async (req: Request, res: Response) => {
               token,
               Name,
               Email,
+              UserID,
               Role
           },
           })
@@ -116,6 +117,7 @@ export const loginUser = async (req: Request, res: Response) => {
             Name: user.recordset[0].Name,
                 Email: user.recordset[0].Email,
                 Role: user.recordset[0].Role,
+                UserId: user.recordset[0].userId,
             data: {
                 token,
                 

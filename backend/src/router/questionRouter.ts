@@ -11,6 +11,7 @@ questionRoutes.route("/getQuestionById/:id").get(VerifyToken, getQuestionById);
 questionRoutes.route("/updateQuestion/:id").patch(VerifyToken, updateQuestion);
 questionRoutes.route("/deleteQuestion/:id").delete(VerifyToken, deleteQuestion);
 questionRoutes.route("/getFullQuestionById/:id").get( getFullQuestionById);
-questionRoutes.route("/getUserQuestions/:id").get( getUserQuestions);
+
+questionRoutes.route("/getUserQuestions").get(VerifyToken, getUserQuestions);
 
 export default questionRoutes;

@@ -1,14 +1,17 @@
 <div class="new-question-container">
     <h1>Ask a Question</h1>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="submitForm()" >
       <label for="title">Title</label>
       <p>Be specific and imagine you are asking a question to another person</p>
-      <input type="text" id="title" name="title" placeholder="e.g how to position a div center with html and css">
+      <input type="text" id="title" name="title" placeholder="e.g how to position a div center with html and css" formControlName="Title"> 
       <label for="body">Body</label>
       <p>Include all the information someone would need to answer your question</p>
-      <textarea id="body" rows="10" name="body" placeholder="e.g Enter body with minimum 300 characters"></textarea>
-      <label for="tags">Tags</label>
-      <p>Add up to five tags to describe what your question is about</p>
+      <textarea id="body" rows="10" name="body" placeholder="e.g Enter body with minimum 300 characters" formControlName="Body"></textarea>
+      <label for="code">Code</label>
+      <textarea id="code" rows="10" name="code" placeholder="e.g Enter code with minimum 300 characters" formControlName="Code"></textarea>
+
+      <!-- <label for="tags">Tags</label>
+      <p>Add up to five tags to describe what your question is about</p> -->
       <input type="text" id="tags" name="tags" placeholder="e.g. html">
       <button type="submit">Post Your Question</button>
     </form>

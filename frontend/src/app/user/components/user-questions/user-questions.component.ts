@@ -1,0 +1,48 @@
+import { Component,OnInit ,NgModule} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule,Router } from '@angular/router';
+import { QuestionService } from 'src/app/shared/services/question.service';
+import { AuthService } from 'src/app/core/services/auth';
+import { Store } from '@ngrx/store';
+import { getQuestions ,getUserQuestions} from 'src/app/shared/actions/question';
+import { Observable } from 'rxjs';
+import { Question } from 'src/app/interfaces/question';
+import { userQuestions } from 'src/app/shared/reducers/question';
+import { AppState } from 'src/app/core/states/appState';
+
+
+@Component({
+  selector: 'app-user-questions',
+  standalone: true,
+  imports: [CommonModule,RouterModule],
+  templateUrl: './user-questions.component.html',
+  styleUrls: ['./user-questions.component.css']
+})
+export class UserQuestionsComponent {
+
+  id!:string
+  question!:Question[]
+  questions$!:Observable<Question[]>
+constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
+
+ngOnInit(): void {
+  // this.id=this.auth.getId()
+  // console.log(this.id)
+  // get questions
+this.store.select(userQuestions).subscribe((question)=>{
+  if(question){
+    this.question=question
+
+    
+  }
+})
+
+
+this.store.dispatch(getUserQuestions())
+
+}
+
+
+
+
+}

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import  {Question} from '../../interfaces/question';
-import {addQuestion, addQuestionSuccess,  getQuestions, getQuestionsSuccess, getQuestionFail,getsingleQuestionId,updateQuestionSuccess,updateQuestionFail,addQuestionFail,deleteQuestionFail,deleteQuestionSuccess, getsingleQuestionIdSuccess, getsingleQuestionIdFail} from '../actions/question';
+import {addQuestion, addQuestionSuccess,  getQuestions, getQuestionsSuccess, getQuestionFail,getsingleQuestionId,updateQuestionSuccess,updateQuestionFail,addQuestionFail,deleteQuestionFail,deleteQuestionSuccess, getsingleQuestionIdSuccess, getsingleQuestionIdFail, getUserQuestionsSuccess} from '../actions/question';
 
 import {QuestionInterface} from '../states/question';
 import { initialState } from "../states/question";
@@ -8,19 +8,14 @@ import { initialState } from "../states/question";
 
 
 const questionSliceState= createFeatureSelector<QuestionInterface>('question')
-
-// const OnequestionSliceState = createFeatureSelector<OneQuestionInterface>('oquestion')
- 
+// const userQuestionSliceState = createFeatureSelector<QuestionInterface>('userquestion')
+  
  export const oneQuestion = createSelector(questionSliceState, state=>state.oneQuestion)
-
+  export const userQuestions = createSelector(questionSliceState, state=>state.userQuestions)  
 export const myQuestions= createSelector(questionSliceState, state=>state.questions)
 const myQuestionsId= createSelector(questionSliceState, state=>state.questionId)
 
-// get single question
-// export const getSingleQuestion=createSelector(myQuestions,myQuestionsId,(state,id)=>{
 
-//     return state.find(x=>x.questionID===id)
-// })
 
 export const questionReducer=createReducer<QuestionInterface>(
     initialState,
@@ -41,15 +36,13 @@ export const questionReducer=createReducer<QuestionInterface>(
         } 
      }),
 
-
-    //  getting single question
-    //  on(getsingleQuestionId,(state,actions):OneQuestionInterface =>{
-    //     return{
-    //         ...state,
-    //         questionId:actions.id
-    //     }
-    //  }),
-
+    // get single question
+    on(getUserQuestionsSuccess, (state, actions):QuestionInterface=>{
+        return{
+            ...state,
+            userQuestions:actions.Questions
+        }
+    }),
 
     on(getsingleQuestionIdSuccess,(state,actions):QuestionInterface=>{
         return{

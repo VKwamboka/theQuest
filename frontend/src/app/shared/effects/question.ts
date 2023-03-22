@@ -27,6 +27,23 @@ export class QuestionEffects{
         )
     })
 
+    // get questions by user
+    allQuestionsByUser = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(QuestionActions.getUserQuestions),
+            mergeMap((action)=>{
+               return this.quetionService.getUserQuestion().pipe(
+                    map(questions=>{
+                        console.log(questions)
+                        // error
+                        return QuestionActions.getUserQuestionsSuccess({Questions:questions})
+                    }),
+                    catchError(error=>of(QuestionActions.getUserQuestionsFail({error:error.message})))
+                )
+            })
+        )
+    })
+
 
 
 // add Question
@@ -40,7 +57,8 @@ export class QuestionEffects{
                     }),
                     catchError(error=>of(QuestionActions.addQuestionFail({error:error.message})))
                 )
-            })
+            }),
+            switchMap(() => [QuestionActions.getQuestions()])
         )
     })
 
