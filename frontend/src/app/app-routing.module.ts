@@ -21,11 +21,11 @@ const routes: Routes = [
     ]
   },
   {
-    path:'admin', loadComponent:()=>import('./admin/components/adminashboard/adminashboard.component').then(l=>l.AdminashboardComponent),children:[
+    path:'admin', canActivate:[AuthGuardService], loadComponent:()=>import('./admin/components/adminashboard/adminashboard.component').then(l=>l.AdminashboardComponent),children:[
       {path:'', loadComponent:()=>import('./admin/components/admincontent/admincontent.component').then(l=>l.AdmincontentComponent)},
-      {path:'manage-users', canActivate:[AuthGuardService],loadComponent:()=>import('./admin/components/manage-users/manage-users.component').then(l=>l.ManageUsersComponent)},
-      {path:'manage-questions',canActivate:[AuthGuardService], loadComponent:()=>import('./admin/components/manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)},
-      {path:'full-question/:id', canActivate:[AuthGuardService],loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+      {path:'manage-users', loadComponent:()=>import('./admin/components/manage-users/manage-users.component').then(l=>l.ManageUsersComponent)},
+      {path:'manage-questions',loadComponent:()=>import('./admin/components/manage-questions/manage-questions.component').then(l=>l.ManageQuestionsComponent)},
+      {path:'full-question/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
 
 
     ]

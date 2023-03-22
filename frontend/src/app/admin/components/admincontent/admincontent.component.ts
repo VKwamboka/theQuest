@@ -14,12 +14,14 @@ import { Vote } from 'src/app/interfaces/vote';
 import { User } from 'src/app/interfaces/user';
 import { getAllUsers } from 'src/app/core/actions/authActions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { ManageUsersComponent } from '../manage-users/manage-users.component';
 
 
 @Component({
   selector: 'app-admincontent',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule,ManageUsersComponent],
   templateUrl: './admincontent.component.html',
   styleUrls: ['./admincontent.component.css']
 })
@@ -43,7 +45,7 @@ export class AdmincontentComponent {
   commentsitems!: Comment[];
   commentCount!: number;
  
-constructor(public auth:AuthService, private http: HttpClient, private store:Store<AppState>){}
+constructor(public auth:AuthService, private http: HttpClient,private store:Store<AppState>){}
 
 ngOnInit(): void {
   // get questions
