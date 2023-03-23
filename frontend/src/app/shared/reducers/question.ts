@@ -1,7 +1,7 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import  {Question} from '../../interfaces/question';
 import {addQuestion, addQuestionSuccess,  getQuestions, getQuestionsSuccess, getQuestionFail,getsingleQuestionId,updateQuestionSuccess,updateQuestionFail,addQuestionFail,deleteQuestionFail,deleteQuestionSuccess, getsingleQuestionIdSuccess, getsingleQuestionIdFail, getUserQuestionsSuccess} from '../actions/question';
-
+import { addAnswer } from "src/app/user/actions/answer";
 import {QuestionInterface} from '../states/question';
 import { initialState } from "../states/question";
 // import { OneQuestionInterface } from "../states/question";
@@ -111,5 +111,18 @@ export const questionReducer=createReducer<QuestionInterface>(
             deleteError:action.error,
             deleteSuccess:''
         }
-     })
+     }),
+    //  add answer
+    on(addAnswer, (state, { answer }) => ({
+        ...state,
+        Answers: [...state.Answers, answer],
+      }))
 )
+
+// export const answerReducer = createReducer(
+//     initialState,
+//     on(addAnswer, (state, { answer }) => ({
+//       ...state,
+//       Answers: [...state.Answers, answer],
+//     }))
+//   );

@@ -6,7 +6,7 @@ import { AppState } from 'src/app/core/states/appState';
 import { Observable } from 'rxjs';
 import { FullQuestion, Question } from 'src/app/interfaces/question';
 import { myQuestions, oneQuestion } from 'src/app/shared/reducers/question';
-import { addQuestion, getQuestions, updateQuestion } from 'src/app/shared/actions/question';
+import { addQuestion, getQuestions, getsingleQuestionId, updateQuestion } from 'src/app/shared/actions/question';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth';
 
@@ -35,6 +35,8 @@ export class EditQuestionComponent {
 
     this.route.params.subscribe((param:Params)=>{
       this.id=param['id']
+
+      this.store.dispatch(getsingleQuestionId({id:this.id}))
       })
 
     this.store.select(oneQuestion).subscribe((question)=>{
@@ -50,13 +52,12 @@ export class EditQuestionComponent {
       }
     })
 
-    // this.store.dispatch(updateQuestion({updatedQuestion:this.form.value,id:this.id}))
   }
 
   
 
   submitForm(){
-    this.store.dispatch(updateQuestion({id:this.id,updatedQuestion:this.form.value}))
+    this.store.dispatch(updateQuestion({id:this.id,updatedQuestion:this.form.value})) 
     this.router.navigate(['/user/my-questions'])
     this.form.reset()
   }

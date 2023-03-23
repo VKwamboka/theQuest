@@ -33,7 +33,7 @@
         <p class="details">{{ questions.QuestionDate }} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
         <p class="summary">{{ questions.Body }}</p>
-        <p class="answers">{{ questions?.Answers?.length || 0 }} answers</p>
+        <p class="answers">{{ questions?.Answers?.length}} answers</p>
       </div>
       <div class="actions">
         <button class="btn btn-upvote" [routerLink]="['/user/edit-question',questions.questionID]">Update</button>

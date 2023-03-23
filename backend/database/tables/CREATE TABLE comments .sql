@@ -11,3 +11,5 @@ CREATE TABLE comments (
    on delete cascade
 );
 
+-- ALTER TABLE comments
+-- ADD CONSTRAINT FK_Comments_Users

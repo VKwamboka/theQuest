@@ -3,7 +3,7 @@ import { AuthState, initialAuthState, UsersState,initialUsersState } from '../st
 import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, register,registerFailure,registerSuccess, getAllUsersSuccess, getAllUsersFailure, deleteUserSuccess, deleteUserFailure } from  '../actions/authActions'
 
 
-const usersSliceState= createFeatureSelector<UsersState>('users')
+export const usersSliceState= createFeatureSelector<UsersState>('users')
 export const allusers= createSelector(usersSliceState, state=>state.users)
   const userId= createSelector(usersSliceState, state=>state.Id)
 

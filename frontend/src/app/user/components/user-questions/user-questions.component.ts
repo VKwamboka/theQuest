@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Question } from 'src/app/interfaces/question';
 import { userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
+import { Answer } from 'src/app/interfaces/answer';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class UserQuestionsComponent {
 
   id!:string
   question!:Question[]
+  answers:Answer[]=[]
   questions$!:Observable<Question[]>
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
@@ -32,7 +34,7 @@ ngOnInit(): void {
 this.store.select(userQuestion).subscribe((questions)=>{
   if(questions){
     this.question=questions
-
+    this.answers = JSON.parse(JSON.stringify(questions))
     
   }
 })

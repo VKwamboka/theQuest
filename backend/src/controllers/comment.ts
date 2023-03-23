@@ -32,7 +32,7 @@ export const createComment = async (req: ExtendedRequest, res: Response) => {
 
     const comment: Comment = {
       comment_id: uid(),
-      user_id: user_id,
+      user_id: req.info!.userId,
       answer_id: answer_id,
       comment_text,
     };

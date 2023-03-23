@@ -1,4 +1,4 @@
-CREATE PROCEDURE CreateAnswerComment
+CREATE OR ALTER PROCEDURE CreateAnswerComment
     @comment_id VARCHAR(255),
     @user_id VARCHAR(255),
     @answer_id VARCHAR(255),
