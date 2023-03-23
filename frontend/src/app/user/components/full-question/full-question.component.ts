@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
-import { HighlightCodeDirective } from 'src/templates/highlight-code.directive';
+import { HighlightCodeDirective } from 'src/app/user/templates/highlight-code.directive';
 import { QuestionService } from 'src/app/shared/services/question.service';
 import { iif, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -72,7 +72,7 @@ this.store.select(oneQuestion).subscribe((question)=>{
     this.answers=JSON.parse(question.Answers) 
     if(this.answers){
       for (let answer of this.answers) {
-        if (answer.isPreffered == true) {
+        if (answer.isPreffered) {
           this.isAnswerPreferred = true;
           break;
         }
