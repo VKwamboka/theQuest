@@ -36,6 +36,7 @@ import { TokenInterceptorService } from './core/services/token-interceptor.servi
     MarkdownPipe
   ],
   imports: [
+    FormsModule,
     MatSlideToggleModule,
     FormsModule,
     StoreModule.forRoot({ prof:authReducer, question:questionReducer, users:allUsersState}),

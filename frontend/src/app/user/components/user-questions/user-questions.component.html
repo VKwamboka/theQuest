@@ -10,24 +10,24 @@
   <main class="container mx-auto py-8">
    
 
-    <div class="flex justify-between items-center mb-4" *ngIf="auth.isLoggedIn">
+    <div class="flex justify-between items-center mb-4" >
       
       <form id="search">
         <input type="text" class=" text-white rounded px-8 py-3 w-256" placeholder="Search for a Question">
       </form>
       <!-- <div class="text-gray-400">Showing 1-10 of 1,000,000 results</div> -->
-      <div>
-        <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
-        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2">
-          <option value="votes">Votes</option>
-          <option value="active">Active</option>
+      <div >
+        <label for="sort-by" class="text-gray-400 mr-2" >Sort by:</label>
+        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2" [(ngModel)]=" sortBy">
+          <!-- <option value="votes" >Votes</option> -->
+          <option value="active"  >Active</option>
           <option value="newest">Newest</option>
         </select>
       </div>
     </div>
     <!-- questions -->
     
-    <div class="questions" *ngFor="let questions of question" >
+    <div class="questions" *ngFor="let questions of question | ordering: sortBy" >
       <div class="question"  >
         <h3><a  [routerLink]="['/user/full-question',questions.questionID]" >{{ questions.Title }}</a></h3>
         <p class="details">{{ questions.QuestionDate  | time}} <a href="#">{{ questions.UserID }}</a></p>

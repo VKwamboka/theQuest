@@ -13,6 +13,7 @@ export interface Question{
     Body : string,
     Code:string,
     UserID: string,
+    
     QuestionDate: Date,
     Answers:Answer[]
 }

@@ -12,12 +12,15 @@ import { AppState } from 'src/app/core/states/appState';
 import { Answer } from 'src/app/interfaces/answer';
 import { TimePipe } from 'src/app/pipes/time.pipe';
 import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
+import { OrderingPipe } from 'src/app/pipes/ordering.pipe';
+import { FormsModule } from '@angular/forms';
+
 
 
 @Component({
   selector: 'app-user-questions',
   standalone: true,
-  imports: [CommonModule,TimePipe,RouterModule,TruncateQuizPipe],
+  imports: [CommonModule,TimePipe,RouterModule,OrderingPipe, TruncateQuizPipe,FormsModule],
   templateUrl: './user-questions.component.html',
   styleUrls: ['./user-questions.component.css']
 })
@@ -28,6 +31,7 @@ export class UserQuestionsComponent {
   userQuestion!:Question
   answers:Answer[]=[]
   questions$!:Observable<Question[]>
+  sortBy = 'newest'
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
 ngOnInit(): void {
