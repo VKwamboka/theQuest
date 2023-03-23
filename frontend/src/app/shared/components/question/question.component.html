@@ -30,7 +30,7 @@
     <div class="questions" *ngFor="let question of questions$ |async" [routerLink]="['/user/full-question',question.questionID]" >
       <div class="question"  >
         <h3><a >{{ question.Title }}</a></h3>
-        <p class="details">{{ question.QuestionDate }} <a href="#">{{ question.UserID }}</a></p>
+        <p class="details">Asked {{ question.QuestionDate | time}} by <a href="#">{{ question.Name}}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
         <p class="summary">{{ question.Body }}</p>
         <p class="answers">1 answer</p>

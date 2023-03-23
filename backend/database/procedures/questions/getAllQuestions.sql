@@ -7,6 +7,7 @@
 -- END
 
 
+-- CREATE OR ALTER PROCEDURE GetAllQuestions
 CREATE OR ALTER PROCEDURE GetAllQuestions
     @pageNumber int,
     @pageSize int
@@ -14,16 +15,18 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    SELECT *
+    SELECT q.*, u.Name AS Name
     FROM (
         SELECT ROW_NUMBER() OVER (ORDER BY QuestionID) AS RowNum, *
         FROM questions
         WHERE isDeleted = 0
-    ) AS RowConstrainedResult
-    WHERE RowNum >= (@pageNumber - 1) * @pageSize + 1
-    AND RowNum <= @pageNumber * @pageSize
-    ORDER BY RowNum
+    ) AS q
+    JOIN users AS u ON q.UserID = u.userId
+    WHERE q.RowNum >= (@pageNumber - 1) * @pageSize + 1
+    AND q.RowNum <= @pageNumber * @pageSize
+    ORDER BY q.RowNum
 END
+
 
 -- CREATE PROCEDURE GetAllQuestions
 -- AS

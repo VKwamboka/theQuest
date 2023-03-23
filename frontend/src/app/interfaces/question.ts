@@ -8,6 +8,7 @@ export interface AddQuestion{
 
 export interface Question{
     questionID: string,
+    Name:string,
     Title: string,
     Body : string,
     Code:string,
@@ -21,6 +22,7 @@ export interface FullQuestion{
     questionID: string,
     Title: string,
     Body : string,
+    Name:string,
     Code:string,
     UserName:string,
     UserID: string,

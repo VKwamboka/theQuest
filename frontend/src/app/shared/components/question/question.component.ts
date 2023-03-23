@@ -9,13 +9,17 @@ import { Observable } from 'rxjs';
 import { Question } from 'src/app/interfaces/question';
 import { myQuestions } from '../../reducers/question';
 import { AppState } from 'src/app/core/states/appState';
+import { TimeAgoPipe } from 'src/app/pipes/time-ago.pipe';
+import { TimePipe } from 'src/app/pipes/time.pipe';
+
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,TimePipe],
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
+  providers: [TimeAgoPipe],
 })
 export class QuestionComponent {
   questions$!:Observable<Question[]>
