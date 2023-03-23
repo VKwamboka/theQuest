@@ -30,9 +30,9 @@
     <div class="questions" *ngFor="let questions of question" >
       <div class="question"  >
         <h3><a  [routerLink]="['/user/full-question',questions.questionID]" >{{ questions.Title }}</a></h3>
-        <p class="details">{{ questions.QuestionDate }} <a href="#">{{ questions.UserID }}</a></p>
+        <p class="details">{{ questions.QuestionDate  | time}} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
-        <p class="summary">{{ questions.Body }}</p>
+        <p class="summary">{{ questions.Body  | truncateQuiz:100 }}</p>
         <p class="answers">{{ answers?.length || 0 }} answers</p>
       </div>
       <div class="actions">

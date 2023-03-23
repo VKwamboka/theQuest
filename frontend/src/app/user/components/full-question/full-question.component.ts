@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
 import { CommonModule } from '@angular/common';
 import { HighlightCodeDirective } from 'src/app/user/templates/highlight-code.directive';
 import { QuestionService } from 'src/app/shared/services/question.service';
@@ -19,13 +19,14 @@ import { quizService } from '../../services/user-quiz.service';
 import {usersSliceState,userId, allusers} from 'src/app/core/reducers/authReducers'
 import { addComment } from '../../actions/answer';
 import { profile } from 'src/app/core/states/authState';
+import { TimePipe } from 'src/app/pipes/time.pipe';
 
 
 
 @Component({
   selector: 'app-full-question',
   standalone: true,
-  imports: [CommonModule, HighlightCodeDirective,RouterModule,ReactiveFormsModule],
+  imports: [CommonModule, HighlightCodeDirective,RouterModule,ReactiveFormsModule,TruncateQuizPipe,TimePipe],
   templateUrl: './full-question.component.html',
   styleUrls: ['./full-question.component.css'],
   // hostDirectives: [HighlightCodeDirective]

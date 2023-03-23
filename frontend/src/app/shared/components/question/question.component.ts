@@ -11,12 +11,13 @@ import { myQuestions } from '../../reducers/question';
 import { AppState } from 'src/app/core/states/appState';
 import { TimeAgoPipe } from 'src/app/pipes/time-ago.pipe';
 import { TimePipe } from 'src/app/pipes/time.pipe';
+import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
 
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [CommonModule,RouterModule,TimePipe],
+  imports: [CommonModule,RouterModule,TimePipe,TruncateQuizPipe],
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.css'],
   providers: [TimeAgoPipe],

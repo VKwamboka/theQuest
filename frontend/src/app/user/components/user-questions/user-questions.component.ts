@@ -10,12 +10,14 @@ import { Question } from 'src/app/interfaces/question';
 import { oneQuestion, userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
 import { Answer } from 'src/app/interfaces/answer';
+import { TimePipe } from 'src/app/pipes/time.pipe';
+import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
 
 
 @Component({
   selector: 'app-user-questions',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,TimePipe,RouterModule,TruncateQuizPipe],
   templateUrl: './user-questions.component.html',
   styleUrls: ['./user-questions.component.css']
 })
