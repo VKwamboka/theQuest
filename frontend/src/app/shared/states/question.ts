@@ -4,6 +4,7 @@ import { FullQuestion, Question } from "src/app/interfaces/question"
 export interface QuestionInterface{
     questions:Question[] 
     Answers:Answer[]
+    QuestionDelete:string
     userQuestions:Question[]
     oneQuestion:FullQuestion |null
     questionId:string
@@ -30,6 +31,7 @@ export interface QuestionInterface{
 
     
    export const initialState:QuestionInterface={
+        QuestionDelete:'',
         oneQuestion:null,
         Answers:[],
         userQuestions:[],

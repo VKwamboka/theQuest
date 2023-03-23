@@ -1,86 +1,4 @@
-<!-- <div class="question">
-  <div class="question-header">
-    <h2 class="question-title">How to create a responsive CSS layout?</h2>
-    <div class="question-meta">
-      <span class="question-votes">10</span>
-      <span class="question-answers">5 answers</span>
-      <span class="question-comments">3 comments</span>
-    </div>
-  </div>
-  <div class="question-body">
-    <p>
-      I'm having trouble creating a responsive CSS layout for my website. Can
-      anyone provide some tips or resources for achieving this?
-    </p>
-  </div>
-  <div class="question-footer">
-    <button class="vote-up"></button>
-    <span class="question-score">10</span>
-    <button class="vote-down"></button>
-  </div>
-  <div class="answers">
-    <div class="answer">
-      <div class="answer-body">
-        <p>
-          One way to create a responsive CSS layout is to use a combination of
-          media queries and flexible units like percentages and ems.
-        </p>
-      </div>
-      <div class="answer-footer">
-        <button class="vote-up"></button>
-        <span class="answer-score">8</span>
-        <button class="vote-down"></button>
-      </div>
-      <div class="answer-comments">
-        <div class="comment">
-          <div class="comment-body">
-            <p>
-              That's a good point, but don't forget about the importance of
-              mobile-first design.
-            </p>
-          </div>
-          <div class="comment-footer">
-            
-            <i class="fa-solid fa-thumbs-up"></i>
-            <span class="comment-score" >4</span>
-            <i class="fa-solid fa-thumbs-down"></i>
-          </div>
-        </div>
-      </div>
-      <hr style="color: antiquewhite;">
-    </div>
-    <div class="answer">
-      <div class="answer-body">
-        <p>
-          Another option is to use a CSS framework like Bootstrap or Foundation,
-          which have built-in responsive layout components.
-        </p>
-      </div>
-      <div class="answer-footer">
-        <button class="vote-up"></button>
-        <span class="answer-score">3</span>
-        <button class="vote-down"></button>
-      </div>
-      <div class="answer-comments">
-        <div class="comment">
-          <div class="comment-body">
-            <p>
-              I've used Bootstrap before and it definitely makes things easier,
-              but you have to be careful not to rely too much on the default
-              styles.
-            </p>
-          </div>
-          <div class="comment-footer">
-            <i class="fa-solid fa-thumbs-up"></i>
-            <span class="comment-score" >4</span>
-            <i class="fa-solid fa-thumbs-down"></i>
-          </div>
-        </div>
-      </div>
-      <hr style="color: antiquewhite;">
-    </div>
-  </div>
-</div> -->
+
 <div class="container1" *ngIf="question">
   <div class="question" >
     <div class="question-meta">
@@ -94,7 +12,7 @@
       <span class="tag">css</span>
     </div>
     <div class="info">
-      <span>Asked by John Doe 3 hours ago</span>
+      <span>Asked by {{ question.UserName }} 3 hours ago</span>
       <!-- <span>Tags: HTML, CSS</span> -->
     </div>
     <p>
@@ -110,12 +28,7 @@
       <!-- <button class="btn btn-upvote">Upvote</button>
       <button class="btn btn-downvote">Downvote</button> -->
       <button class="btn btn-answer" >Answer</button>
-      <div class="postanswer" *ngIf="!shqQuiz">
-        <form [formGroup]= "answerForm"  >
-            <div><textarea name="" id="" cols="100" rows="10" placeholder="Post your Answer Here" formControlName="answer_text"> </textarea></div> 
-            <div><button type="submit" (click)="addAnswers()">Post Answer</button></div>
-        </form>
-    </div>
+     
 
     </div>
   </div>
@@ -126,7 +39,18 @@
     
     <div  class="answer">
       <div class="info">
-        <span>Answer by {{ answer.UserName}}</span>
+        <span style="font-size: 12px;">Answer by {{ answer.UserName}}</span>
+        <div class="div">
+          
+        </div>
+        <p class="btn-preferred" *ngIf="userId === question.UserID && !isAnswerPreferred" (click)="markAsPreferred(answer.answer_id)">Mark as preferred</p>
+        <p class="btn-preferred" *ngIf="userId === question.UserID && isAnswerPreferred && answer.isPreffered==true">Answer marked as preferred</p>
+
+        <!-- <p class=" btn-preferred" (click)="markAsPreferred(answer.answer_id)"  *ngIf="userId === question.UserID">Mark as preferred</p> -->
+        <!-- <p class=" btn-preferred" (click)="markAsPreferred(answer.answer_id)"  >Mark as preferred</p> -->
+        <!-- <p class="btn-preferred" *ngIf="userId === question.UserID" (click)="markAsPreferred(answer.answer_id)">Mark as preferred</p> -->
+         <!-- <p *ngIf="userId !== question.UserID">You cannot mark this answer as preferred.</p> -->
+
         <div class="question-meta">
           
           <span class="question-votes">{{ getUpvoteCount(answer) }} upvotes </span>
@@ -138,17 +62,17 @@
         <span>{{ answer.AnswerDate | date : "medium" }}</span>
       </div>
       
-        <p>{{ answer.answer_text }}</p>
+        <p style="font-size: 16px;">{{ answer.answer_text }}</p>
       <div class="actions">
-        <button class="btn btn-upvote">Upvote</button>
-        <button class="btn btn-downvote">Downvote</button>
+        <button class="btn btn-upvote" (click)="addVote(answer.answer_id,'upvote')">Upvote</button>
+        <button class="btn btn-downvote" (click)="addVote(answer.answer_id,'downvote')">Downvote</button>
         <button class="btn btn-upvote">Comment</button>
         <br>
       </div>
       <!-- add comment -->
       <div class="postanswer" *ngIf="!shqQuiz">
         <form [formGroup]= "commentForm"  >
-            <div><textarea name="" id="" cols="100" rows="6" placeholder="Post your Answer Here" formControlName="comment_text"> </textarea></div> 
+            <div><textarea name="" id="" cols="100" rows="4" placeholder="Post your Answer Here" formControlName="comment_text"> </textarea></div> 
             <div><button type="submit" (click)="addComments(answer.answer_id)">Comment</button></div>
         </form>
     </div>
@@ -164,4 +88,10 @@
       </div>
     </div>
   </div> 
+  <div class="postanswer" *ngIf="!shqQuiz">
+    <form [formGroup]= "answerForm"  >
+        <div><textarea name="" id="" cols="100" rows="10" placeholder="Post your Answer Here" formControlName="answer_text"> </textarea></div> 
+        <div><button type="submit" (click)="addAnswers()">Post Answer</button></div>
+    </form>
+</div>
 </div>

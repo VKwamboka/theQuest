@@ -22,6 +22,7 @@ export interface FullQuestion{
     Title: string,
     Body : string,
     Code:string,
+    UserName:string,
     UserID: string,
     QuestionDate: Date,
     Answers:any

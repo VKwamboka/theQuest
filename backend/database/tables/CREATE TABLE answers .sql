@@ -10,16 +10,20 @@ CREATE TABLE answers (
   CONSTRAINT FK_Answers_UserID
   FOREIGN KEY (user_id) REFERENCES users(userId),
   FOREIGN KEY (question_id) REFERENCES questions(questionId)
-  ON DELETE CASCADE
+  -- ON DELETE CASCADE
 );
+
+
+-- ALTER TABLE answers DROP CONSTRAINT fk_question_id;
+-- ALTER TABLE answers DROP CONSTRAINT fk_user_id;
 
 -- ALTER TABLE answers
 -- ADD CONSTRAINT fk_user_id
 -- FOREIGN KEY (user_id) REFERENCES users(userId)
 -- ON DELETE NO ACTION;
 
--- ALTER TABLE answers
--- ADD CONSTRAINT fk_question_id
--- FOREIGN KEY (question_id) REFERENCES questions(questionId)
--- ON DELETE NO ACTION;
+ALTER TABLE answers
+ADD CONSTRAINT fk_question_id
+FOREIGN KEY (question_id) REFERENCES questions(questionId)
+ON DELETE CASCADE;
 

@@ -1,6 +1,6 @@
 <div class="container1">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-bold mb-8">All Questions</h1>
+      <h1 class="text-3xl font-bold mb-8">My Questions</h1>
       <a routerLink="/user/ask-question" class=" text-xl ask" >Ask  Question</a>
      
     </div>
@@ -33,7 +33,7 @@
         <p class="details">{{ questions.QuestionDate }} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
         <p class="summary">{{ questions.Body }}</p>
-        <p class="answers">{{ questions?.Answers?.length}} answers</p>
+        <p class="answers">{{ answers?.length || 0 }} answers</p>
       </div>
       <div class="actions">
         <button class="btn btn-upvote" [routerLink]="['/user/edit-question',questions.questionID]">Update</button>

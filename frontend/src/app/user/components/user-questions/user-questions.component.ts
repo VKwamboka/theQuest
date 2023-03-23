@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { deleteQuestionByUser, getQuestions ,getUserQuestions} from 'src/app/shared/actions/question';
 import { Observable } from 'rxjs';
 import { Question } from 'src/app/interfaces/question';
-import { userQuestion } from 'src/app/shared/reducers/question';
+import { oneQuestion, userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
 import { Answer } from 'src/app/interfaces/answer';
 
@@ -23,6 +23,7 @@ export class UserQuestionsComponent {
 
   id!:string
   question!:Question[]
+  userQuestion!:Question
   answers:Answer[]=[]
   questions$!:Observable<Question[]>
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
@@ -34,11 +35,18 @@ ngOnInit(): void {
 this.store.select(userQuestion).subscribe((questions)=>{
   if(questions){
     this.question=questions
-    this.answers = JSON.parse(JSON.stringify(questions))
+    // this.answers = JSON.parse((questions))
     
   }
 })
 
+this.store.select(oneQuestion).subscribe((question)=>{
+  if(question){
+    this.userQuestion=question
+    this.answers=JSON.parse(question.Answers) 
+    
+  }
+})
 
 this.store.dispatch(getUserQuestions())
 
@@ -47,6 +55,7 @@ this.store.dispatch(getUserQuestions())
 Delete(id:string){
   
   this.store.dispatch(deleteQuestionByUser({id}))
+  // this.store.dispatch(getUserQuestions())
  
 }
 

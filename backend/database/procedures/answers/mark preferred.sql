@@ -18,3 +18,5 @@ BEGIN
 
     SELECT 'Answer marked as preferred successfully' AS Message
 END
+
+EXECUTE MarkAnswerAsPreferred '509d340a-4f74-49f4-8b42-343707c4f3e7', '944f0bbb-5e2a-412e-9ec5-ac570366e01d'

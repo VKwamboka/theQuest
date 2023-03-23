@@ -67,6 +67,9 @@ export const RegisterUser = async (req: Request, res: Response) => {
           res.status(201).json({
               
           status: 'User registered successfully',
+          Email,
+          Name,
+          UserID,
           data: {
               token,
               Name,
@@ -338,4 +341,20 @@ export const deleteUserCompletely=async(req:ExtendedRequest,res:Response)=>{
   } catch (error) {
     return res.status(500).json(error)
   }
+}
+// get user id
+export const getUserId=async(req:ExtendedRequest,res:Response)=>{
+  try {
+    const userId = req.info?.userId
+    const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
+    if(!user){
+       return res.status(404).json({error:'User Not Found'})
+    }
+  
+    return res.status(200).json(user.userId)
+  
+  } catch (error) {
+    return res.status(500).json(error)
+  }
+  
 }

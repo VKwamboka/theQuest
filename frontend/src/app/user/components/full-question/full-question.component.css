@@ -143,6 +143,12 @@
   .btn-downvote {
     background-color: #ff9933;
   }
+  .btn-preferred{
+    background-color: #ff9933;
+    color: #fff;
+    padding: 0.4rem;
+    /* height: 10px; */
+  }
   
   .btn-answer:hover {
     background-color: #ff6600;
@@ -155,6 +161,7 @@
     border: none;
     border-radius: 3px;
     padding: 10px;
+    margin-top: 2rem;
     margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
