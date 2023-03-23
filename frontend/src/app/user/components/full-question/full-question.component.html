@@ -106,10 +106,17 @@
       {{ question.Code }}
     </code>
 
-    <div class="actions">
+    <div class="actions" >
       <!-- <button class="btn btn-upvote">Upvote</button>
       <button class="btn btn-downvote">Downvote</button> -->
-      <button class="btn btn-answer">Answer</button>
+      <button class="btn btn-answer" >Answer</button>
+      <div class="postanswer" *ngIf="!shqQuiz">
+        <form [formGroup]= "answerForm"  >
+            <div><textarea name="" id="" cols="100" rows="10" placeholder="Post your Answer Here" formControlName="answer_text"> </textarea></div> 
+            <div><button type="submit" (click)="addAnswers()">Post Answer</button></div>
+        </form>
+    </div>
+
     </div>
   </div>
 
@@ -136,7 +143,15 @@
         <button class="btn btn-upvote">Upvote</button>
         <button class="btn btn-downvote">Downvote</button>
         <button class="btn btn-upvote">Comment</button>
+        <br>
       </div>
+      <!-- add comment -->
+      <div class="postanswer" *ngIf="!shqQuiz">
+        <form [formGroup]= "commentForm"  >
+            <div><textarea name="" id="" cols="100" rows="6" placeholder="Post your Answer Here" formControlName="comment_text"> </textarea></div> 
+            <div><button type="submit" (click)="addComments(answer.answer_id)">Comment</button></div>
+        </form>
+    </div>
       <div class="comments">
         <h2>Comments ({{ answer?.Comments?.length || 0}})</h2>
         <div *ngFor="let comment of answer.Comments" class="comment">

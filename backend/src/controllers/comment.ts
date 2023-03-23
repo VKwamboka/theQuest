@@ -32,7 +32,7 @@ export const createComment = async (req: ExtendedRequest, res: Response) => {
 
     const comment: Comment = {
       comment_id: uid(),
-      user_id: user_id,
+      user_id: req.info!.userId,
       answer_id: answer_id,
       comment_text,
     };
@@ -65,7 +65,7 @@ export const updateComment = async (req: ExtendedRequest, res: Response) => {
 // get all comments
 export const getAllComments = async (req: Request, res: Response) => {
   try {
-    const result = await _db.exec("GetAllComments");
+    const result = await (await _db.exec("GetAllComments")).recordset;
     return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json(error);

@@ -32,9 +32,14 @@ export const updateQuestionFail= createAction('[updateQuestion]-updateQuestionFa
 
 
 export const deleteQuestion = createAction('[deleteQuestion]-deleteQuestion',props<{id:string}>())
+export const deleteQuestionByUser = createAction('[deleteQuestion]-deleteQuestion',props<{id:string}>())
 
 export const deleteQuestionSuccess = createAction('[deleteQuestion]-deleteQuestionSuccess', props<{message:Message}>())
 
 export const deleteQuestionFail= createAction('[deleteQuestion]-deleteQuestionFail',props<{error:string}>())
 
-// get one question details
+
+// get users questions
+export const getUserQuestions = createAction('[getUserQuestions]-getUserQuestions')
+export const getUserQuestionsFail= createAction('[getUserQuestions]-getUserQuestionsFail',props<{error:string}>())
+export const getUserQuestionsSuccess = createAction('[getUserQuestions]-getUserQuestionsSuccess', props<{Questions:Question[]}>())

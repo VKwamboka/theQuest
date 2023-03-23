@@ -13,12 +13,15 @@ import { Answer } from 'src/app/interfaces/answer';
 import { Vote } from 'src/app/interfaces/vote';
 import { User } from 'src/app/interfaces/user';
 import { getAllUsers } from 'src/app/core/actions/authActions';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { ManageUsersComponent } from '../manage-users/manage-users.component';
 
 
 @Component({
   selector: 'app-admincontent',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule,ManageUsersComponent],
   templateUrl: './admincontent.component.html',
   styleUrls: ['./admincontent.component.css']
 })
@@ -34,8 +37,15 @@ export class AdmincontentComponent {
   totalAnswers = 0;
   totalComments = 0;
   totalVotes = 0;
+
+  // comments and answers
+  answersitems!: Answer[];
+  answerCount!: number;
+
+  commentsitems!: Comment[];
+  commentCount!: number;
  
-constructor(public auth:AuthService,  private store:Store<AppState>){}
+constructor(public auth:AuthService, private http: HttpClient,private store:Store<AppState>){}
 
 ngOnInit(): void {
   // get questions
@@ -47,30 +57,38 @@ this.store.dispatch(getAllUsers())
 
 this.store.select(myQuestions).subscribe((question)=>{
   if(question){
-    this.questions=question
-    this.questions.forEach(question => {
-      // const quizAnswers = JSON.parse(question.Answers);
-      this.totalAnswers += question.Answers?.length;
-      question.Answers?.forEach(answer => {
-        this.totalComments += answer.Comments.length;
-        this.totalVotes += answer.Votes.length;
-      });
-    });
-
-    
+    this.questions=question   
   }
 })
 
 this.store.select(allusers).subscribe((user)=>{
   if(user){
     this.users=user
-    // this.answers=JSON.parse(question.answers) 
-  
-    // console.log(this.comments)
     
   }
 })
 
+const accessToken = localStorage.getItem('token') || ' ';
+
+// get number of answers
+this.http.get<Answer[]>('http://localhost:5500/answer/getAnswers',{ headers: new HttpHeaders().set(
+  'Authorization',
+  'Bearer ' + accessToken
+)}).subscribe((answersitems) => {
+  this.answersitems = answersitems;
+  this.answerCount = answersitems.length;
+});
+
+
+// get the number of comments
+this.http.get<Comment[]>('http://localhost:5500/comment/getAllComments',{ headers: new HttpHeaders().set(
+  'Authorization',
+  'Bearer ' + accessToken
+)}).subscribe((commentsitems) => {
+  this.commentsitems = commentsitems;
+  console.log(this.commentsitems)
+  this.commentCount = commentsitems.length;
+});
 }
 
 

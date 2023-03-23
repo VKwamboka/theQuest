@@ -4,6 +4,7 @@ import { Comment } from "./comment";
 export interface Answer {
     answer_id: string;
     user_id: string;
+    question_id: string;
     UserName: string;
     answer_text: string;
     isPreffered: boolean;

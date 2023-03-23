@@ -10,6 +10,7 @@ export class AuthService {
   isLoggedIn=false
   private role=''
   private name=''
+  private id=''
 
 
   getName(){
@@ -19,6 +20,9 @@ export class AuthService {
 getRole(){
     return this.role
     }
+    getId(){
+      return this.id
+    }
 
     setRole(role:string){
       this.role=role
@@ -26,7 +30,9 @@ getRole(){
     setName(name:string){
       this.name=name
     }
-
+    setId(id:string){
+      this.id=id
+    }
 
   getAuthStatus():Promise<boolean>{
     const promise = new Promise<boolean>((resolve,reject)=>{
@@ -43,5 +49,6 @@ getRole(){
 
   logout(){
     this.isLoggedIn=false;
+    localStorage.removeItem('token')
   }
 }

@@ -27,6 +27,23 @@ export class QuestionEffects{
         )
     })
 
+    // get questions by user
+    allQuestionsByUser = createEffect(()=>{
+        return this.actions$.pipe(
+            ofType(QuestionActions.getUserQuestions),
+            mergeMap((action)=>{
+               return this.quetionService.getUserQuestion().pipe(
+                    map(questions=>{
+                        console.log(questions)
+                        // error
+                        return QuestionActions.getUserQuestionsSuccess({Questions:questions})
+                    }),
+                    catchError(error=>of(QuestionActions.getUserQuestionsFail({error:error.message})))
+                )
+            })
+        )
+    })
+
 
 
 // add Question
@@ -40,7 +57,8 @@ export class QuestionEffects{
                     }),
                     catchError(error=>of(QuestionActions.addQuestionFail({error:error.message})))
                 )
-            })
+            }),
+            switchMap(() => [QuestionActions.getQuestions()])
         )
     })
 
@@ -56,11 +74,13 @@ export class QuestionEffects{
                     }),
                     catchError(error=>of(QuestionActions.updateQuestionFail({error:error.message})))
                 )
-            })
+            }),
+            switchMap(() => [QuestionActions.getQuestions()])
+
         )
     })
 
-    // delete question
+    // delete question by admin
     deleteQuestion = createEffect(()=>{
         return this.actions$.pipe(
             ofType(QuestionActions.deleteQuestion),
@@ -76,6 +96,21 @@ export class QuestionEffects{
         )
     })
 
+// delete question by user
+deleteQuestionByUser = createEffect(()=>{
+    return this.actions$.pipe(
+        ofType(QuestionActions.deleteQuestionByUser),
+        concatMap((action)=>{
+            return this.quetionService.deleteQuestionByUser(action.id).pipe(
+                map(message=>{
+                    return QuestionActions.deleteQuestionSuccess({message:message})
+                }),
+                catchError(error=>of(QuestionActions.deleteQuestionFail({error:error.message})))
+            )
+        }),
+        switchMap(() => [QuestionActions.getUserQuestions()])
+    )
+})
 
     // get single question
     getSingleQuestion = createEffect(()=>{

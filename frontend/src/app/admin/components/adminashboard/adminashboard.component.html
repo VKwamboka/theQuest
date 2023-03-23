@@ -1,7 +1,7 @@
 <div class="container1">
   <div class="sidebar" [ngClass]="{'hidden': isMenuOpen}">
     <div class="logo">
-      <img
+      <img routerLink="/admin"
         src="https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon.png?v=c78bd457575a"
         alt="Stack Overflow logo"
       />
@@ -10,8 +10,9 @@
       <li><a routerLink="/admin">Dashboard</a></li>
       <li><a routerLink="manage-questions">Posts</a></li>
       <li><a routerLink="manage-users">Users</a></li>
-      <li><a routerLink="#">Settings</a></li>
+      <li><a routerLink="/admin">Settings</a></li>
     </ul>
+      <P style="margin-top: 4rem;margin-left: 1rem;cursor: pointer;" (click)="auth.logout()" routerLink="/login">LOGOUT</P>
   </div>
   <div class="main">
     <div class="header">
@@ -30,7 +31,7 @@
         <h1>Admin Dashboard</h1>
         <p>Manage your Stack Overflow site with ease.</p>
       </div>
-      <a href="https://stackoverflow.blog/" title="Stack Overflow Blog" rel="home">
+      <a routerLink="/" title="Stack Overflow Blog" rel="home">
         <svg class="native wmx100 native" width="309" height="64" viewBox="0 0 309 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M43.9001 32.9027C43.9001 24.4982 48.6388 19.8489 55.7022 19.8489C62.7655 19.8489 67.5043 24.5876 67.5043 32.9027C67.5043 41.3072 62.7655 46.2247 55.7022 46.2247C48.7282 46.2247 43.9001 41.2178 43.9001 32.9027ZM60.7091 32.9027C60.7091 28.2534 58.8315 25.5711 55.7916 25.5711C52.7517 25.5711 50.874 28.2534 50.874 32.9027C50.874 37.552 52.7517 40.4131 55.7916 40.4131C58.8315 40.4131 60.7091 37.4626 60.7091 32.9027Z" fill="#F48024"></path>
   <path d="M69.9183 20.2064H77.0711L79.7534 31.2932C80.4687 33.9755 80.9157 36.6578 81.631 39.3401H81.8098C82.5251 36.5684 83.0616 33.9755 83.6874 31.2932L86.2803 20.2064H93.1649L85.6545 45.6882H77.5182L69.9183 20.2064Z" fill="#F48024"></path>

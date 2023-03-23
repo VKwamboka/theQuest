@@ -18,12 +18,12 @@ const  _db = new DatabaseUtils()
 dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 // create answer
-export const createAnswer = async (req: Request, res: Response) => {
+export const createAnswer = async (req: ExtendedRequest, res: Response) => {
     try{
         const { user_id,question_id,answer_text} = await createAnswerHelper.validateAsync(req.body)
         const answer: Answer = {
             answer_id: uid(),
-            user_id: user_id,
+            user_id: req.info!.userId,
             question_id: question_id,
             answer_text,
             created_at: new Date(),

@@ -38,4 +38,5 @@ export const createQuizHelper = Joi.object({
 export const updateQuizHelper = Joi.object({
     Title: Joi.string(),
     Body: Joi.string(),
+    Code:Joi.string(),
 });

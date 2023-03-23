@@ -9,32 +9,46 @@ import { Observable } from 'rxjs';
 import { Question } from 'src/app/interfaces/question';
 import { userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
+import { Answer } from 'src/app/interfaces/answer';
+
 
 @Component({
-  selector: 'app-userprofile',
+  selector: 'app-user-questions',
   standalone: true,
   imports: [CommonModule,RouterModule],
-  templateUrl: './userprofile.component.html',
-  styleUrls: ['./userprofile.component.css']
+  templateUrl: './user-questions.component.html',
+  styleUrls: ['./user-questions.component.css']
 })
-export class UserprofileComponent {
+export class UserQuestionsComponent {
+
   id!:string
   question!:Question[]
+  answers:Answer[]=[]
   questions$!:Observable<Question[]>
-  constructor(public auth:AuthService,private store:Store<AppState>){}
+constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
-  ngOnInit(): void {
+ngOnInit(): void {
+  // this.id=this.auth.getId()
+  // console.log(this.id)
+  // get questions
+this.store.select(userQuestion).subscribe((questions)=>{
+  if(questions){
+    this.question=questions
+    this.answers = JSON.parse(JSON.stringify(questions))
+    
+  }
+})
+
+
+this.store.dispatch(getUserQuestions())
+
+}
+
+Delete(id:string){
   
-    this.store.select(userQuestion).subscribe((questions)=>{
-      if(questions){
-        this.question=questions
-    
-        
-      }
-    })
-  
-    
-    this.store.dispatch(getUserQuestions())
-    
-    }
+  this.store.dispatch(deleteQuestionByUser({id}))
+ 
+}
+
+
 }

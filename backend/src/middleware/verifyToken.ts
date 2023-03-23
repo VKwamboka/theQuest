@@ -21,6 +21,7 @@ try {
     const Payloadata= jwt.verify(token, process.env.JWT_SECRET as string) as DecodedData
    
    req.info= Payloadata
+   console.log(Payloadata)
    next()
     } 
 catch (error:any) {

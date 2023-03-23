@@ -1,7 +1,10 @@
+import { Answer } from "src/app/interfaces/answer"
 import { FullQuestion, Question } from "src/app/interfaces/question"
 
 export interface QuestionInterface{
     questions:Question[] 
+    Answers:Answer[]
+    userQuestions:Question[]
     oneQuestion:FullQuestion |null
     questionId:string
     error:string
@@ -28,6 +31,8 @@ export interface QuestionInterface{
     
    export const initialState:QuestionInterface={
         oneQuestion:null,
+        Answers:[],
+        userQuestions:[],
         questions:[],
         questionId:'',
         error:'',

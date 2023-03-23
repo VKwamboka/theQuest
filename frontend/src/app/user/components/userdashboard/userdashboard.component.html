@@ -8,13 +8,16 @@
         <li><a routerLink="/">Home</a></li>
         <li><a routerLink="/user/all-questions">Questions</a></li>
         <!-- <li><a routerLink="#">Tags</a></li> -->
-        <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
+        <li><a routerLink="/user/my-questions"> My Questions({{ question.length }})</a></li>
         <li><a routerLink="/user/profile">My Profile</a></li>
         <li><a routerLink="/user/ask-question">Ask Question</a></li>
-        <button (click)="showToast()">Show Toast Message</button>
+        <!-- <button (click)="showToast()">Show Toast Message</button> -->
         <!-- <app-toast *ngIf="showToastMessage" [message]="toastMessage" [type]="toastType" [duration]="toastDuration"></app-toast> -->
         
       </ul>
+
+      <P style="margin-top: 4rem;margin-left: 1rem;cursor: pointer;" (click)="auth.logout()" routerLink="/login">LOGOUT</P>
+
     </div>
 <!-- when side bar is  -->
  
@@ -27,11 +30,13 @@
             <li><a routerLink="/">Home</a></li>
             <li><a routerLink="/user/all-questions">Questions</a></li>
             <!-- <li><a routerLink="#">Tags</a></li> -->
-            <li><a routerLink="/user/all-questions"> My Questions(2)</a></li>
+            <li><a routerLink="/user/all-questions"> My Questions({{ question.length }})</a></li>
             <li><a routerLink="/user/profile">My Profile</a></li>
             <li><a routerLink="/user/ask-question">Ask Question</a></li>
 
           </ul>
+          <P style="margin-top: 4rem;margin-left: 1rem;cursor: pointer;" (click)="auth.logout()" routerLink="/login">LOGOUT</P>
+
         </div>
        
         <div class="head">

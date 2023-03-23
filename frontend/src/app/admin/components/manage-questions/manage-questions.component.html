@@ -15,7 +15,7 @@
         <tbody>
           <tr *ngFor="let question of questions$ |async" >
             <td>{{ question.questionID }}</td>
-            <td [routerLink]="['/user/full-question',question.questionID]" >{{ question.Title }}</td>
+            <td [routerLink]="['/admin/full-question',question.questionID]" >{{ question.Title }}</td>
             <td>user</td>
             <!-- <td>HTML, CSS</td> -->
             <!-- <td>Open</td> -->

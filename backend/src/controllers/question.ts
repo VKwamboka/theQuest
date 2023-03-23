@@ -8,7 +8,7 @@ import { Question } from '../interfaces/question'
 import { DecodedData, User } from '../interfaces/userInterface'
 
 interface ExtendedRequest extends Request{
-    body:{Name:string,userId:string, Email:string,Title:string,Body:string,Code:string,Tags:string[]},
+    body:{Name:string,UserId:string, Email:string,Title:string,Body:string,Code:string,Tags:string[]},
     params:{id:string},
     info?:DecodedData
 }
@@ -18,20 +18,26 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') })
 
 // create question
 
-export const createQuestion = async (req: Request, res: Response) => {
+export const createQuestion = async (req: ExtendedRequest, res: Response) => {
     try{
-        const { Title, Body, Code, UserId} = await createQuizHelper.validateAsync(req.body)
+        const { Title, Body, Code} = await createQuizHelper.validateAsync(req.body)
         
         const question: Question = {
             Title,
             Body,
-            UserID:UserId,
+            UserID: req.info!.userId,
             Code,
             QuestionDate: new Date(),
             questionID: uid(),
         }
-        const userId = req.body.UserId
+        
+        const userId = req.info?.userId
+
+        console.log(userId)
+
+
         console.log(question)
+
         const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
         console.log(req.params)
         if(!user){
@@ -146,11 +152,13 @@ export const updateQuestion = async (req: ExtendedRequest, res: Response) => {
 // get speific user questions
 export const getUserQuestions = async (req: ExtendedRequest, res: Response) => {
     try{
-        const UserID = req.params.id
+        const UserID = req.info?.userId
+        
+        console.log(req.info?.userId)
+        const quiz= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
 
-        const quiz:Question[]= await (await _db.exec('GetUserQuestions', {UserID} )).recordset
-
-        if(quiz){
+        if(quiz.length){
+            
             await _db.exec("GetUserQuestions", {UserID})
             return res.status(200).json(quiz) 
         }

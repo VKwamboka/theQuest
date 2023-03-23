@@ -13,12 +13,12 @@ export class QuestionService {
 
 //   add question
   addQuestion(question:AddQuestion):Observable<Message>{
-    return this.http.post<Message>('http://localhost:4000/flights',question)
+    return this.http.post<Message>('http://localhost:5500/question/postQuestion',question)
   }
   
 //   get user's question
-  getUserQuestion(id:string):Observable<Question[]>{
-    return this.http.get<Question[]>(`http://localhost:5500/question/getUserQuestions/${id}`);
+  getUserQuestion():Observable<Question[]>{
+    return this.http.get<Question[]>(`http://localhost:5500/question/getUserQuestions`);
   }
 // get all questions
   getAllQuestions():Observable<Question[]>{
@@ -34,9 +34,15 @@ export class QuestionService {
     return  this.http.delete<Message>(`http://localhost:5500/question/deleteQuestion/${id}`)
    }
 
+//  get questions by user
+//   delete question
+deleteQuestionByUser(id:string):Observable<Message>{
+  return  this.http.delete<Message>(`http://localhost:5500/question/deleteQuestion/${id}`)
+ }
+
 //   update question
    updateQuestion(id:string,updatedQuestion:AddQuestion):Observable<Question>{
-    return  this.http.put<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
+    return  this.http.patch<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
    }
  
 
