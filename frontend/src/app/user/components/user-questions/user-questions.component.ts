@@ -14,13 +14,15 @@ import { TimePipe } from 'src/app/pipes/time.pipe';
 import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
 import { OrderingPipe } from 'src/app/pipes/ordering.pipe';
 import { FormsModule } from '@angular/forms';
+import { SearchingPipe } from 'src/app/pipes/searching.pipe';
+
 
 
 
 @Component({
   selector: 'app-user-questions',
   standalone: true,
-  imports: [CommonModule,TimePipe,RouterModule,OrderingPipe, TruncateQuizPipe,FormsModule],
+  imports: [CommonModule,TimePipe,RouterModule,OrderingPipe, TruncateQuizPipe,FormsModule,SearchingPipe],
   templateUrl: './user-questions.component.html',
   styleUrls: ['./user-questions.component.css']
 })
@@ -32,6 +34,9 @@ export class UserQuestionsComponent {
   answers:Answer[]=[]
   questions$!:Observable<Question[]>
   sortBy = 'newest'
+  // searchQuery: string = ''; 
+  searchType?: string = 'Keyword';
+  searchTerm?: string;
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
 ngOnInit(): void {
