@@ -74,7 +74,7 @@ export const getAllQuestions = async (req: ExtendedRequest, res: Response) => {
     const { pageNumber, pageSize } = req.query;
     const pagination: IPagination = {
         pageNumber: pageNumber? +pageNumber: 1,
-        pageSize: pageSize? +pageSize: 10
+        pageSize: pageSize? +pageSize: 15
     }
     try {
         // const pageNumber = parseInt(pagination.pageNumber) || 1; // default to first page

@@ -28,8 +28,8 @@
     <!-- questions -->
     
     
-    <div class="questions" *ngFor="let questions of question | ordering: sortBy |searching:searchType: searchTerm" >
-      <div class="question"  >
+    <div class="questions" *ngFor="let questions of question| ordering: sortBy |searching:searchType: searchTerm" >
+      <div class="question" >
         <h3><a  [routerLink]="['/user/full-question',questions.questionID]" >{{ questions.Title }}</a></h3>
         <p class="details">{{ questions.QuestionDate  | time}} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
@@ -43,8 +43,6 @@
       <hr>
     </div>
     
-    
-  
 
     <!-- <div class="flex justify-center mt-8"> -->
       <div class="pagination">
@@ -58,6 +56,8 @@
           <li><a href="#">Next</a></li>
         </ul>
       </div>
+
+    
       
     <!-- </div> -->
   </main>
@@ -65,3 +65,9 @@
 
 
 
+<ng-template #noquestions *ngIf="question.length < 1">
+  <div class="no-questions" >
+      <p>You have not yet asked any question</p>
+      <button mat-raised-button routerLink="/questions/ask" color="accent">Add a question</button>
+  </div>
+</ng-template>

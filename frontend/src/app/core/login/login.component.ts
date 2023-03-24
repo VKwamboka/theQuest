@@ -62,10 +62,13 @@ export class LoginComponent {
       }
     
     },(error)=>{
+      this.error = true;
       this.errorMessage = error.error.message;
+
+      console.log(error.error.message)
     })
     
-    this.login$.subscribe(state => console.log(state));
+    // this.login$.subscribe(state => console.log(state));
     
   
     console.log('hey')

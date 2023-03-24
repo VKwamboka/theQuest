@@ -152,17 +152,17 @@ h1 {
   margin-right: 10px;
 }
 
-.pagination a {
+.pagination li {
   color: #fff;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 5px;
 }
 
-.pagination a.active {
+li.active {
   background-color: #f48024;
 }
-.pagination a:hover{
+.pagination li:hover{
   background-color: #3e3f40;
 }
 

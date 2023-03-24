@@ -19,6 +19,7 @@ import { SearchingPipe } from 'src/app/pipes/searching.pipe';
 
 
 
+
 @Component({
   selector: 'app-user-questions',
   standalone: true,
@@ -40,13 +41,11 @@ export class UserQuestionsComponent {
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
 
 ngOnInit(): void {
-  // this.id=this.auth.getId()
-  // console.log(this.id)
-  // get questions
+ 
 this.store.select(userQuestion).subscribe((questions)=>{
   if(questions){
     this.question=questions
-    // this.answers = JSON.parse((questions))
+   
     
   }
 })
@@ -66,7 +65,7 @@ this.store.dispatch(getUserQuestions())
 Delete(id:string){
   
   this.store.dispatch(deleteQuestionByUser({id}))
-  // this.store.dispatch(getUserQuestions())
+ 
  
 }
 
