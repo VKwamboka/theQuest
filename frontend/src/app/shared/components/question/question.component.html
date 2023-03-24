@@ -18,23 +18,24 @@
       <!-- <div class="text-gray-400">Showing 1-10 of 1,000,000 results</div> -->
       <div>
         <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
-        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2">
-          <option value="votes">Votes</option>
-          <option value="active">Active</option>
+        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2" >
+          <!-- <option value="votes">Votes</option> -->
+          <option value="active">Most answered</option>
           <option value="newest">Newest</option>
         </select>
       </div>
     </div>
     <!-- questions -->
     
-    <div class="questions" *ngFor="let question of questions$ |async" [routerLink]="['/user/full-question',question.questionID]" >
+    <div class="questions" *ngFor="let question of questions$ |async  " [routerLink]="['/user/full-question',question.questionID]" >
       <div class="question"  >
-        <h3><a >{{ question.Title }}</a></h3>
-        <p class="details">{{ question.QuestionDate }} <a href="#">{{ question.UserID }}</a></p>
+        <h3><a >{{ question.Title| truncateQuiz:30 }}</a></h3>
+        <p class="details">Asked {{ question.QuestionDate | time}} by <a href="#">{{ question.Name}}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
-        <p class="summary">{{ question.Body }}</p>
-        <p class="answers">1 answer</p>
+        <p class="summary">{{ question.Body | truncateQuiz:40 }}</p>
+        <p class="answers">{{ 1 }} answer</p>
       </div>
+      <hr>
     </div>
     
     <div class="question"  >
@@ -55,15 +56,21 @@
     <!-- <div class="flex justify-center mt-8"> -->
       <div class="pagination">
         <ul>
-          <li><a href="#">Prev</a></li>
-          <li><a href="#" class="active">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li><a href="#">5</a></li>
-          <li><a href="#">Next</a></li>
+          <li  (click)="previousPage()" >Prev</li>
+          <li (click)="goToPage(1)" class="active">1</li>
+          <li (click)="goToPage(2)">2</li>
+          <li (click)="goToPage(3)">3</li>
+          <li (click)="goToPage(4)">4</li>
+          <li><a routerLink="#">5</a></li>
+          <li   (click)="nextPage()">Next</li>
         </ul>
       </div>
+
+      
+      <!-- <ul>
+        <li *ngFor="let item of questions | paginate: currentPage : pageSize">{{ item }}</li>
+      </ul>
+       -->
       
     <!-- </div> -->
   </main>

@@ -33,8 +33,26 @@ addComment(comment:Comment):Observable<Message>{
     }
 // add vote
 addVote(vote:Vote):Observable<Message>{
-    return this.http.post<Message>('http://localhost:5500/votes/add',vote)
+    return this.http.post<Message>('http://localhost:5500/vote/post-vote',vote)
+    }
+markPreferred(answer_id:string):Observable<Message>{
+  console.log(answer_id);
+  
+    return this.http.patch<Message>(`http://localhost:5500/answer/markAnswerPreferred`,{answer_id})
     }
 
 
+    // get user id
+    getUserId():Observable<any>{
+      console.log("Called");
+      
+      return this.http.get<any>('http://localhost:5500/auth/getUserId')
+    }
+
+    getOneQuestion(id:string):Observable<Question>{
+      return  this.http.get<Question>(`http://localhost:5500/question/getFullQuestionById/${id}`)
+     }
+
 }
+
+

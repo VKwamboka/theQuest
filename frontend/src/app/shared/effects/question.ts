@@ -107,8 +107,9 @@ deleteQuestionByUser = createEffect(()=>{
                 }),
                 catchError(error=>of(QuestionActions.deleteQuestionFail({error:error.message})))
             )
-        }),
-        switchMap(() => [QuestionActions.getUserQuestions()])
+        })
+        
+        // switchMap(() => [QuestionActions.getUserQuestions()])
     )
 })
 

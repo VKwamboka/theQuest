@@ -8,7 +8,7 @@ import { AuthState } from '../states/authState';
 import { register } from '../actions/authActions';
 import { AuthService } from '../services/auth';
 import { Store } from '@ngrx/store';
-import { passwordMatchValidator } from '../cutomValidator';
+// import { passwordMatchValidator } from '../cutomValidator';
 
 @Component({
   selector: 'app-signup',
@@ -33,22 +33,22 @@ export class SignupComponent {
     this.form = this.fb.group({
       Name:[null, Validators.required],
       Email:[null, [Validators.required, Validators.email]],
-      Password:[null, Validators.required, Validators.minLength(8)],
+      Password:[null, Validators.required],
       confirmPassword:[null, Validators.required]
-    }, {
-      validator: passwordMatchValidator('Password', 'confirmPassword')
     })
   }
 
   submitForm(){
     console.log(this.form.value)
+    this.store.dispatch(register({userRegistered:this.form.value}))
+
     this.authentication.registerUser(this.form.value).subscribe(response=>{
      
       this.auth.setRole(response.Role)
       this.auth.setName(response.Name)
       this.auth.login()
       localStorage.setItem('token', response.data.token)
-      console.log(response.data.token)
+      console.log(response.data)
       if(response.data.token){
        
         this.router.navigate(['/user'])
@@ -56,8 +56,6 @@ export class SignupComponent {
       }
   
     
-    },(error)=>{
-      this.errorMessage = error.error.message;
     })
     this.store.dispatch(register({userRegistered:this.form.value}))
  

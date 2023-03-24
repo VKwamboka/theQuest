@@ -1,6 +1,6 @@
 <div class="container1">
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl font-bold mb-8">All Questions</h1>
+      <h1 class="text-3xl font-bold mb-8">My Questions</h1>
       <a routerLink="/user/ask-question" class=" text-xl ask" >Ask  Question</a>
      
     </div>
@@ -10,30 +10,31 @@
   <main class="container mx-auto py-8">
    
 
-    <div class="flex justify-between items-center mb-4" *ngIf="auth.isLoggedIn">
+    <div class="flex justify-between items-center mb-4" >
       
       <form id="search">
-        <input type="text" class=" text-white rounded px-8 py-3 w-256" placeholder="Search for a Question">
+        <input type="text"  [(ngModel)]="searchTerm"  [ngModelOptions]="{standalone: true}" class=" text-white rounded px-8 py-3 w-256" placeholder="Search for a Question">
       </form>
       <!-- <div class="text-gray-400">Showing 1-10 of 1,000,000 results</div> -->
-      <div>
-        <label for="sort-by" class="text-gray-400 mr-2">Sort by:</label>
-        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2">
-          <option value="votes">Votes</option>
-          <option value="active">Active</option>
+      <div >
+        <label for="sort-by" class="text-gray-400 mr-2" >Sort by:</label>
+        <select name="sort-by" id="sort-by" class=" text-white rounded px-4 py-2" [(ngModel)]=" sortBy">
+          <!-- <option value="votes" >Votes</option> -->
+          <option value="active"  >Active</option>
           <option value="newest">Newest</option>
         </select>
       </div>
     </div>
     <!-- questions -->
     
-    <div class="questions" *ngFor="let questions of question" >
-      <div class="question"  >
+    
+    <div class="questions" *ngFor="let questions of question| ordering: sortBy |searching:searchType: searchTerm" >
+      <div class="question" >
         <h3><a  [routerLink]="['/user/full-question',questions.questionID]" >{{ questions.Title }}</a></h3>
-        <p class="details">{{ questions.QuestionDate }} <a href="#">{{ questions.UserID }}</a></p>
+        <p class="details">{{ questions.QuestionDate  | time}} <a href="#">{{ questions.UserID }}</a></p>
         <p class="tags">Tags: <a href="#">html</a> <a href="#">Computer Science</a></p>
-        <p class="summary">{{ questions.Body }}</p>
-        <p class="answers">{{ questions?.Answers?.length}} answers</p>
+        <p class="summary">{{ questions.Body  | truncateQuiz:100 }}</p>
+        <p class="answers">{{ answers?.length || 0 }} answers</p>
       </div>
       <div class="actions">
         <button class="btn btn-upvote" [routerLink]="['/user/edit-question',questions.questionID]">Update</button>
@@ -42,8 +43,6 @@
       <hr>
     </div>
     
-    
-  
 
     <!-- <div class="flex justify-center mt-8"> -->
       <div class="pagination">
@@ -57,6 +56,8 @@
           <li><a href="#">Next</a></li>
         </ul>
       </div>
+
+    
       
     <!-- </div> -->
   </main>
@@ -64,3 +65,9 @@
 
 
 
+<ng-template #noquestions *ngIf="question.length < 1">
+  <div class="no-questions" >
+      <p>You have not yet asked any question</p>
+      <button mat-raised-button routerLink="/questions/ask" color="accent">Add a question</button>
+  </div>
+</ng-template>

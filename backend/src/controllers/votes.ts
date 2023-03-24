@@ -32,9 +32,9 @@ export const createVote = async (req: ExtendedRequest, res: Response) => {
       const answerID = answer_id
       const userId = user_id
       const answer = await (await _db.exec('findAnswerById', {answerID})).recordset[0]
-      const user = await (await _db.exec('usp_FindUserById', {userId})).recordset[0]
+      // const user = await (await _db.exec('usp_FindUserById', {userId})).recordset[0]
       console.log(answer)
-      if(answer  && user){
+      if(answer  ){
         await (await _db.exec('vote_answer', vote )).recordset
         return res.status(201).json({message:"Voted succcessfully!!!"});
       }
@@ -48,20 +48,6 @@ export const createVote = async (req: ExtendedRequest, res: Response) => {
     }
   };
 
-
-// update vote
-export const updateVote = async (req: ExtendedRequest, res: Response) => {
-    try{
-        const {user_id,  vote_type} = await updateVoteHelper.validateAsync(req.body)
-        const answer_id= req.params.id
-
-        const result = await _db.exec("updateVote", {user_id, answer_id, vote_type})
-        return res.status(200).json({message:'Updated  Vote Successfully'})
-
-    }catch (error) {
-        return res.status(500).json(error)
-      }
-}
 
 
 // get all votes
@@ -103,49 +89,3 @@ export const getVoteById = async (req: ExtendedRequest, res: Response) => {
       }
 }
 
-
-// create vote
-// export const createVote = async (req: ExtendedRequest, res: Response) => {
-//     try{
-//         const {user_id, answer_id, vote_type} = await createVoteHelper.validateAsync(req.body)
-//         const vote:Votes = {
-//             vote_id: uid(),
-//             user_id: user_id,
-//             answer_id: answer_id,
-//             vote_type
-//         }
-
-//         const result = await _db.exec("createVote", vote)
-//         return res.status(201).json(result)
-        
-
-//     }catch (error) {
-//         return res.status(500).json(error)
-//       }
-// }
-// }
-
-// create vote
-// export const createVote = async (req: ExtendedRequest, res: Response) => {
-//     try {
-//         const { user_id, answer_id, vote_type } = await createVoteHelper.validateAsync(req.body);
-//         const vote:Votes = {
-//             vote_id: uid(),
-//             user_id,
-//             answer_id,
-//             vote_type,
-//         };
-
-//         // Check if voter has already voted
-//         const existingVote = await (await _db.exec('getVoteByUserAndAnswer', { user_id, answer_id })).recordset;
-//         if (existingVote && existingVote.length > 0) {
-//             return res.status(400).json({ error: 'User has already voted on this answer.' });
-//         }
-
-//         // Insert vote into database
-//         const result = await _db.exec('createVote', vote);
-//         return res.status(201).json(result);
-//     } catch (error) {
-//         return res.status(500).json({ error});
-//     }
-// };

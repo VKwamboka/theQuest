@@ -45,5 +45,13 @@ deleteQuestionByUser(id:string):Observable<Message>{
     return  this.http.patch<Question>(`http://localhost:5500/question/updateQuestion/${id}`, updatedQuestion)
    }
  
-
+// pagination
+// get all questions
+getPagedQuestions(pageNumber?: number, pageSize?: number): Observable<Question[]> {
+  let url = 'http://localhost:5500/question/getAllQuestions';
+  if (pageNumber && pageSize) {
+    url += `?pageNumber=${pageNumber}&pageSize=${pageSize}`;
+  }
+  return this.http.get<Question[]>(url);
+}
 }

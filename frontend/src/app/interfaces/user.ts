@@ -72,6 +72,7 @@ export interface LoginSuccess{
     };
     Role:string
     Name:string
+    userId:string
     // token:string
     
 }

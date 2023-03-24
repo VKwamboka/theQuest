@@ -14,13 +14,13 @@ import { allUsersState, authReducer } from './core/reducers/authReducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { questionReducer } from './shared/reducers/question';
 import { QuestionEffects } from './shared/effects/question';
-import { TruncatePipe } from './truncate.pipe';
-import { TimeAgoPipe } from './time-ago.pipe';
-import { SearchPipe } from './search.pipe';
-import { FilterByPipe } from './filter-by.pipe';
-import { OrderByPipe } from './order-by.pipe';
-import { MarkdownPipe } from './markdown.pipe';
-import { HighlightDirective } from 'src/templates/highlight.directive';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { TimeAgoPipe } from './pipes/time-ago.pipe';
+import { SearchPipe } from './pipes/search.pipe';
+import { FilterByPipe } from './pipes/filter-by.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { MarkdownPipe } from './pipes/markdown.pipe';
+import { HighlightDirective } from 'src/app/user/templates/highlight.directive';
 import { TokenInterceptorService } from './core/services/token-interceptor.service';
 
 
@@ -36,6 +36,7 @@ import { TokenInterceptorService } from './core/services/token-interceptor.servi
     MarkdownPipe
   ],
   imports: [
+    FormsModule,
     MatSlideToggleModule,
     FormsModule,
     StoreModule.forRoot({ prof:authReducer, question:questionReducer, users:allUsersState}),

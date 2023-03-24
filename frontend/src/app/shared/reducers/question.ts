@@ -1,6 +1,6 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import  {Question} from '../../interfaces/question';
-import {addQuestion, addQuestionSuccess,  getQuestions, getQuestionsSuccess, getQuestionFail,getsingleQuestionId,updateQuestionSuccess,updateQuestionFail,addQuestionFail,deleteQuestionFail,deleteQuestionSuccess, getsingleQuestionIdSuccess, getsingleQuestionIdFail, getUserQuestionsSuccess} from '../actions/question';
+import {addQuestion, addQuestionSuccess,  getQuestions, getQuestionsSuccess, getQuestionFail,getsingleQuestionId,updateQuestionSuccess,updateQuestionFail,addQuestionFail,deleteQuestionFail,deleteQuestionSuccess, getsingleQuestionIdSuccess, getsingleQuestionIdFail, getUserQuestionsSuccess, deleteQuestion, deleteQuestionByUser} from '../actions/question';
 import { addAnswer } from "src/app/user/actions/answer";
 import {QuestionInterface} from '../states/question';
 import { initialState } from "../states/question";
@@ -99,9 +99,14 @@ export const questionReducer=createReducer<QuestionInterface>(
 
     //  delete question
      on(deleteQuestionSuccess,(state,action):QuestionInterface=>{
+
+        const  remainingQuestions = state.userQuestions.filter(item=>{
+            return item.questionID!==state.QuestionDelete
+        })
         return {
             ...state,
             deleteError:'',
+            userQuestions:remainingQuestions,
             deleteSuccess:action.message.message
         }
      }),
@@ -112,6 +117,21 @@ export const questionReducer=createReducer<QuestionInterface>(
             deleteSuccess:''
         }
      }),
+
+
+
+    //  delete question
+    on(deleteQuestionByUser,(state,action):QuestionInterface=>{
+        return {
+            ...state,
+            QuestionDelete:action.id,
+            deleteError:'',
+            deleteSuccess:''
+        }
+    }),
+
+
+
     //  add answer
     on(addAnswer, (state, { answer }) => ({
         ...state,

@@ -5,7 +5,7 @@ import { loginSuccess, loginFailure, logout, login, updateUserProfileSuccess, re
 
 export const usersSliceState= createFeatureSelector<UsersState>('users')
 export const allusers= createSelector(usersSliceState, state=>state.users)
-  const userId= createSelector(usersSliceState, state=>state.Id)
+ export const userId= createSelector(usersSliceState, state=>state.Id)
 
 export const authReducer = createReducer<AuthState>(
   initialAuthState,

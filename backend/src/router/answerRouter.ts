@@ -10,7 +10,7 @@ answerRoutes.route("/getAnswers").get(VerifyToken,getAnswers);
 answerRoutes.route("/getAnswerById/:id").get(VerifyToken,getAnswerById);
 answerRoutes.route("/updateAnswer/:id").patch(VerifyToken,updateAnswer);
 answerRoutes.route("/deleteAnswer/:id").delete(VerifyToken,deleteAnswer);
-answerRoutes.route("/markAnswerPreferred/:id").patch(VerifyToken,markAnswerPreferred);
+answerRoutes.route("/markAnswerPreferred").patch(VerifyToken,markAnswerPreferred);
 answerRoutes.route("/getUserAnswers/:id").get(getUserAnswers);
 
 export default answerRoutes;

@@ -35,7 +35,7 @@ export class AskQuestionComponent {
   submitForm(){
     this.store.dispatch(addQuestion({newQuestion:this.form.value}))
     this.store.dispatch(getQuestions())
-    this.router.navigate(['/user/all-questions'])
+    this.router.navigate(['/user/my-questions'])
   }
 
 }

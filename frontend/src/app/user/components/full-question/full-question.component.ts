@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import { TruncateQuizPipe } from 'src/app/pipes/truncate-quiz.pipe';
 import { CommonModule } from '@angular/common';
-import { HighlightCodeDirective } from 'src/templates/highlight-code.directive';
+import { HighlightCodeDirective } from 'src/app/user/templates/highlight-code.directive';
 import { QuestionService } from 'src/app/shared/services/question.service';
 import { iif, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -14,18 +14,19 @@ import {Answer} from 'src/app/interfaces/answer'
 import { Vote } from 'src/app/interfaces/vote';
 import { Comment } from 'src/app/interfaces/comment';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { addAnswer } from '../../actions/answer';
+import { addAnswer, addVote, getUserId } from '../../actions/answer';
 import { quizService } from '../../services/user-quiz.service';
-import {usersSliceState} from 'src/app/core/reducers/authReducers'
+import {usersSliceState,userId, allusers} from 'src/app/core/reducers/authReducers'
 import { addComment } from '../../actions/answer';
-// import { oneQuestion} from 'src/app/shared/reducers/question';
-// import {Quest}
-// import { getSingleQuestion } from 'src/app/shared/reducers/question';
+import { profile } from 'src/app/core/states/authState';
+import { TimePipe } from 'src/app/pipes/time.pipe';
+
+
 
 @Component({
   selector: 'app-full-question',
   standalone: true,
-  imports: [CommonModule, HighlightCodeDirective,RouterModule,ReactiveFormsModule],
+  imports: [CommonModule, HighlightCodeDirective,RouterModule,ReactiveFormsModule,TruncateQuizPipe,TimePipe],
   templateUrl: './full-question.component.html',
   styleUrls: ['./full-question.component.css'],
   // hostDirectives: [HighlightCodeDirective]
@@ -34,17 +35,19 @@ import { addComment } from '../../actions/answer';
 export class FullQuestionComponent {
   question!: FullQuestion
   id!:string
+  logged!:string
   answers!:Answer[]
   votes!:Vote[]
   comments!:Comment[]
   commentForm!: FormGroup;
   answerForm!:FormGroup;
   answerText?: string;
-  userId:string=''
+  userId!:string
   shqQuiz=false;
   shAnsw = false;
   answerst: Answer[] = [];
  answer_id = ''
+ isAnswerPreferred = false;
 
   constructor(private route:ActivatedRoute, private router:Router , private quizService:quizService,private fb:FormBuilder,private store:Store<AppState>){}
   
@@ -66,36 +69,51 @@ export class FullQuestionComponent {
 this.store.select(oneQuestion).subscribe((question)=>{
   if(question){
     this.question=question
+  
     this.answers=JSON.parse(question.Answers) 
-
-   
-let answer;
-for (let i = 0; i < this.answers.length; i++) {
-  if (this.answers[i].answer_id === this.answer_id) {
-    answer = this.answers[i];
-    // break;
-  }
-}
-
+    if(this.answers){
+      for (let answer of this.answers) {
+        if (answer.isPreffered) {
+          this.isAnswerPreferred = true;
+          break;
+        }
+        
+      }
+    }
     
-    console.log(this.question);
+    
+    console.log(question.UserID);
     // console.log(this.comments)
     
   }
 })
-this.store.dispatch(getsingleQuestionId({id:this.id}))
-  // this.store.select(my).subscribe((question)=>{
-  //   if(question){
-  //     this.question=question
-  //     console.log(this.question)
-  //   }
-  // })
 
-  this.store.select(usersSliceState).subscribe((user)=>{
-    this.userId= user.Id
-    
+
+
+this.store.dispatch(getsingleQuestionId({id:this.id}))
+
+  this.store.select(profile).subscribe((user)=>{
+    if(user){
+      this.userId=user.userId
+      console.log(this.userId)
+    }
   })
 
+  this.quizService.getUserId().subscribe((res)=>{
+    // this.store.dispatch(getUserId({userId:res}))
+    this.userId=res
+    console.log(this.userId)
+    
+  })
+   
+  //  this.quizService.getOneQuestion(this.id).subscribe((res)=>{
+   
+  //   this.userId = res.UserID
+  //   console.log(res.UserID)
+  //  }) 
+  
+  
+ 
   
   // add answer
 this.answerForm=this.fb.group({
@@ -106,6 +124,13 @@ this.answerForm=this.fb.group({
 this.commentForm=this.fb.group({
   comment_text:[null]
 })
+
+
+
+ 
+  // mark answer as preferred
+ 
+
 
 
 
@@ -142,22 +167,24 @@ addComments(answerId: string){
 
 
 
+// add vote
+addVote(answer_id: string, voteType: 'upvote' | 'downvote') {
+  this.quizService.addVote({ answer_id:answer_id, vote_type: voteType }).subscribe((res) => {
+  
+    this.store.dispatch(getsingleQuestionId({ id: this.id }));
+  });
+  this.store.dispatch(addVote({answer_id:answer_id, voteType}));
+  this.store.dispatch(getsingleQuestionId({id:this.id}))
+}
 
-// addComment(answerId: string) {
-//   const comment: Comment = { /* comment data */ };
-//   this.quizService.addComment(comment, answerId).subscribe((newComment) => {
-//     this.store.dispatch(addComment({ comment: newComment, answerId }));
-//   });
-// }
-// <form (ngSubmit)="addComment(answer.id)">
-//   <input type="text" name="commentText" [(ngModel)]="commentText">
-//   <button type="submit">Add Comment</button>
-// </form>
-// addComment(comment: Comment, answerId: string): Observable<Comment> {
-//   return this.http.post<Comment>(`http://localhost:5500/answer/${answerId}/addComment`, comment);
-// }
-
-
+// mark answer as preferred
+markAsPreferred(answer_id: string) {
+  this.quizService.markPreferred(answer_id).subscribe((res) => {
+    // console.log(res);
+    this.store.dispatch(getsingleQuestionId({ id: this.id }));
+  });
+  // this.store.dispatch(getsingleQuestionId({ id: this.id }));
+}
 
 getUpvoteCount(answer: any): number {
   return answer?.Votes?.filter((v: any) => v.vote_type === 'upvote').length || 0;
@@ -166,6 +193,8 @@ getUpvoteCount(answer: any): number {
 getDownvoteCount(answer: any): number {
   return answer?.Votes?.filter((v: any)=> v.vote_type === 'downvote').length || 0;
 }
+
+// get user id
 
 
 }
