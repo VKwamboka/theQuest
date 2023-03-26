@@ -70,7 +70,7 @@
         <br>
       </div>
       <!-- add comment -->
-      <div class="postanswer" *ngIf="!shqQuiz">
+      <div class="postanswer" >
         <form [formGroup]= "commentForm"  >
             <div><textarea name="" id="" cols="100" rows="4" placeholder="Post your Answer Here" formControlName="comment_text"> </textarea></div> 
             <div><button type="submit" (click)="addComments(answer.answer_id)">Comment</button></div>

@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/core/services/auth';
 import { Store } from '@ngrx/store';
 import { deleteQuestionByUser, getQuestions ,getUserQuestions} from 'src/app/shared/actions/question';
 import { Observable } from 'rxjs';
-import { Question } from 'src/app/interfaces/question';
+import { FullQuestion, Question } from 'src/app/interfaces/question';
 import { oneQuestion, userQuestion } from 'src/app/shared/reducers/question';
 import { AppState } from 'src/app/core/states/appState';
 import { Answer } from 'src/app/interfaces/answer';
@@ -31,11 +31,14 @@ export class UserQuestionsComponent {
 
   id!:string
   question!:Question[]
+  userQ!:Question
+  uQuiz!:FullQuestion
   userQuestion!:Question
   answers:Answer[]=[]
+  answerst!: Answer[]
   questions$!:Observable<Question[]>
-  sortBy = 'newest'
-  // searchQuery: string = ''; 
+  
+  sortBy = 'newest';
   searchType?: string = 'Keyword';
   searchTerm?: string;
 constructor(public auth:AuthService, private router:Router, private store:Store<AppState>){}
@@ -53,10 +56,12 @@ this.store.select(userQuestion).subscribe((questions)=>{
 this.store.select(oneQuestion).subscribe((question)=>{
   if(question){
     this.userQuestion=question
+    let n = JSON.parse(question.Answers) 
     this.answers=JSON.parse(question.Answers) 
-    
+    this.answerst=n
   }
 })
+
 
 this.store.dispatch(getUserQuestions())
 
