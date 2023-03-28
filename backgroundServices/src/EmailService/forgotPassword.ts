@@ -80,7 +80,7 @@ console.log(users);
     // Render the email template
     ejs.renderFile(
       "template/forgotPassword.ejs",
-      { name: Name, resetUrl },
+      { name: Name, reset:resetUrl },
       async (error, html) => {
         if (error) {
           console.log(error);
