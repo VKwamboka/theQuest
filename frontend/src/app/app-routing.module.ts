@@ -19,6 +19,7 @@ const routes: Routes = [
       {path:'',loadComponent:()=>import('./shared/components/question/question.component').then(l=>l.QuestionComponent)},
       {path:'full-question/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
       // {path:'deleteQuestion/:id', loadComponent:()=>import('./user/components/full-question/full-question.component').then(l=>l.FullQuestionComponent)},
+      {path:'forgot-password', loadComponent:()=>import('./user/components/forgot-pass/forgot-pass.component').then(l=>l.ForgotPassComponent)},
 
     ]
   },
