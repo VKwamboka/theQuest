@@ -39,10 +39,10 @@
     <!-- <div class="quiz-image">
       <img class="quiz-image__img" src="" />
     </div> -->
-    <form class="modal-content animate"  >
+    <form class="modal-content animate"   [formGroup]="form" (ngSubmit)="submitForm()">
       <div class="imgcontainer">
         <!-- <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span> -->
-        <img src="img_avatar2.png" alt="Avatar" class="avatar">
+        <!-- <img src="img_avatar2.png" alt="Avatar" class="avatar"> -->
       </div>
   
       <div class="container" >
@@ -57,9 +57,9 @@
         </div>
      
 
-        <div class="error" *ngIf="error">
+        <!-- <div class="error" *ngIf="error">
           <p>{{errorMessage}}</p>
-       </div>
+       </div> -->
 
 
       <button [disabled]="!form.valid">Login</button>

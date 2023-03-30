@@ -28,4 +28,8 @@ export class AuthenticationService {
     deleteUser(id:string):Observable<Message>{
     return this.http.delete<Message>(`http://localhost:5500/auth/deletecompletely/${id}`)
     }
+
+    forgotPassword(email:string):Observable<Message>{
+      return this.http.post<Message>('http://localhost:550/auth/sendemail',email)
+    }
 }
