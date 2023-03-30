@@ -41,7 +41,9 @@ export class ForgotPassComponent {
   submitForm(){
     console.log(this.form.value)
     // this.store.dispatch(login({userlogged:this.form.value}));
-    this.authentication.forgotPassword(this.form.value)
+    this.authentication.forgotPassword(this.form.value).subscribe((res)=>{
+      console.log(res)
+    })
     console.log('hey') 
   }
 

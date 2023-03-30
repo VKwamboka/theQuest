@@ -30,6 +30,6 @@ export class AuthenticationService {
     }
 
     forgotPassword(email:string):Observable<Message>{
-      return this.http.post<Message>('http://localhost:550/auth/sendemail',email)
+      return this.http.post<Message>('http://localhost:5500/auth/sendemail',email)
     }
 }
