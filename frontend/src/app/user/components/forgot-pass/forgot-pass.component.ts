@@ -32,7 +32,7 @@ export class ForgotPassComponent {
   }
   ngOnInit(): void {
     this.form = this.fb.group({
-      Email:[null, [Validators.required, Validators.email]],
+      email:[null, [Validators.required, Validators.email]],
 
     }) 
 
