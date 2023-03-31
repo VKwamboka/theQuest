@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, LoginUser,LoginSuccess,Message, RegisterUser } from 'src/app/interfaces/user';
+import { User, LoginUser,LoginSuccess,Message, RegisterUser, password } from 'src/app/interfaces/user';
 import{Observable} from 'rxjs'
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class AuthenticationService {
     forgotPassword(email:string):Observable<Message>{
       return this.http.post<Message>('http://localhost:5500/auth/sendemail',email)
     }
-    resetPassword(password:string):Observable<Message>{
-      re
+    resetPassword(pass:password):Observable<Message>{
+      return this.http.post<Message>('http://localhost:5500/auth/resetpassword',pass)
     }
 }
