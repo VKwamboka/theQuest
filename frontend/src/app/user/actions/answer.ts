@@ -33,3 +33,9 @@ export const getUserId = createAction(
   GET_USER_ID,
   (payload: { userId:string}) => ({ payload })
 )
+// send forgot password email
+export const SEND_EMAIL = '[User] Send Email';
+export const sendEmail = createAction(
+  SEND_EMAIL,
+  (payload: { email:string}) => ({ payload })
+)

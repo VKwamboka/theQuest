@@ -9,6 +9,7 @@ const routes: Routes = [
   {path:'login', loadComponent:()=>import('./core/login/login.component').then(l=>l.LoginComponent)},
   {path:'register', loadComponent:()=>import('./core/signup/signup.component').then(l=>l.SignupComponent)},
   {path:'forgot-password', loadComponent:()=>import('./user/components/forgot-pass/forgot-pass.component').then(l=>l.ForgotPassComponent)},
+  {path:'reset-password', loadComponent:()=>import('./user/components/reset-password/reset-password.component').then(l=>l.ResetPasswordComponent)},
 
   {
     path:'user', loadComponent:()=>import('./user/components/userdashboard/userdashboard.component').then(l=>l.UserdashboardComponent),children:[

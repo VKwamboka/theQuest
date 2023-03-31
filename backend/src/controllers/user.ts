@@ -301,23 +301,23 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
       const { userId, Name } = user
       const JWT = generateJWT({ userId, Name, Email } as JWTPayload, "1h");
       const resetUrl = `${process.env.CLIENT_URL}/reset-password/?resetToken=${JWT}`;
-      // const passwordResetMsg = `
-      //   <h1>You requested a password reset</h1>
-      //   <p>Please go to this link to reset your password</p>
-      //   <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
-      //   <p>If you did not request this, please ignore this email</p>
-      // `;
+      const passwordResetMsg = `
+        <h1>You requested a password reset</h1>
+        <p>Please go to this link to reset your password</p>
+        <a href=${resetUrl} clicktracking=off>${resetUrl}</a>
+        <p>If you did not request this, please ignore this email</p>
+      `;
 
-      // try {
-      //   await sendEmail("Password Reset Request", Email, passwordResetMsg);
-      //   return res.status(200).json({
-      //     message: "We have sent a link to reset your password to your email",
-      //     resetUrl,
-      //   });
-      // } catch (error: any) {
-      //   // console.log(error);
-      //   return res.status(500).json({ message: "Email could not be sent" });
-      // }
+      try {
+        await sendEmail("Password Reset Request", Email, passwordResetMsg);
+        return res.status(200).json({
+          message: "We have sent a link to reset your password to your email",
+          resetUrl,
+        });
+      } catch (error: any) {
+        // console.log(error);
+        return res.status(500).json({ message: "Email could not be sent" });
+      }
 
     } catch (error) {
       // console.log(error)
