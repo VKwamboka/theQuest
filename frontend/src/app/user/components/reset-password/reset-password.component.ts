@@ -30,8 +30,8 @@ export class ResetPasswordComponent {
   }
   ngOnInit(): void {
     this.form = this.fb.group({
-      email:[null, [Validators.required, Validators.email]],
-
+      Password:[null, [Validators.required]],
+      ConfirmPassword:[null, [Validators.required]],
     }) 
 
   }
