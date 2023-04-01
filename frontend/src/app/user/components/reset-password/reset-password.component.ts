@@ -8,6 +8,8 @@ import { logout } from 'src/app/core/actions/authActions';
 import { AuthService } from 'src/app/core/services/auth';
 import { AuthenticationService } from 'src/app/core/services/authentication';
 import { AuthState } from 'src/app/core/states/authState';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-reset-password',
@@ -23,7 +25,7 @@ export class ResetPasswordComponent {
   form!:FormGroup
   login$!:Observable<AuthState[]>
   // error=null
-  constructor(private fb:FormBuilder, private authentication:AuthenticationService, private auth :AuthService,
+  constructor(private route: ActivatedRoute,private fb:FormBuilder, private authentication:AuthenticationService, private auth :AuthService,
     private router:Router, private store:Store<AuthState>
     ){
 
@@ -31,15 +33,22 @@ export class ResetPasswordComponent {
   ngOnInit(): void {
     this.form = this.fb.group({
       Password:[null, [Validators.required]],
-      ConfirmPassword:[null, [Validators.required]],
+      ConfirmPassword:[null, [Validators.required]]
     }) 
 
   }
 
   submitForm(){
     console.log(this.form.value)
+    const resetToken = this.route.snapshot.queryParamMap.get('resetToken');
+    console.log(resetToken)
+    const updatePassword = {
+      
+      password: this.form.value,
+      resetToken: resetToken,
+    };
     // this.store.dispatch(login({userlogged:this.form.value}));
-    this.authentication.resetPassword(this.form.value).subscribe((res)=>{
+    this.authentication.resetPassword(updatePassword).subscribe((res)=>{
       console.log(res)
     })
     console.log('hey') 

@@ -32,7 +32,7 @@ export class AuthenticationService {
     forgotPassword(email:string):Observable<Message>{
       return this.http.post<Message>('http://localhost:5500/auth/sendemail',email)
     }
-    resetPassword(pass:password):Observable<Message>{
-      return this.http.post<Message>('http://localhost:5500/auth/resetpassword',pass)
+    resetPassword(pass:any):Observable<Message>{
+      return this.http.patch<Message>('http://localhost:5500/auth/updatepassworduser',pass)
     }
 }
