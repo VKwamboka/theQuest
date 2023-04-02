@@ -35,17 +35,21 @@ export class ForgotPassComponent {
       email:[null, [Validators.required, Validators.email]],
 
     }) 
+    // console.log(this.form)
 
   }
 
   submitForm(){
-    console.log(this.form.value)
-    // this.store.dispatch(login({userlogged:this.form.value}));
-    this.authentication.forgotPassword(this.form.value).subscribe((res)=>{
-      console.log(res)
-    })
+    if (this.form && this.form.controls) {
+      console.log(this.form.value)
+      this.authentication.forgotPassword(this.form.value).subscribe((res)=>{
+        console.log(res)
+      })
+    }
     console.log('hey') 
   }
+  
+  
 
   Close(){
     this.error=false;

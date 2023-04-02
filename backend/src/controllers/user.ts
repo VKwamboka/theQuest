@@ -1,7 +1,7 @@
 import Bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
 import path from 'path'
-import jwt from 'jsonwebtoken'
+import jwt, { verify } from 'jsonwebtoken'
 import {v4 as uid} from 'uuid'
 import { RequestHandler,Request,Response } from 'express'
 import { UserSignUpHelper, UserSignInHelper, UserUpdateProfileHelper,UserUpdatePasswordHelper } from '../helpers/userHelper'
@@ -242,10 +242,47 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
     }
   }
 
+
+
+  // update new version
   // update password
-  export const updatePasswordUser = async (req: ExtendedRequest, res: Response) => {
+export const updatePasswordUser = async (req: ExtendedRequest, res: Response) => {
+  try{
+    const resetToken = req.query.resetToken as string;
+    console.log(req.info)
+    if (!resetToken) {
+      return res.status(400).json({ message: 'Reset token is missing' });
+    }
+// verify token and extract user ID
+    const decodedToken = verify(resetToken, jwtSecret) as { userId: string };
+    const userId = decodedToken.userId;
+    console.log(userId)
+    // const userId = decodedToken.userId;
+    const user: User = await (await _db.exec('usp_FindUserById', {userId})).recordset[0];
+    if(!user){
+      return res.status(404).json({error:'User Not Found'})
+    }
+
+    const {Password, ConfirmPassword} = await UserUpdatePasswordHelper.validateAsync(req.body);
+    if(Password !== ConfirmPassword){
+      return res.status(400).json({message:'Passwords do not match'})
+    }
+
+    const hashedPassword = await Bcrypt.hash(Password, 10);
+    await _db.exec('usp_UpdateUser', {userId, password:hashedPassword}); // update the password of the user in the database
+
+    return res.status(200).json({message:'Password updated'})
+
+  } catch(error){
+    return res.status(500).json(error)
+  }
+}
+
+
+  // update password
+  export const updatedPasswordUser = async (req: ExtendedRequest, res: Response) => {
     try{
-      const userId = req.params.id
+      const userId = req.info?.userId
       const user:User= await (await  _db.exec('usp_FindUserById', {userId})).recordset[0]
       if(!user){
          return res.status(404).json({error:'User Not Found'})
@@ -258,7 +295,7 @@ export  const updateProfile = async(req:ExtendedRequest,res:Response)=>{
         return res.status(400).json({message:'Passwords do not match'})
       }
       const hashedPassword= await Bcrypt.hash(Password,10)
-      await _db.exec('usp_UpdateUser', {userId,password:hashedPassword})
+      await _db.exec('usp_UpdateUser', {password:hashedPassword})
 
       // update forgetPassword value
       const EmailUpdate = req.body.Email

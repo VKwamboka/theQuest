@@ -13,7 +13,7 @@ userRoutes.route("/delete/:id").patch(VerifyToken,deleteUser);
 userRoutes.route("/updatepassword/:id").patch(updatePassword);
 userRoutes.route("/user/:id").get(VerifyToken,getUserById);
 userRoutes.route("/updateprofile/:id").patch(VerifyToken,updateProfile);
-userRoutes.route("/updatepassworduser/:id").patch(updatePasswordUser);
+userRoutes.route("/updatepassworduser").patch(VerifyToken, updatePasswordUser);
 userRoutes.route("/sendemail").post(sendEmailToUser);
 userRoutes.route("/deletecompletely/:id").delete(VerifyToken,deleteUserCompletely);
 userRoutes.route("/getUserId").get(VerifyToken,getUserId);
