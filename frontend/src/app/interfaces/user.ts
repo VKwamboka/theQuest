@@ -8,6 +8,9 @@ export interface User {
     Role: string;
     JWT: string;
   }
+  export interface email{
+    email:string
+  }
   export interface password{
     Password:string;
     ConfirmPassword:string;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, LoginUser,LoginSuccess,Message, RegisterUser, password } from 'src/app/interfaces/user';
+import { User, LoginUser,LoginSuccess,Message, RegisterUser, password, email } from 'src/app/interfaces/user';
 import{Observable} from 'rxjs'
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.http.delete<Message>(`http://localhost:5500/auth/deletecompletely/${id}`)
     }
 
-    forgotPassword(email:string):Observable<Message>{
+    forgotPassword(email:email):Observable<Message>{
       return this.http.post<Message>('http://localhost:5500/auth/sendemail',email)
     }
     resetPassword(pass:any):Observable<Message>{
